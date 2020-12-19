@@ -35,6 +35,7 @@ async function gotMessage(msg) {
         if (tokens[0] === '!bot') {
             const index = Math.floor(Math.random() * replies.length)
             msg.channel.send(replies[index])
+            console.log("reply sent")
         } else if (tokens[0] === '!gif') {
             let keywords = 'happy'
             if (tokens.length > 1) {
@@ -45,6 +46,7 @@ async function gotMessage(msg) {
             let json = await response.json()
             const index = Math.floor(Math.random() * json.results.length)
             msg.channel.send(json.results[index].url)
+            console.log("gif sent")
         }
     }
 }
