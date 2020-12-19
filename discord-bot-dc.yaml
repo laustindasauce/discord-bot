@@ -13,9 +13,12 @@ spec:
       labels:
         app: botguy
     spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+    spec:
       containers:
       - name: botguy
-        image: registry:5000/discord-bots-botguy
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         imagePullPolicy: Always
         env:
         - name: TOKEN
