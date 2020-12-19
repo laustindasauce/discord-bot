@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: botguy
+  namespace: discord-bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: botguy
+  template:
+    metadata:
+      labels:
+        app: botguy
+    spec:
+      containers:
+      - name: botguy
+        image: registry:5000/discord-bots:botguy
+        imagePullPolicy: Always
+        env:
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: botguy-token
+              name: discord-secrets
+        - name: PUBLIC
+          valueFrom:
+            secretKeyRef:
+              key: botguy-public
+              name: discord-secrets
+        - name: BOT_ID
+          valueFrom:
+            secretKeyRef:
+              key: botguy-id
+              name: discord-secrets
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              key: botguy-secret
+              name: discord-secrets
+        - name: TENOR_KEY
+          valueFrom:
+            secretKeyRef:
+              key: botguy-tenor-key
+              name: discord-secrets

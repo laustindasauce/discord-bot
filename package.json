@@ -1,7 +1,7 @@
 {
   "name": "discord-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is Discord bot -BotGuy",
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/abspen1/discord-bot.git"
   },
-  "author": "",
+  "author": "Austin Spencer",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/abspen1/discord-bot/issues"

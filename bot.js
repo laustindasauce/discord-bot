@@ -4,7 +4,7 @@ token = process.env.TOKEN
 public = process.env.PUBLIC
 bot_id = process.env.BOT_ID
 secret = process.env.SECRET
-tenor_key = process.env.TENORKEY
+tenor_key = process.env.TENOR_KEY
 
 const Discord = require('discord.js')
 const fetch = require('node-fetch')
