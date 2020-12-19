@@ -28,15 +28,23 @@ const replies = [
 ]
 
 async function gotMessage(msg) {
-    console.log(msg.content)
-    if (msg.channel.id == '789694387431931944' && msg.content === '!bot') {
-        const index = Math.floor(Math.random() * replies.length)
-        msg.channel.send(replies[index])
-    } else if (msg.content === '!gif') {
-        let url = `https://api.tenor.com/v1/search?q=happy&key=${tenor_key}&limit=8`
-        let response = await fetch(url)
-        let json = await response.json()
-        const index = Math.floor(Math.random() * json.results.length)
-        msg.channel.send(json.results[index].url)
+    if (msg.channel.id == '789694387431931944'){
+
+        tokens = msg.content.split(' ')
+
+        if (tokens[0] === '!bot') {
+            const index = Math.floor(Math.random() * replies.length)
+            msg.channel.send(replies[index])
+        } else if (tokens[0] === '!gif') {
+            let keywords = 'happy'
+            if (tokens.length > 1) {
+                keywords = tokens.slice(1, tokens.length).join(' ')
+            }
+            let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${tenor_key}&ContentFilter=off`
+            let response = await fetch(url)
+            let json = await response.json()
+            const index = Math.floor(Math.random() * json.results.length)
+            msg.channel.send(json.results[index].url)
+        }
     }
 }
