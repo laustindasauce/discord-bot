@@ -15,7 +15,6 @@ spec:
     spec:
       imagePullSecrets:
       - name: pipeline-docker-registry
-    spec:
       containers:
       - name: botguy
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
