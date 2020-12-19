@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: botguy
-        image: registry:5000/discord-bots:botguy
+        image: registry:5000/discord-bots-botguy
         imagePullPolicy: Always
         env:
         - name: TOKEN
