@@ -23,6 +23,13 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+
+    tokens = msg.content.split(' ')
+
+    if (tokens[0] === '!gif') {
+        get_gif(msg, tokens)
+    }
+
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -38,6 +45,19 @@ client.on('message', message => {
     }
     
 });
+
+async function get_gif(msg, tokens) {
+    let keywords = 'happy'
+    if (tokens.length > 1) {
+        keywords = tokens.slice(1, tokens.length).join(' ')
+    }
+    let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${process.env.TENOR_KEY}&ContentFilter=off`
+    let response = await fetch(url)
+    let json = await response.json()
+    const index = Math.floor(Math.random() * json.results.length)
+    msg.channel.send(json.results[index].url)
+    console.log("gif sent")
+}
 
 
 client.login(token)
