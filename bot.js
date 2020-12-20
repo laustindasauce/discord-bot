@@ -16,6 +16,7 @@ const token = process.env.TOKEN
 const public = process.env.PUBLIC
 const bot_id = process.env.BOT_ID
 const secret = process.env.SECRET
+const cooldowns = new Discord.Collection();
 const prefix = '!'
 
 client.once('ready', () => {
