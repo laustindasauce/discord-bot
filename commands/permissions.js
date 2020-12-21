@@ -5,7 +5,13 @@ module.exports = {
         const data = [];
 
         if (!message.mentions.users.size) {
-            const memberPermissions = message.member.permissions.toArray();
+
+            try {
+                const memberPermissions = message.member.permissions.toArray();
+            }
+            catch(err) {
+                message.reply("I can't complete that command within dm's")
+            }
             
             data.push('Here\'s a list of your permissions:');
             for (index = 0; index < memberPermissions.length; index++) { 
