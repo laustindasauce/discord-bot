@@ -85,6 +85,7 @@ client.on('message', message => {
 
 // Create an event listener for new guild members
 client.on('guildMemberAdd', member => {
+	console.log("New member joined")
 	// Send the message to a designated channel on a server:
 	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	// Do nothing if the channel wasn't found on this server
