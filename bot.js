@@ -42,10 +42,6 @@ redis.set("check-redis", "Redis is ready!");
 
 redis.get("check-redis").then((res) => console.log(res));
 
-redis.incr("test-incr")
-
-redis.get("test-incr").then((res) => console.log(res));
-
 /**
  * When a message is sent in the server this function will be triggered
  */
@@ -145,7 +141,7 @@ function check_profanity(message) {
 			message.delete();
 			data.push("Profanity was found in your message:")
 			data.push(message.content)
-			let title = message.author + "-prof-count"
+			let title = message.author.tag + "-prof-count"
 			redis.incr(title)
 			let count = 0;
 			redis.get(title).then(function (res) {
@@ -192,7 +188,7 @@ function check_profanity(message) {
 			return message.author.send(data, { split: true })
 				.then(() => {
                     if (message.channel.type === 'dm') return;
-                    message.reply('https://tenor.com/view/watch-your-profanity-funny-gif-5600117');
+                    message.channel.send('https://tenor.com/view/watch-your-profanity-funny-gif-5600117');
                 })
                 .catch(error => {
                     console.error(`Could not send profanity warning DM to ${message.author.tag}.\n`, error);
