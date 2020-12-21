@@ -1,3 +1,4 @@
+var Redis = require('ioredis')
 const fs = require('fs');
 const Discord = require('discord.js')
 const fetch = require('node-fetch')
@@ -12,16 +13,33 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+/**
+ * Retrieve all environment variables as constant values
+ */
 const token = process.env.TOKEN
 const public = process.env.PUBLIC
 const bot_id = process.env.BOT_ID
 const secret = process.env.SECRET
+const redisPass = process.env.REDIS_PASS
+const redisHost = process.env.REDIS_HOST
+
+var redis = new Redis({
+    port: 6379,          // Redis port
+    host: redisHost,   	 // Redis host
+    password: redisPass, // Redis pass
+    db: 9,				 // Redis database
+})
+
 const cooldowns = new Discord.Collection();
 const prefix = '!'
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 });
+
+client.set("check-redis", "Redis is ready!");
+
+client.get("check-redis").then((res) => console.log(res));
 
 client.on('message', message => {
 
