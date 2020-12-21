@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Tag a member and ban them.',
 	execute(message) {
 
-        if (member.hasPermission('BAN_MEMBERS')) {
+        if (message.member.hasPermission('BAN_MEMBERS')) {
             if (!message.mentions.users.size) {
 			    return message.reply('you need to tag a user in order to ban them!');
 		    }
