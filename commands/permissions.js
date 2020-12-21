@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'permission',
+	name: 'permissions',
 	description: 'View your permissions or tag another user to see their permissions.',
 	execute(message) {
         const data = [];
