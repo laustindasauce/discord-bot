@@ -28,6 +28,8 @@ module.exports = {
                 // If the member is in the guild
                 if (member) {
                     const memberPermissions = member.permissions.serialize();
+
+                    console.log(memberPermissions)
             
                     data.push('Here\'s a list of your permissions:');
                     data.push(memberPermissions);
