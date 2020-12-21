@@ -5,10 +5,12 @@ module.exports = {
         const data = [];
 
         if (!message.mentions.users.size) {
-            const memberPermissions = message.member.permissions.serialize();
+            const memberPermissions = message.member.permissions.toArray();
             
             data.push('Here\'s a list of your permissions:');
-            data.push(memberPermissions);
+            for (index = 0; index < memberPermissions.length; index++) { 
+                data.push(memberPermissions[index]);
+            }
 
             return message.author.send(data, { split: true })
                 .then(() => {
