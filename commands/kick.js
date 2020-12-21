@@ -46,7 +46,7 @@ module.exports = {
 			}
 		} else {
             // Otherwise, let the user know they don't have permission to kick
-            message.reply("You don't have permissions to kick other users.\n@Admin can you check on this.")
+            message.reply("You don't have permissions to kick other users.\n<@&790612674106097754> can you check on this.")
         }
 	},
 };
