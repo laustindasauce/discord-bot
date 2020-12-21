@@ -157,7 +157,7 @@ function check_profanity(message) {
 					 * Could adjust this to ban if need be
 					 * Also could have a second if that is 10 or so and have that ban the user
 					 */
-					member
+					message.member
 					.kick('User has sent a message with profanity at least 3 times now.')
 					.then(() => {
 						// We let the message author know we were able to kick the person
@@ -172,30 +172,30 @@ function check_profanity(message) {
 						console.error(err);
 					});
 				}
+				let body = "You have now sent " + count + " messages marked as containing profanity.";
+				data.push(body)
+				if (3 - count == 1) {
+					body = "If you send 1 more profane message you will be kicked from the server.";
+				} else if (count > 2) {
+					body = "You have been kicked from the server for sending too many messages containing profanity.";
+				} else {
+					count -= 3
+					body = "If you send " + count + " more profane messages you will be kicked from the server.";
+				}
+				data.push(body)
+				body = "If you believe to have received this in error and the message you sent was clean, ";
+				body += "please submit an appeal to one of the admins."
+				data.push(body)
+				return message.author.send(data, { split: true })
+					.then(() => {
+						if (message.channel.type === 'dm') return;
+						message.channel.send('https://tenor.com/view/watch-your-profanity-funny-gif-5600117');
+					})
+					.catch(error => {
+						console.error(`Could not send profanity warning DM to ${message.author.tag}.\n`, error);
+						message.reply('It seems like I can\'t DM you!\nhttps://tenor.com/view/watch-your-profanity-funny-gif-5600117');
+					});
 			});
-			let body = "You have now sent " + count + " messages marked as containing profanity.";
-			data.push(body)
-			if (3 - count == 1) {
-				body = "If you send 1 more profane message you will be kicked from the server.";
-			} else if (count > 2) {
-				body = "You have been kicked from the server for sending too many messages containing profanity.";
-			} else {
-				count -= 3
-				body = "If you send " + count + " more profane messages you will be kicked from the server.";
-			}
-			data.push(body)
-			body = "If you believe to have received this in error and the message you sent was clean, ";
-			body += "please submit an appeal to one of the admins."
-			data.push(body)
-			return message.author.send(data, { split: true })
-				.then(() => {
-                    if (message.channel.type === 'dm') return;
-                    message.channel.send('https://tenor.com/view/watch-your-profanity-funny-gif-5600117');
-                })
-                .catch(error => {
-                    console.error(`Could not send profanity warning DM to ${message.author.tag}.\n`, error);
-                    message.reply('It seems like I can\'t DM you!\nhttps://tenor.com/view/watch-your-profanity-funny-gif-5600117');
-                });
 		}
 	}
 }
