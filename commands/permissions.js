@@ -27,13 +27,13 @@ module.exports = {
                 const member = message.guild.member(user);
                 // If the member is in the guild
                 if (member) {
-                    const memberPermissions = member.permissions.serialize();
-                    const arrayPermissions = member.permissions.toArray();
-
-                    console.log(arrayPermissions)
+                    const memberPermissions = member.permissions.toArray();
             
                     data.push('Here\'s a list of your permissions:');
-                    data.push(memberPermissions);
+
+                    for (index = 0; index < memberPermissions.length; index++) { 
+                        data.push(memberPermissions[index]);
+                    }
 
                     return message.author.send(data, { split: true })
                         .then(() => {
