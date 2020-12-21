@@ -4,7 +4,9 @@ This is using JavaScript to create a Discord bot. This interacts with [Discord.j
 ## Dependencies
 * [node.js](https://nodejs.org/en/)
 * [Discord.js](https://github.com/discordjs/discord.js)
+* [ioredis](https://www.npmjs.com/package/ioredis)
 * [node-fetch](https://www.npmjs.com/package/node-fetch)
+* [badwords](https://www.npmjs.com/package/badwords)
 
 ## Functionality
 So far the bot has limited functionality. As of right now the bot can reply to certain messages, either with a gif or with a regular text message. I would like to add several more functions and the possibilities seem endless.
