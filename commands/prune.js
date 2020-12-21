@@ -18,8 +18,8 @@ module.exports = {
 				message.channel.send('there was an error trying to prune messages in this channel!');
 			});
 		} else {
-			// Otherwise, let the user know they don't have permission to manage messages
-            message.reply("You don't have permissions to manage messages.\n<@&790612674106097754> can you check on this.")
+			// Otherwise, let the user know they don't have permission to prune messages
+            message.reply("You don't have permissions to prune messages.\n<@&790612674106097754> can you check on this.")
 		}
 	},
 };
