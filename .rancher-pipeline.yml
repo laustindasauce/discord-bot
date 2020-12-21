@@ -1,5 +1,5 @@
 stages:
-- name: Publish
+- name: Build & Publish
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
