@@ -37,9 +37,9 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 });
 
-client.set("check-redis", "Redis is ready!");
+redis.set("check-redis", "Redis is ready!");
 
-client.get("check-redis").then((res) => console.log(res));
+redis.get("check-redis").then((res) => console.log(res));
 
 client.on('message', message => {
 
