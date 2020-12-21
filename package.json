@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/abspen1/discord-bot#readme",
   "dependencies": {
+    "badwords": "^1.0.0",
     "discord.js": "^12.5.1",
     "ioredis": "^4.19.4",
     "node-fetch": "^2.6.1"
