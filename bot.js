@@ -176,19 +176,19 @@ function check_profanity(message) {
 					});
 				}
 			});
-			let title = "You have now sent " + count + " messages marked as containing profanity.";
-			data.push(title)
+			let body = "You have now sent " + count + " messages marked as containing profanity.";
+			data.push(body)
 			if (3 - count == 1) {
-				title = "If you send 1 more profane message you will be kicked from the server.";
+				body = "If you send 1 more profane message you will be kicked from the server.";
 			} else if (count > 2) {
-				title = "You have been kicked from the server for sending too many messages containing profanity.";
+				body = "You have been kicked from the server for sending too many messages containing profanity.";
 			} else {
-				title = "If you send " + 3-count + " more profane messages you will be kicked from the server.";
+				body = "If you send " + 3-count + " more profane messages you will be kicked from the server.";
 			}
-			data.push(title)
-			title = "If you believe to have received this in error and the message you sent was clean, ";
-			title += "please submit an appeal to one of the admins."
-			data.push(title)
+			data.push(body)
+			body = "If you believe to have received this in error and the message you sent was clean, ";
+			body += "please submit an appeal to one of the admins."
+			data.push(body)
 			return message.author.send(data, { split: true })
 				.then(() => {
                     if (message.channel.type === 'dm') return;
