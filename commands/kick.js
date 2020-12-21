@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Tag a member and kick them.',
 	execute(message) {
 
-		if (member.roles.cache.has('790612674106097754')) {
+		if (member.hasPermission('KICK_MEMBERS')) {
 			if (!message.mentions.users.size) {
 				return message.reply('you need to tag a user in order to kick them!');
 			}

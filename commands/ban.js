@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Tag a member and ban them.',
 	execute(message) {
 
-        if (member.roles.cache.has('790612674106097754')) {
+        if (member.hasPermission('BAN_MEMBERS')) {
             if (!message.mentions.users.size) {
 			    return message.reply('you need to tag a user in order to ban them!');
 		    }
@@ -48,7 +48,7 @@ module.exports = {
             }
         } else {
             // Otherwise, let the user know they don't have permission to ban
-            message.reply("You don't have permissions to ban other users.\n@Admin can you check on this.")
+            message.reply("You don't have permissions to ban users.\n@Admin can you check on this.")
         }
 	},
 };
