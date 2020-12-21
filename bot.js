@@ -142,6 +142,7 @@ function check_profanity(message) {
 			data.push("Profanity was found in your message:")
 			data.push(message.content)
 			let title = message.author.tag + "-prof-count"
+			console.log(title)
 			redis.incr(title)
 			let count = 0;
 			redis.get(title).then(function (res) {
@@ -179,7 +180,8 @@ function check_profanity(message) {
 			} else if (count > 2) {
 				body = "You have been kicked from the server for sending too many messages containing profanity.";
 			} else {
-				body = "If you send " + 3-count + " more profane messages you will be kicked from the server.";
+				count -= 3
+				body = "If you send " + count + " more profane messages you will be kicked from the server.";
 			}
 			data.push(body)
 			body = "If you believe to have received this in error and the message you sent was clean, ";
