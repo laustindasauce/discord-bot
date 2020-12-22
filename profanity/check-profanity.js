@@ -13,7 +13,7 @@ var redis = new Redis({
 
 module.exports = {
 	name: 'check-profanity',
-	description: 'Profanity filter that will delete and punish users who message blacklisted words.',
+	description: 'Profanity filter that will delete message and punish users who message blacklisted words.',
 	execute(message) {
 		for (var i in badwordsArray) {
             if (message.content.toLowerCase().includes(badwordsArray[i])) {
