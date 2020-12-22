@@ -122,14 +122,14 @@ module.exports = {
 		versions = args.join(' ');
 
 		if (versions === "all") {
+			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
+		} else {
 			if (client.sismember("BotGuy-Versions", args)){
-		    	get_versions(message).then(() => console.log(`DM sent with all available versions.`));
+		    	get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 			}
 			else {
 				not_version(message).then(() => console.log(`DM sent with wrong version message.`));
 			}
-		} else {
-			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
 	},
 };
