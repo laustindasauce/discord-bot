@@ -15,7 +15,6 @@ async function get_gif(message, args) {
 module.exports = {
 	name: 'gif',
 	description: 'Send a specified gif.',
-	args: true,
 	execute(message, args) {
 		get_gif(message, args).then(() => console.log("gif sent"));
 	},
