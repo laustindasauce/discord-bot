@@ -82,32 +82,6 @@ async function get_versions(message) {
 		});
 }
 
-async function not_version(message) {
-	let data = [];
-
-	data.push(`${args} is not a valid version of BotGuy`)
-	data.push("Here are all versions for BotGuy:")
-	redis.smembers("BotGuy-Versions", function (errors, res) {
-		if (errors) {
-			console.error(errors)
-		} else {
-			for (var i = 0; i < res.length; i++) {
-				data.push(res[i])
-			}
-		}
-	})
-
-	return message.author.send(data, { split: true })
-		.then(() => {
-			if (message.channel.type === 'dm') return;
-			message.reply('I\'ve sent you a DM with all versions!');
-		})
-		.catch(error => {
-			console.error(`Could not send versions DM to ${message.author.tag}.\n`, error);
-			message.reply('it seems like I can\'t DM you!');
-		});
-}
-
 module.exports = {
 	name: 'version',
 	description: 'Give insight into the versions of BotGuy.',
@@ -115,14 +89,37 @@ module.exports = {
 	execute(message, args) {
 		versions = args.join(' ');
 
+		let data = [];
+
+		data.push(`${args} is not a valid version of BotGuy`)
+		data.push("Here are all versions for BotGuy:")
+
+		redis.smembers("BotGuy-Versions", function (errors, res) {
+			if (errors) {
+				console.error(errors)
+			} else {
+				for (var i = 0; i < res.length; i++) {
+					data.push(res[i])
+				}
+			}
+		})
+
 		if (versions === "all") {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else {
-			if (redis.sismember("BotGuy-Versions", args)){
+			if (data.includes(args)){
 		    	get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 			}
 			else {
-				not_version(message).then(() => console.log(`DM sent with wrong version message.`));
+				return message.author.send(data, { split: true })
+					.then(() => {
+						if (message.channel.type === 'dm') return;
+						message.reply('I\'ve sent you a DM with all versions!');
+					})
+					.catch(error => {
+						console.error(`Could not send versions DM to ${message.author.tag}.\n`, error);
+						message.reply('it seems like I can\'t DM you!');
+					});
 			}
 		}
 	},
