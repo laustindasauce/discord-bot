@@ -33,6 +33,7 @@ module.exports = {
 					.then((res) => {
 						if (res > 0) {
                             redis.decr(title).then(() => {
+								res--;
 								message.channel.send(`${member.user.username} now has profanity count of ${res}`)
 							}).catch(err => {
                                 // An error happened
