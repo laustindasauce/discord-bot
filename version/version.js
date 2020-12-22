@@ -51,7 +51,7 @@ async function get_version(client, save_version) {
                 const channel = client.channels.cache.find(channel => channel.id === channelID)
                 redis.set('botguy-version', to_string);
                 channel.send(to_string)
-                save_version.execute(redis, to_string);
+                save_version.execute(redis, to_string, client);
             })
         })
     })

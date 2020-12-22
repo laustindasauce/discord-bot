@@ -43,6 +43,7 @@ var redis = new Redis({
 const cooldowns = new Discord.Collection();
 const prefix = '!'
 
+redis.get("check-redis").then((res) => console.log(res));
 // redis.set('mod2', "0");
 
 client.once('ready', () => {
@@ -50,9 +51,6 @@ client.once('ready', () => {
 	version.execute(client, save_version);
 });
 
-redis.get("check-redis").then((res) => console.log(res));
-
-// redis.set("abspence-prof-count", "0");
 
 /**
  * When a message is sent in the server this function will be triggered
