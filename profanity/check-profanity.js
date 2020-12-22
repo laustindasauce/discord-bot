@@ -1,4 +1,15 @@
 var badwordsArray = require('badwords/array');
+var Redis = require('ioredis')
+
+const redisPass = process.env.REDIS_PASS
+const redisHost = process.env.REDIS_HOST
+
+var redis = new Redis({
+    port: 6379,          // Redis port
+    host: redisHost,   	 // Redis host
+    password: redisPass, // Redis pass
+    db: 9,				 // Redis database
+})
 
 module.exports = {
 	name: 'check-profanity',
