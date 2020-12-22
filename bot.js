@@ -139,6 +139,7 @@ function check_profanity(message) {
 			message.delete();
 			data.push("Profanity was found in your message:")
 			data.push(message.content)
+			console.log("message.author is: ")
 			console.log(message.author)
 			let title = message.author.tag + "-prof-count"
 			// console.log(title)
