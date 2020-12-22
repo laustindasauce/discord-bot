@@ -20,6 +20,7 @@ for (const file of functionFiles) {
 }
 
 var profanity = require('./profanity/check-profanity.js')
+var version = require('./version/version.js')
 
 /**
  * Retrieve all environment variables as constant values
@@ -43,6 +44,7 @@ const prefix = '!'
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
+	version.execute(client);
 });
 
 redis.get("check-redis").then((res) => console.log(res));
