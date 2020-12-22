@@ -32,7 +32,7 @@ async function get_version(client, save_version) {
                     redis.incr('mod2')
                     mod2++;
                 } else {
-                    if (mod2 < 9) {
+                    if (mod1 < 9) {
                         redis.incr('mod1')
                         redis.set('mod2', "0")
                         mod2 = 0;
