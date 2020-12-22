@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 async function get_gif(message, args) {
     let keywords = 'happy'
     if (tokens.length > 1) {

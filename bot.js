@@ -2,7 +2,7 @@ var Redis = require('ioredis')
 var badwordsArray = require('badwords/array');
 const fs = require('fs');
 const Discord = require('discord.js')
-const fetch = require('node-fetch')
+
 const client = new Discord.Client()
 
 client.commands = new Discord.Collection();
@@ -56,7 +56,14 @@ client.on('message', message => {
 	/**
 	 * Before doing anything else I want to check the message for any bad words
 	 */
-	if (!message.author.bot) func.execute(message);
+	if (!message.author.bot) {
+		try {
+			func.execute(message);
+		} catch (error) {
+			console.error(error);
+			message.reply('Unable to check this message for profanity..');
+		}
+	} 
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
