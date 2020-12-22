@@ -1,7 +1,7 @@
-var Redis = require('ioredis')
+var Redis = require('ioredis');
 
-const redisPass = process.env.REDIS_PASS
-const redisHost = process.env.REDIS_HOST
+const redisPass = process.env.REDIS_PASS;
+const redisHost = process.env.REDIS_HOST;
 
 var redis = new Redis({
     port: 6379,          // Redis port
@@ -14,30 +14,30 @@ async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
 
-	let data = []
+	let data = [];
 
 	redis.hgetall(commandHash, function (err, result) {
 		if (err) {
-			console.error(err)
-			data.push(`Error occured trying to get commands for Version ${args}`)
+			console.error(err);
+			data.push(`Error occured trying to get commands for Version ${args}`);
 		} else {
 			if (result) {
-				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`)
-				data.push("------------------\n\tCommands\n------------------")
-				const entries = Object.entries(result)
+				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
+				data.push("------------------\n\tCommands\n------------------");
+				const entries = Object.entries(result);
 				for (var [name, description] of entries) {
-					data.push(`${name}: ${description}`)
+					data.push(`${name}: ${description}`);
 				}
 				redis.hgetall(functionHash, function (err, result) {
 					if (err) {
-						console.error(err)
-						data.push(`Error occured trying to get functions for Version ${args}`)
+						console.error(err);
+						data.push(`Error occured trying to get functions for Version ${args}`);
 					} else {
 						if (result) {
-							data.push("------------------\n\tFunctions\n------------------")
-							const entries = Object.entries(result)
+							data.push("------------------\n\tFunctions\n------------------");
+							const entries = Object.entries(result);
 							for (var [name, description] of entries) {
-								data.push(`${name}: ${description}`)
+								data.push(`${name}: ${description}`);
 							}
 						}
 					}
@@ -61,13 +61,13 @@ async function get_hash(message, args) {
 async function get_versions(message) {
 	let data = [];
 
-	data.push("Here are all versions for BotGuy:")
+	data.push("Here are all versions for BotGuy:");
 	redis.smembers("BotGuy-Versions", function (errors, res) {
 		if (errors) {
-			console.error(errors)
+			console.error(errors);
 		} else {
 			for (var i = 0; i < res.length; i++) {
-				data.push(res[i])
+				data.push(res[i]);
 			}
 		}
 	})
@@ -91,15 +91,15 @@ module.exports = {
 
 		let data = [];
 
-		data.push(`${args} is not a valid version of BotGuy`)
-		data.push("Here are all versions for BotGuy:")
+		data.push(`${args} is not a valid version of BotGuy`);
+		data.push("Here are all versions for BotGuy:");
 
 		redis.smembers("BotGuy-Versions", function (errors, res) {
 			if (errors) {
-				console.error(errors)
+				console.error(errors);
 			} else {
 				for (var i = 0; i < res.length; i++) {
-					data.push(res[i])
+					data.push(res[i]);
 				}
 			}
 		})
