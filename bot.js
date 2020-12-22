@@ -1,5 +1,4 @@
 var Redis = require('ioredis')
-var badwordsArray = require('badwords/array');
 const fs = require('fs');
 const Discord = require('discord.js')
 
@@ -24,9 +23,9 @@ for (const file of functionFiles) {
  * Retrieve all environment variables as constant values
  */
 const token = process.env.TOKEN
-const public = process.env.PUBLIC
-const bot_id = process.env.BOT_ID
-const secret = process.env.SECRET
+// const public = process.env.PUBLIC
+// const bot_id = process.env.BOT_ID
+// const secret = process.env.SECRET
 const redisPass = process.env.REDIS_PASS
 const redisHost = process.env.REDIS_HOST
 

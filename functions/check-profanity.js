@@ -1,3 +1,5 @@
+var badwordsArray = require('badwords/array');
+
 module.exports = {
 	name: 'check-profanity',
 	description: 'Profanity filter that will delete and punish users who message blacklisted words.',
