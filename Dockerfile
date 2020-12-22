@@ -6,6 +6,7 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json
 COPY commands commands
 COPY functions functions
+COPY profanity profanity
 COPY bot.js bot.js
 
 RUN npm install

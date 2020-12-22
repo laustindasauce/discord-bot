@@ -19,6 +19,8 @@ for (const file of functionFiles) {
 	client.functions.set(func.name, func);
 }
 
+var profanity = require('./profanity/check-profanity.js')
+
 /**
  * Retrieve all environment variables as constant values
  */
@@ -51,20 +53,19 @@ redis.get("check-redis").then((res) => console.log(res));
  * When a message is sent in the server this function will be triggered
  */
 client.on('message', message => {
-
 	/**
 	 * Before doing anything else I want to check the message for any bad words
 	 */
 	if (!message.author.bot) {
 		try {
-			func.execute(message);
+			profanity.execute(message);
 		} catch (error) {
 			console.error(error);
 			message.reply('Unable to check this message for profanity..');
 		}
-	} 
+	}
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -72,7 +73,34 @@ client.on('message', message => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command) return;
+
+
+	if (!command) {
+		const func = client.functions.get(commandName)
+		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+		if (!func) return;
+
+		if (func.guildOnly && message.channel.type === 'dm') {
+			return message.reply('I can\'t execute that function inside DMs!');
+		}
+
+		if (func.args && !args.length) {
+			let reply = `You didn't provide any arguments, ${message.author}!`;
+			if (func.usage) {
+				reply += `\nThe proper usage would be: \`${prefix}${func.name} ${func.usage}\``;
+			}
+			return message.channel.send(reply);
+		}
+		
+		try {
+			func.execute(message, args);
+		} catch (error) {
+			console.error(error);
+			message.reply('there was an error trying to execute that function!');
+		}
+		return
+	}
 
 	if (command.guildOnly && message.channel.type === 'dm') {
 		return message.reply('I can\'t execute that command inside DMs!');

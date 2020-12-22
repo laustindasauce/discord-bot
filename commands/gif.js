@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 async function get_gif(message, args) {
     let keywords = 'happy'
     if (tokens.length > 1) {
-        keywords = tokens.slice(1, tokens.length).join(' ')
+        keywords = args.join(' ')
     }
     let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${process.env.TENOR_KEY}&ContentFilter=off`
     let response = await fetch(url)
