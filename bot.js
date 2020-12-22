@@ -40,7 +40,7 @@ client.once('ready', () => {
 
 redis.get("check-redis").then((res) => console.log(res));
 
-redis.set("abspence-prof-count", "0");
+// redis.set("abspence-prof-count", "0");
 
 /**
  * When a message is sent in the server this function will be triggered

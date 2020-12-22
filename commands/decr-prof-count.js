@@ -26,22 +26,25 @@ module.exports = {
 				const member = message.guild.member(user);
 				// If the member is in the guild
 				if (member) {
-					let count = 0;
 					console.log('member.user.username is : ')
 					console.log(member.user.username)
                     let title = member.user.username + "-prof-count";
                     redis.get(title)
 					.then((res) => {
 						if (res > 0) {
-                            redis.decr(title).then(() => count = res).catch(err => {
+                            redis.decr(title).then(() => {
+								message.channel.send(`${member.user.username} now has profanity count of ${res}`)
+							}).catch(err => {
                                 // An error happened
                                 message.reply(`I was unable to edit this ${member.user.username}'s profanity count`);
                                 // Log the error
-                                console.error(err);
+								console.error(err);
+								return
                             })
                         } else {
-                            message.reply(`${member.user.username} doesn't have any profanity incidents.`)
-                        }
+							message.reply(`${member.user.username} doesn't have any profanity incidents.`)
+							return
+						}
 					})
 					.catch(err => {
 						// An error happened
