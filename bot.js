@@ -38,6 +38,8 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 });
 
+redis.set("abspence#0147-prof-count", "0");
+
 redis.set("check-redis", "Redis is ready!");
 
 redis.get("check-redis").then((res) => console.log(res));
@@ -178,7 +180,7 @@ function check_profanity(message) {
 							.kick('User has sent a message with profanity at least 3 times now.')
 							.then(() => {
 								// We let the message author know we were able to kick the person
-								message.reply(`Successfully kicked ${user.tag}`);
+								message.reply(`Successfully kicked ${message.author.tag}`);
 							})
 							.catch(err => {
 								// An error happened
