@@ -22,36 +22,34 @@ module.exports = {
 
 			const user = message.mentions.users.first();
 
-			console.log(user)
-
 			if (user) {
 				const member = message.guild.member(user);
 				// If the member is in the guild
 				if (member) {
                     let count = 0;
-                    let title = user.tag + "-prof-count";
+                    let title = member.tag + "-prof-count";
                     redis.get(title)
 					.then((res) => {
 						if (res > 0) {
                             redis.decr(title).then(() => count = res).catch(err => {
                                 // An error happened
-                                message.reply(`I was unable to edit this ${user.tag}'s profanity count`);
+                                message.reply(`I was unable to edit this ${member.tag}'s profanity count`);
                                 // Log the error
                                 console.error(err);
                             })
                         } else {
-                            message.reply(`${user.tag} doesn't have any profanity incidents.`)
+                            message.reply(`${member.tag} doesn't have any profanity incidents.`)
                         }
 					})
 					.catch(err => {
 						// An error happened
-						message.reply(`I was unable to edit ${user.tag}'s profanity count`);
+						message.reply(`I was unable to edit ${member.tag}'s profanity count`);
 						// Log the error
 						console.error(err);
 					});
 				} else {
 					// The mentioned user isn't in this guild
-					message.reply(`${user.tag} isn't in this guild!`);
+					message.reply(`${member.tag} isn't in this guild!`);
 				}
 			// Otherwise, if no user was mentioned
 			} else {
