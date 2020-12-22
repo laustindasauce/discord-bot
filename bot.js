@@ -44,7 +44,7 @@ const cooldowns = new Discord.Collection();
 const prefix = '!'
 
 redis.get("check-redis").then((res) => console.log(res));
-redis.set('version', "0");
+redis.set('version', "1");
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
