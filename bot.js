@@ -38,8 +38,6 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 });
 
-redis.set("check-redis", "Redis is ready!");
-
 redis.get("check-redis").then((res) => console.log(res));
 
 /**
@@ -54,7 +52,7 @@ client.on('message', message => {
 
     tokens = message.content.split(' ')
 
-    if (tokens[0] === '!gif') {
+    if (tokens[0] == `${prefix}gif`) {
         get_gif(message, tokens)
     }
 
@@ -103,7 +101,7 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args, redis);
+		command.execute(message, args);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
