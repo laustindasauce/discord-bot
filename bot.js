@@ -42,9 +42,11 @@ var redis = new Redis({
 const cooldowns = new Discord.Collection();
 const prefix = '!'
 
+redis.set('mod2', "0");
+
 client.once('ready', () => {
-	console.log("Bot has logged in successfully!")
-	version.execute(client)
+	console.log("Bot has logged in successfully!");
+	version.execute(client);
 });
 
 redis.get("check-redis").then((res) => console.log(res));

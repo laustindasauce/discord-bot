@@ -3,6 +3,8 @@ var Redis = require('ioredis')
 const redisPass = process.env.REDIS_PASS
 const redisHost = process.env.REDIS_HOST
 
+var save_version = require('./version/save-version.js')
+
 let version = 1;
 let mod1 = 0;
 let mod2 = 0;
@@ -46,10 +48,12 @@ async function get_version(client) {
                         version++;
                     }
                 }
-                let to_string = `Updated Version:\n\tVersion:\t${version}.${mod1}.${mod2}`
+                let to_string = `${version}.${mod1}.${mod2}`
                 let channelID = '790960191792873573'
                 const channel = client.channels.cache.find(channel => channel.id === channelID)
+                redis.set('botguy-version', to_string);
                 channel.send(to_string)
+                save_version.execute(redis, to_string);
             })
         })
     })
