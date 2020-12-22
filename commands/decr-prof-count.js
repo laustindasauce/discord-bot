@@ -22,6 +22,8 @@ module.exports = {
 
 			const user = message.mentions.users.first();
 
+			console.log(user)
+
 			if (user) {
 				const member = message.guild.member(user);
 				// If the member is in the guild
