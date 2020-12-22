@@ -45,6 +45,8 @@ const prefix = '!'
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 	console.log(client.channels.cache)
+	client.channel.get('790960191792873573').send(`Welcome to the server!`)
+
 	// check_version()
 });
 
