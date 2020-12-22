@@ -4,11 +4,6 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 const functionFiles = fs.readdirSync('./functions').filter(file => file.endsWith('.js'));
 
 
-for (const file of functionFiles) {
-	const func = require(`./functions/${file}`);
-	client.functions.set(func.name, func);
-}
-
 module.exports = {
 	name: 'save-version',
 	description: 'Save the version to Redis database.',
