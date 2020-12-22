@@ -1,23 +1,27 @@
-const fs = require('fs');
-
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const functionFiles = fs.readdirSync('./functions').filter(file => file.endsWith('.js'));
-
-
 module.exports = {
 	name: 'save-version',
 	description: 'Save the version to Redis database.',
-	execute(redis, version) {
+	execute(redis, version, client) {
         redis.sadd('BotGuy-Versions', version);
+
+        // Set commands hash
         commandHash = "hash-" + version + "-commands";
-        for (const file of commandFiles) {
-            const command = require(`./commands/${file}`);
-            redis.hset(commandHash, command.name, command.description);
+        for (cmds of client.commands) {
+            for (command of cmds) {
+                if (command.name) {
+                    redis.hset(commandHash, command.name, command.description);
+                }
+            }
         }
+
+        // Set functions hash
         functionHash = "hash-" + version + "-functions";
-        for (const file of functionFiles) {
-            const func = require(`./functions/${file}`);
-            redis.hset(functionHash, func.name, func.description)
+        for (cmds of client.functions) {
+            for (func of cmds) {
+                if (func.name) {
+                    redis.hset(functionHash, func.name, func.description)
+                }
+            }
         }
 	},
 };
