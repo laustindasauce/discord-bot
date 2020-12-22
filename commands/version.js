@@ -31,7 +31,7 @@ var redis = new Redis({
 //         }
 //     }
 // });
-async function get_hash(args) {
+async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
 
@@ -93,6 +93,6 @@ module.exports = {
 	description: 'Give insight into the versions of BotGuy.',
 	args: true,
 	execute(message, args) {
-		get_hash(args).then(() => console.log(`DM sent with info on version`))
+		get_hash(message, args).then(() => console.log(`DM sent with info on version`))
 	},
 };
