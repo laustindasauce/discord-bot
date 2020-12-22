@@ -27,29 +27,29 @@ module.exports = {
 				// If the member is in the guild
 				if (member) {
                     let count = 0;
-                    let title = member.tag + "-prof-count";
+                    let title = user.tag + "-prof-count";
                     redis.get(title)
 					.then((res) => {
 						if (res > 0) {
                             redis.decr(title).then(() => count = res).catch(err => {
                                 // An error happened
-                                message.reply(`I was unable to edit this ${member}'s profanity count`);
+                                message.reply(`I was unable to edit this ${user.tag}'s profanity count`);
                                 // Log the error
                                 console.error(err);
                             })
                         } else {
-                            message.reply(`${member} doesn't have any profanity incidents.`)
+                            message.reply(`${user.tag} doesn't have any profanity incidents.`)
                         }
 					})
 					.catch(err => {
 						// An error happened
-						message.reply(`I was unable to edit ${member}'s profanity count`);
+						message.reply(`I was unable to edit ${user.tag}'s profanity count`);
 						// Log the error
 						console.error(err);
 					});
 				} else {
 					// The mentioned user isn't in this guild
-					message.reply(`${member} isn't in this guild!`);
+					message.reply(`${user.tag} isn't in this guild!`);
 				}
 			// Otherwise, if no user was mentioned
 			} else {
