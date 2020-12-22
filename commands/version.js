@@ -10,12 +10,6 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-// if (redis.sismember("testss", inputStr)){
-//     console.log("Thats already in our projects!")
-// }
-// else {
-//     console.log("Adding project")
-// }
 async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
