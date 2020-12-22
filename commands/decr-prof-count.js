@@ -1,6 +1,6 @@
 module.exports = {
-	name: 'kick',
-    description: 'Tag a member and kick them.',
+	name: 'decr-prof-count',
+    description: 'Tag a member and decrease their profanity count.',
     redis: true,
 	execute(message, redis) {
 
