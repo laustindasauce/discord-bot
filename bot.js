@@ -45,11 +45,12 @@ const prefix = '!'
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 	console.log(client)
+	check_version()
 });
 
 async function check_version() {
 	let res = await version.execute(client)
-	client.channels.get('790960191792873573').send(res);
+	client.channels.cache['790960191792873573'].send(res);
 }
 
 redis.get("check-redis").then((res) => console.log(res));
