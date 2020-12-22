@@ -54,7 +54,7 @@ redis.get("check-redis").then((res) => console.log(res));
  */
 client.on('message', message => {
 	/**
-	 * Before doing anything else I want to check the message for any bad words
+	 * Before doing anything else I want to check the message for any blacklisted words
 	 */
 	if (!message.author.bot) {
 		try {
