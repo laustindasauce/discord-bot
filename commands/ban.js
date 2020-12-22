@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'ban',
-	description: 'Tag a member and ban them.',
+    description: 'Tag a member and ban them.',
+    guildOnly: true,
 	execute(message) {
 
         if (message.member.hasPermission('BAN_MEMBERS')) {

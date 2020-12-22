@@ -1,17 +1,13 @@
 module.exports = {
 	name: 'permissions',
-	description: 'View your permissions or tag another user to see their permissions.',
+    description: 'View your permissions or tag another user to see their permissions.',
+    guildOnly: true,
 	execute(message) {
         const data = [];
 
         if (!message.mentions.users.size) {
 
-            try {
-                const memberPermissions = message.member.permissions.toArray();
-            }
-            catch(err) {
-                message.reply("I can't complete that command within dm's")
-            }
+            const memberPermissions = message.member.permissions.toArray();
             
             data.push('Here\'s a list of your permissions:');
             for (index = 0; index < memberPermissions.length; index++) { 
