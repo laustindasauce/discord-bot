@@ -10,27 +10,12 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-// client.hgetall("Hero", function (err, result) {
-//     if (err) {
-//         console.error(err);
-//     } else {
-//         const entries = Object.entries(result)
-//         for (var [name, val] of entries) {
-//             console.log(`There are ${val} ${name}`)
-//         }
-//     }
-// });
-
-// client.smembers("testss", function (err, result) {
-//     if (err) {
-//         console.error(err);
-//     } else {
-//         for (var i = 0; i < result.length; i++) {
-//             console.log(result[i]);
-//             //Do something
-//         }
-//     }
-// });
+// if (client.sismember("testss", inputStr)){
+//     console.log("Thats already in our projects!")
+// }
+// else {
+//     console.log("Adding project")
+// }
 async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
@@ -60,18 +45,6 @@ async function get_hash(message, args) {
 							for (var [name, description] of entries) {
 								data.push(`${name}: ${description}`)
 							}
-						}
-					}
-				})
-			} else {
-				data.push(`${args} is not a valid version of BotGuy`)
-				data.push("Here are all versions for BotGuy:")
-				client.smembers("BotGuy-Versions", function (errors, res) {
-					if (errors) {
-						console.error(errors)
-					} else {
-						for (var i = 0; i < res.length; i++) {
-							data.push(res[i])
 						}
 					}
 				})
@@ -115,6 +88,32 @@ async function get_versions(message) {
 		});
 }
 
+async function not_version(message) {
+	let data = [];
+
+	data.push(`${args} is not a valid version of BotGuy`)
+	data.push("Here are all versions for BotGuy:")
+	client.smembers("BotGuy-Versions", function (errors, res) {
+		if (errors) {
+			console.error(errors)
+		} else {
+			for (var i = 0; i < res.length; i++) {
+				data.push(res[i])
+			}
+		}
+	})
+
+	return message.author.send(data, { split: true })
+		.then(() => {
+			if (message.channel.type === 'dm') return;
+			message.reply('I\'ve sent you a DM with all versions!');
+		})
+		.catch(error => {
+			console.error(`Could not send versions DM to ${message.author.tag}.\n`, error);
+			message.reply('it seems like I can\'t DM you!');
+		});
+}
+
 module.exports = {
 	name: 'version',
 	description: 'Give insight into the versions of BotGuy.',
@@ -123,7 +122,12 @@ module.exports = {
 		versions = args.join(' ');
 
 		if (versions === "all") {
-			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
+			if (client.sismember("BotGuy-Versions", args)){
+		    	get_versions(message).then(() => console.log(`DM sent with all available versions.`));
+			}
+			else {
+				not_version(message).then(() => console.log(`DM sent with wrong version message.`));
+			}
 		} else {
 			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
