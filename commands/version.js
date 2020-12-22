@@ -35,6 +35,8 @@ async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
 
+	let data = []
+
 	redis.hgetall(commandHash, function (err, result) {
 		if (err) {
 			console.error(err)
