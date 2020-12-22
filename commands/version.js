@@ -124,7 +124,7 @@ module.exports = {
 		if (versions === "all") {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else {
-			if (client.sismember("BotGuy-Versions", args)){
+			if (redis.sismember("BotGuy-Versions", args)){
 		    	get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 			}
 			else {
