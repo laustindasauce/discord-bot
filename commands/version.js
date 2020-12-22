@@ -10,7 +10,7 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-// if (client.sismember("testss", inputStr)){
+// if (redis.sismember("testss", inputStr)){
 //     console.log("Thats already in our projects!")
 // }
 // else {
@@ -68,7 +68,7 @@ async function get_versions(message) {
 	let data = [];
 
 	data.push("Here are all versions for BotGuy:")
-	client.smembers("BotGuy-Versions", function (errors, res) {
+	redis.smembers("BotGuy-Versions", function (errors, res) {
 		if (errors) {
 			console.error(errors)
 		} else {
@@ -93,7 +93,7 @@ async function not_version(message) {
 
 	data.push(`${args} is not a valid version of BotGuy`)
 	data.push("Here are all versions for BotGuy:")
-	client.smembers("BotGuy-Versions", function (errors, res) {
+	redis.smembers("BotGuy-Versions", function (errors, res) {
 		if (errors) {
 			console.error(errors)
 		} else {
