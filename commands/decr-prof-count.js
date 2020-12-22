@@ -33,23 +33,23 @@ module.exports = {
 						if (res > 0) {
                             redis.decr(title).then(() => count = res).catch(err => {
                                 // An error happened
-                                message.reply(`I was unable to edit this ${member.tag}'s profanity count`);
+                                message.reply(`I was unable to edit this ${member}'s profanity count`);
                                 // Log the error
                                 console.error(err);
                             })
                         } else {
-                            message.reply(`${member.tag} doesn't have any profanity incidents.`)
+                            message.reply(`${member} doesn't have any profanity incidents.`)
                         }
 					})
 					.catch(err => {
 						// An error happened
-						message.reply(`I was unable to edit ${member.tag}'s profanity count`);
+						message.reply(`I was unable to edit ${member}'s profanity count`);
 						// Log the error
 						console.error(err);
 					});
 				} else {
 					// The mentioned user isn't in this guild
-					message.reply(`${member.tag} isn't in this guild!`);
+					message.reply(`${member} isn't in this guild!`);
 				}
 			// Otherwise, if no user was mentioned
 			} else {
