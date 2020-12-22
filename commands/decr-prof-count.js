@@ -26,28 +26,24 @@ module.exports = {
 				const member = message.guild.member(user);
 				// If the member is in the guild
 				if (member) {
-					console.log('member.user.username is : ')
-					console.log(member.user.username)
                     let title = member.user.username + "-prof-count";
-                    redis.get(title)
-					.then((res) => {
+                    redis.get(title).then((res) => {
 						if (res > 0) {
+							// Decrement the profanity count
                             redis.decr(title).then(() => {
 								res--;
-								message.channel.send(`${member.user.username} now has profanity count of ${res}`)
+								message.reply(`Decrement was a success:\n${member.user.username} now has profanity count of ${res}`)
 							}).catch(err => {
                                 // An error happened
-                                message.reply(`I was unable to edit this ${member.user.username}'s profanity count`);
+                                message.reply(`I was unable to edit ${member.user.username}'s profanity count`);
                                 // Log the error
 								console.error(err);
-								return
                             })
                         } else {
+							// member doesn't have any profanity incidents
 							message.reply(`${member.user.username} doesn't have any profanity incidents.`)
-							return
 						}
-					})
-					.catch(err => {
+					}).catch(err => {
 						// An error happened
 						message.reply(`I was unable to edit ${member.user.username}'s profanity count`);
 						// Log the error
@@ -59,10 +55,10 @@ module.exports = {
 				}
 			// Otherwise, if no user was mentioned
 			} else {
-			message.reply("You didn't mention the user to edit!");
+				message.reply("You didn't mention the user to edit!");
 			}
 		} else {
-            // Otherwise, let the user know they don't have permission to kick
+            // Otherwise, let the user know they don't have permission to edit this
             message.reply("You don't have permissions to decrease users' profanity count.\n<@&790612674106097754> can you check on this.")
         }
 	},
