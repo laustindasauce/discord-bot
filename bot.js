@@ -21,6 +21,7 @@ for (const file of functionFiles) {
 
 var profanity = require('./profanity/check-profanity.js')
 var version = require('./version/version.js')
+var save_version = require('./version/save-version.js')
 
 /**
  * Retrieve all environment variables as constant values
@@ -42,11 +43,11 @@ var redis = new Redis({
 const cooldowns = new Discord.Collection();
 const prefix = '!'
 
-redis.set('mod2', "0");
+// redis.set('mod2', "0");
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
-	version.execute(client);
+	version.execute(client, save_version);
 });
 
 redis.get("check-redis").then((res) => console.log(res));

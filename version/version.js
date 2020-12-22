@@ -3,8 +3,6 @@ var Redis = require('ioredis')
 const redisPass = process.env.REDIS_PASS
 const redisHost = process.env.REDIS_HOST
 
-var save_version = require('./version/save-version.js')
-
 let version = 1;
 let mod1 = 0;
 let mod2 = 0;
@@ -16,7 +14,7 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-async function get_version(client) {
+async function get_version(client, save_version) {
     // Get latest version from database
     await redis.get('version').then((res) => {
         if (res) {
@@ -62,7 +60,7 @@ async function get_version(client) {
 module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
-	execute(client) {
-        get_version(client).then(() => console.log("Updated version."));
+	execute(client, save_version) {
+        get_version(client, save_version).then(() => console.log("Updated version."));
 	},
 };
