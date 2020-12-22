@@ -38,8 +38,6 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
 });
 
-redis.set("abspence#0147-prof-count", "0");
-
 redis.set("check-redis", "Redis is ready!");
 
 redis.get("check-redis").then((res) => console.log(res));
@@ -105,7 +103,7 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args);
+		command.execute(message, args, redis);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
