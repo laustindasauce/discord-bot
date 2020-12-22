@@ -27,8 +27,8 @@ module.exports = {
 				// If the member is in the guild
 				if (member) {
 					let count = 0;
-					console.log('member is : ')
-					console.log(member)
+					console.log('member.user.username is : ')
+					console.log(member.user.username)
                     let title = member.tag + "-prof-count";
                     redis.get(title)
 					.then((res) => {
