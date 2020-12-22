@@ -44,8 +44,8 @@ const prefix = '!'
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
-	console.log(client)
-	check_version()
+	console.log(client.channels.cache)
+	// check_version()
 });
 
 async function check_version() {
