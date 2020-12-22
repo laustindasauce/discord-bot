@@ -3,9 +3,7 @@ const fs = require('fs');
 const Discord = require('discord.js')
 
 const client = new Discord.Client()
-func
 
-log(func)
 client.commands = new Discord.Collection();
 client.functions= new Discord.Collection();
 
@@ -46,16 +44,8 @@ const prefix = '!'
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!")
-	// console.log(client.channels.cache)
-	let welcome_id = '<#790960191792873573>'
-	client.channel.get(`${welcome_id}`).send(`Welcome to the server!`)
-	// check_version()
+	version.execute(client)
 });
-
-async function check_version() {
-	let res = await version.execute(client)
-	client.channels.cache['790960191792873573'].send(res);
-}
 
 redis.get("check-redis").then((res) => console.log(res));
 
