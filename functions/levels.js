@@ -8,6 +8,7 @@ module.exports = {
     permLevel: "User",
 	execute(client) {
 		for (let i = client.config.permLevels.length; i > 0; i--) {
+            const thisLevel = client.config.permLevels[i];
             embed.addField(thisLevel.name, thisLevel, false)
         }
         return message.author.send(exampleEmbed)
