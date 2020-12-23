@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'server',
+	aliases: ['guild'],
 	description: 'Display info about this server.',
 	guildOnly: true,
 	execute(message) {
