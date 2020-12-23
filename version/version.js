@@ -14,7 +14,7 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-async function get_version(client, save_version) {
+async function get_version(client, save_version, test) {
     // Get latest version from database
     await redis.get('version').then((res) => {
         if (res) {
@@ -47,6 +47,7 @@ async function get_version(client, save_version) {
                     }
                 }
                 let to_string = `${version}.${mod1}.${mod2}`
+                if (test) return console.log(to_string)
                 let channelID = '790960191792873573'
                 const channel = client.channels.cache.find(channel => channel.id === channelID)
                 redis.set('botguy-version', to_string);
@@ -60,7 +61,7 @@ async function get_version(client, save_version) {
 module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
-	execute(client, save_version) {
-        get_version(client, save_version).then(() => console.log("Successfully updated version."));
+	execute(client, save_version, test) {
+        get_version(client, save_version, test).then(() => console.log("Successfully updated version."));
 	},
 };

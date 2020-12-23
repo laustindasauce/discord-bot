@@ -49,11 +49,11 @@ var redis = new Redis({
 });
 
 const cooldowns = new Discord.Collection();
-const prefix = client.config.defaultSettings.prefix;
+var prefix = client.config.defaultSettings.prefix;
 
 redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
-redis.set('botguy-env', 'live')
+redis.set('botguy-env', 'test')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
 
@@ -61,8 +61,9 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
 	redis.get('botguy-env').then((res) => {
 		if (res !== "test") {
-			version.execute(client, save_version);
+			version.execute(client, save_version, false);
 		} else {
+			version.execute(client, save_version, true);
 			console.log("**************\nTest Env Active\n**************")
 			prefix = client.config.defaultSettings.testPrefix;
 		}
