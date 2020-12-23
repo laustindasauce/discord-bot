@@ -55,7 +55,7 @@ const config = {
     { level: 2,
       // This is the name of the role.
       name: "Moderator",
-      description: "This is your permission level, the staff levels should always be above the rest of the roles",
+      description: "Staff level permissions, just above the lowly User",
       // The following lines check the guild the message came from for the roles.
       // Then it checks if the member that authored the message has the role.
       // If they do return true, which will allow them to execute the command in question.
