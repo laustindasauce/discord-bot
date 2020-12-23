@@ -12,7 +12,9 @@ var redis = new Redis({
 
 module.exports = {
 	name: 'decr-prof-count',
-    description: 'Tag a member and decrease their profanity count.',
+	description: 'Tag a member and decrease their profanity count.',
+	usage: '[@member]',
+	cooldown: 5,
 	execute(message) {
 
 		if (message.member.hasPermission('ADMINISTRATOR')) {

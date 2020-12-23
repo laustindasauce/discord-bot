@@ -2,7 +2,7 @@ module.exports = {
 	name: 'prune',
 	description: 'Prune up to 99 messages.',
 	guildOnly: true,
-	ars: true,
+	args: true,
 	execute(message, args) {
 
 		if (message.member.hasPermission('MANAGE_MESSAGES')) {
