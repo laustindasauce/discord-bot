@@ -53,7 +53,7 @@ var prefix = client.config.defaultSettings.prefix;
 
 redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
-redis.set('botguy-env', 'test')
+redis.set('botguy-env', 'live')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
 
