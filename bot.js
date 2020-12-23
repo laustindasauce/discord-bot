@@ -53,7 +53,7 @@ const prefix = client.config.defaultSettings.prefix;
 
 redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
-redis.set('botguy-env', 'test')
+redis.set('botguy-env', 'live')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
 
@@ -64,6 +64,7 @@ client.once('ready', () => {
 			version.execute(client, save_version);
 		} else {
 			console.log("**************\nTest Env Active\n**************")
+			prefix = client.config.defaultSettings.testPrefix;
 		}
 	})
 });
@@ -100,6 +101,8 @@ client.on('message', message => {
 		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		if (!func) return;
+
+		if (func.readOnly) return message.reply(`${func.name} is read only!`);
 
 		if (func.guildOnly && message.channel.type === 'dm') {
 			return message.reply('I can\'t execute that function inside DMs!');

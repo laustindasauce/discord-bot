@@ -30,6 +30,7 @@ const config = {
   
   "defaultSettings" : {
     "prefix": "!",
+    "testPrefix": "~",
     "modLogChannel": "mod-log",
     "modRole": "Moderator",
     "adminRole": "Administrator",
