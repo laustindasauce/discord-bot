@@ -44,7 +44,8 @@ const config = {
   permLevels: [
     // This is the lowest permisison level, this is for non-roled users.
     { level: 0,
-      name: "User", 
+      name: "User",
+      description: "This is the lowest permisison level, this is for non-roled users",
       // Don't bother checking, just return true which allows them to execute any command their
       // level allows them to.
       check: () => true
@@ -54,6 +55,7 @@ const config = {
     { level: 2,
       // This is the name of the role.
       name: "Moderator",
+      description: "This is your permission level, the staff levels should always be above the rest of the roles",
       // The following lines check the guild the message came from for the roles.
       // Then it checks if the member that authored the message has the role.
       // If they do return true, which will allow them to execute the command in question.
@@ -69,7 +71,8 @@ const config = {
     },
 
     { level: 3,
-      name: "Administrator", 
+      name: "Administrator",
+      description: "This is the server/guild administrator",
       check: (message) => {
         try {
           const adminRole = message.guild.roles.cache.find(r => r.name.toLowerCase() === message.settings.adminRole.toLowerCase());
@@ -81,7 +84,8 @@ const config = {
     },
     // This is the server owner.
     { level: 4,
-      name: "Server Owner", 
+      name: "Server Owner",
+      description: "Owner of the server",
       // Simple check, if the guild owner id matches the message author's ID, then it will return true.
       // Otherwise it will return false.
       check: (message) => message.channel.type === "text" ? (message.guild.ownerID === message.author.id ? true : false) : false
@@ -91,6 +95,7 @@ const config = {
     // to any server they joins, in order to help troubleshoot the bot on behalf of owners.
     { level: 8,
       name: "Bot Support",
+      description: "Inbetween level that has the equivalent of server owner access. Can help troubleshoot the bot on behalf of owners",
       // The check is by reading if an ID is part of this array. Yes, this means you need to
       // change this and reboot the bot to add a support user. Make it better yourself!
       check: (message) => config.support.includes(message.author.id)
@@ -99,6 +104,7 @@ const config = {
     // Bot Admin has some limited access like rebooting the bot or reloading commands.
     { level: 9,
       name: "Bot Admin",
+      description: "Bot Admin has some limited access like rebooting the bot or reloading commands",
       check: (message) => config.admins.includes(message.author.id)
     },
 
@@ -106,7 +112,8 @@ const config = {
     // The reason this should be the highest level is because of dangerous commands such as eval
     // or exec (if the owner has that).
     { level: 10,
-      name: "Bot Owner", 
+      name: "Bot Owner",
+      description: "Highest permission level available, can access all commands",
       // Another simple check, compares the message author id to the one stored in the config file.
       check: (message) => message.client.config.ownerID === message.author.id
     }
