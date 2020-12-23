@@ -61,6 +61,6 @@ module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
 	execute(client, save_version) {
-        get_version(client, save_version).then(() => console.log("Updated version."));
+        get_version(client, save_version).then(() => console.log("Successfully updated version."));
 	},
 };
