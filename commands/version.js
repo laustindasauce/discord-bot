@@ -24,6 +24,7 @@ async function get_hash(message, args) {
 			if (result) {
 				const entries = Object.entries(result);
 				let i = 0;
+				let j = 0;
 				for (var [name, description] of entries) {
 					if (i === 0) {
 						data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
@@ -32,6 +33,7 @@ async function get_hash(message, args) {
 					}
 					data.push(`${name}: ${description}`);
 				}
+				
 				redis.hgetall(functionHash, function (err, result) {
 					if (err) {
 						console.error(err);
@@ -39,7 +41,6 @@ async function get_hash(message, args) {
 					} else {
 						if (result) {
 							const entries = Object.entries(result);
-							let j = 0;
 							for (var [name, description] of entries) {
 								if (j === 0) {
 									data.push("------------------\n\tFunctions\n------------------");
@@ -50,14 +51,14 @@ async function get_hash(message, args) {
 						}
 					}
 				})
+				if (i === 0 && j === 0) {
+					data.push(`${args} is not a valid version of BotGuy`);
+					data.push("Try the command !version all")
+				}
 			}
 		}
 	})
 
-	if (!data.length) {
-		data.push(`${args} is not a valid version of BotGuy`);
-		data.push("Try the command !version all")
-	}
 	return message.author.send(data, { split: true })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
