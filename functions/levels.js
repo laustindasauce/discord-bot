@@ -7,7 +7,7 @@ module.exports = {
     description: "Displays embedded message with all available levels in the server.",
     permLevel: "User",
 	execute(client) {
-		for (let i = client.config.permLevels.length; i > 0; i--) {
+		for (let i = client.config.permLevels.length-1; i > 0; i--) {
             const thisLevel = client.config.permLevels[i];
             embed.addField(thisLevel.name, thisLevel, false)
         }
