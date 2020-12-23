@@ -45,6 +45,11 @@ spec:
             secretKeyRef:
               key: botguy-tenor-key
               name: discord-secrets
+        - name: USER_ID
+          valueFrom:
+            secretKeyRef:
+              key: abspen1-id
+              name: discord-secrets
         - name: REDIS_PASS
           valueFrom:
             secretKeyRef:
