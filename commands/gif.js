@@ -13,8 +13,10 @@ async function get_gif(message, args) {
 }
 
 module.exports = {
-	name: 'gif',
+    name: 'gif',
+    aliases: ['video', 'vid'],
     description: 'Send a specified gif. Add arguments if you\'d like!',
+    usage: '[**optional** search parameter]',
 	execute(message, args) {
 		get_gif(message, args).then(() => console.log("gif sent"));
 	},
