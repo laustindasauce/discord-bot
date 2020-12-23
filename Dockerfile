@@ -8,6 +8,7 @@ COPY commands commands
 COPY functions functions
 COPY profanity profanity
 COPY version version
+COPY config.js config.js
 COPY bot.js bot.js
 
 RUN npm install
