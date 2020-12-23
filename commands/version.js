@@ -46,7 +46,7 @@ async function get_hash(message, args) {
 		}
 	})
 
-	if (!data) {
+	if (!data.length) {
 		data.push(`${args} is not a valid version of BotGuy`);
 		data.push("Try the command !version all")
 	}
