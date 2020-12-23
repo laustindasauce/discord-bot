@@ -79,7 +79,7 @@ async function get_hash(message, args) {
 	}
 
 	exampleEmbed.setTimestamp()
-	exampleEmbed.setFooter('Try running one of these commands with ! infront', 'https://discord.bots.gg/img/logo_transparent_coloured.png');
+	exampleEmbed.setFooter('To run a command send => ![command name]', 'https://discord.bots.gg/img/logo_transparent_coloured.png');
 
 	return message.author.send(exampleEmbed)
 		.then(() => {
