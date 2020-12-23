@@ -45,7 +45,7 @@ const prefix = '!'
 
 redis.get("check-redis").then((res) => console.log(res));
 // redis.del('BotGuy-Versions')
-redis.set('mod2', "0");
+// redis.set('mod2', "0");
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");

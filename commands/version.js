@@ -21,7 +21,7 @@ async function get_hash(message, args) {
 			console.error(err);
 			data.push(`Error occured trying to get commands for Version ${args}`);
 		} else {
-			if (result) {
+			if (result.length) {
 				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
 				data.push("------------------\n\tCommands\n------------------");
 				const entries = Object.entries(result);
@@ -33,7 +33,7 @@ async function get_hash(message, args) {
 						console.error(err);
 						data.push(`Error occured trying to get functions for Version ${args}`);
 					} else {
-						if (result) {
+						if (result.length) {
 							data.push("------------------\n\tFunctions\n------------------");
 							const entries = Object.entries(result);
 							for (var [name, description] of entries) {
