@@ -16,50 +16,49 @@ async function get_hash(message, args) {
 
 	let data = [];
 
-	redis.hgetall(commandHash, function (err, result) {
-		if (err) {
-			console.error(err);
-			data.push(`Error occured trying to get commands for Version ${args}`);
-		} else {
-			if (result) {
-				const entries = Object.entries(result);
-				let i = 0;
-				let j = 0;
-				for (var [name, description] of entries) {
-					if (i === 0) {
-						data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
-						data.push("------------------\n\tCommands\n------------------");
-						i++;
-					}
-					data.push(`${name}: ${description}`);
-				}
-				
-				redis.hgetall(functionHash, function (err, result) {
-					if (err) {
-						console.error(err);
-						data.push(`Error occured trying to get functions for Version ${args}`);
-					} else {
-						if (result) {
-							const entries = Object.entries(result);
-							for (var [name, description] of entries) {
-								if (j === 0) {
-									data.push("------------------\n\tFunctions\n------------------");
-									j++;
-								}
-								data.push(`${name}: ${description}`);
-							}
-						}
-					}
-				})
-				console.log(j)
-				console.log(i)
-				if (i === 0 && j === 0) {
-					data.push(`${args} is not a valid version of BotGuy`);
-					data.push("Try the command !version all")
-				}
+	let hash = null;
+	let funcHash = null;
+	try {
+		hash = await redis.hgetall(commandHash)
+	} catch (error) {
+		
+	}
+
+	try {
+		funcHash = await redis.hgetall(functionHash)
+	} catch (error) {
+		
+	}
+	
+	if (hash !== null) {
+		let entries = Object.entries(hash)
+		let i = 0;
+		for (var [name, description] of entries) {
+			if (i === 0) {
+				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
+				data.push("------------------\n\tCommands\n------------------");
+				i = 1;
 			}
+			data.push(`${name}: ${description}`);
 		}
-	})
+		
+	}
+	if (funcHash !== null) {
+		let j = 0;
+		let entries = Object.entries(funcHash)
+		for (var [name, description] of entries) {
+			if (j === 0) {
+				data.push("------------------\n\tFunctions\n------------------");
+				j = 1;
+			}
+			data.push(`${name}: ${description}`);
+		}
+	}
+
+	if (!data.length) {
+		data.push(`${args} is not a valid version of BotGuy`);
+		data.push("Try the command !version all")
+	}
 
 	return message.author.send(data, { split: true })
 		.then(() => {
@@ -70,6 +69,7 @@ async function get_hash(message, args) {
 			console.error(`Could not send version DM to ${message.author.tag}.\n`, error);
 			message.reply('it seems like I can\'t DM you!');
 		});
+	
 }
 
 async function get_versions(message) {
@@ -106,7 +106,7 @@ module.exports = {
 		if (versions === "all") {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else {
-		    get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
+			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
 	},
 };
