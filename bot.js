@@ -1,8 +1,15 @@
 var Redis = require('ioredis')
 const fs = require('fs');
 const Discord = require('discord.js')
+const config = require("./config.js");
 
-const client = new Discord.Client()
+const client = new Discord.Client({
+  ws: {
+    intents: config.intents
+  }
+});
+
+client.config = config
 
 client.commands = new Discord.Collection();
 client.functions= new Discord.Collection();
@@ -21,28 +28,30 @@ for (const file of functionFiles) {
 
 var profanity = require('./profanity/check-profanity.js')
 var version = require('./version/version.js')
-var save_version = require('./version/save-version.js')
+var save_version = require('./version/save-version.js');
+// const { inherits } = require('util');
 
 /**
  * Retrieve all environment variables as constant values
  */
-const token = process.env.TOKEN
+// const token = process.env.TOKEN
 // const public = process.env.PUBLIC
 // const bot_id = process.env.BOT_ID
 // const secret = process.env.SECRET
-const redisPass = process.env.REDIS_PASS
-const redisHost = process.env.REDIS_HOST
+const redisPass = client.config.redisPass;
+const redisHost = client.config.redisHost;
 
 var redis = new Redis({
     port: 6379,          // Redis port
     host: redisHost,   	 // Redis host
     password: redisPass, // Redis pass
     db: 9,				 // Redis database
-})
+});
 
 const cooldowns = new Discord.Collection();
-const prefix = '!'
+const prefix = client.config.defaultSettings.prefix;
 
+redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
@@ -96,9 +105,10 @@ client.on('message', message => {
 			}
 			return message.channel.send(reply);
 		}
+		const level = client.permlevel(message);
 		
 		try {
-			func.execute(message, args);
+			func.execute(client, redis, message, args, level);
 		} catch (error) {
 			console.error(error);
 			message.reply('there was an error trying to execute that function!');
@@ -149,8 +159,7 @@ client.on('message', message => {
 });
 
 // Create an event listener for new guild members
-client.on('guildMemberAdd', member => {
-	console.log("New member joined")
+client.on('guildMemberAdd', (member) => {
 	// Send the message to a designated channel on a server:
 	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	// Do nothing if the channel wasn't found on this server
@@ -159,7 +168,36 @@ client.on('guildMemberAdd', member => {
 		return;
 	}
 	// Send the message, mentioning the member
-	channel.send(`Welcome to the server, ${member}`);
+	channel.send(`Welcome to the server, ${member.displayName}`);
+	
 });
 
-client.login(token)
+const init = async () => {
+
+	// Generate a cache of client permissions for pretty perm names in commands.
+	client.levelCache = {};
+	for (let i = 0; i < client.config.permLevels.length; i++) {
+		const thisLevel = client.config.permLevels[i];
+		client.levelCache[thisLevel.name] = thisLevel.level;
+	}
+
+	client.permlevel = message => {
+		let permlvl = 10;
+
+		const permOrder = client.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
+
+		while (permOrder.length) {
+			const currentLevel = permOrder.shift();
+			if (message.guild && currentLevel.guildOnly) continue;
+
+			if (currentLevel.check(message)) {
+				permlvl = currentLevel.level;
+				return permlvl;
+			}
+		}
+	};
+
+	client.login(client.config.token);
+}
+
+init();
