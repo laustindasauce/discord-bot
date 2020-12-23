@@ -107,8 +107,14 @@ module.exports = {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else if (versions === "latest") {
 			redis.get('botguy-version').then((res) => {
-				get_hash(message, res).then(() => console.log(`DM sent with info on latest version.`));
-			})
+				return message.reply(`The latest version is v${res}`)
+					.then(() => {
+						console.log("Replied with latest version of BotGuy.")
+					})
+					.catch(error => {
+						console.error(`Could not send version reply to ${message.author.tag}.\n`, error);
+					});
+				})
 		} else {
 			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
