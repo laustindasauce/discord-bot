@@ -21,11 +21,15 @@ async function get_hash(message, args) {
 			console.error(err);
 			data.push(`Error occured trying to get commands for Version ${args}`);
 		} else {
-			if (result.length) {
-				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
-				data.push("------------------\n\tCommands\n------------------");
+			if (result) {
 				const entries = Object.entries(result);
+				let i = 0;
 				for (var [name, description] of entries) {
+					if (i === 0) {
+						data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
+						data.push("------------------\n\tCommands\n------------------");
+						i++;
+					}
 					data.push(`${name}: ${description}`);
 				}
 				redis.hgetall(functionHash, function (err, result) {
@@ -33,10 +37,16 @@ async function get_hash(message, args) {
 						console.error(err);
 						data.push(`Error occured trying to get functions for Version ${args}`);
 					} else {
-						if (result.length) {
+						if (result) {
 							data.push("------------------\n\tFunctions\n------------------");
 							const entries = Object.entries(result);
+							let j = 0;
 							for (var [name, description] of entries) {
+								if (j === 0) {
+									data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
+									data.push("------------------\n\tCommands\n------------------");
+									j++;
+								}
 								data.push(`${name}: ${description}`);
 							}
 						}
