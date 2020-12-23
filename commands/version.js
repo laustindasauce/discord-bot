@@ -51,6 +51,8 @@ async function get_hash(message, args) {
 						}
 					}
 				})
+				console.log(j)
+				console.log(i)
 				if (i === 0 && j === 0) {
 					data.push(`${args} is not a valid version of BotGuy`);
 					data.push("Try the command !version all")
