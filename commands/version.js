@@ -105,6 +105,10 @@ module.exports = {
 
 		if (versions === "all") {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
+		} else if (versions === "latest") {
+			redis.get('botguy-version').then((res) => {
+				get_hash(message, res).then(() => console.log(`DM sent with info on latest version.`));
+			})
 		} else {
 			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
