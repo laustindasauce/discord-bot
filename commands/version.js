@@ -1,4 +1,8 @@
 var Redis = require('ioredis');
+const Discord = require('discord.js');
+const exampleEmbed = new Discord.MessageEmbed()
+	.setColor('#ff2052')
+	.setAuthor('BotGuy', 'https://discord.bots.gg/img/logo_transparent_coloured.png', 'https://discord.js.org');
 
 const redisPass = process.env.REDIS_PASS;
 const redisHost = process.env.REDIS_HOST;
@@ -13,6 +17,9 @@ var redis = new Redis({
 async function get_hash(message, args) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
+
+	exampleEmbed.setTitle(`v${args}`)
+	exampleEmbed.setDescription(`Modules available to BotGuy as of v${args}`)
 
 	let data = [];
 
@@ -34,12 +41,13 @@ async function get_hash(message, args) {
 		let entries = Object.entries(hash)
 		let i = 0;
 		for (var [name, description] of entries) {
-			if (i === 0) {
-				data.push(`MODULES AVAILABLE TO BOTGUY AS OF VERSION ${args}\n`);
-				data.push("------------------\n\tCommands\n------------------");
-				i = 1;
-			}
-			data.push(`${name}: ${description}`);
+			// if (i === 0) {
+			// 	exampleEmbed.setTitle(` AS OF VERSION ${args}`);
+			// 	data.push("= Commands =\n");
+			// 	i = 1;
+			// }
+			data.push(`• ${name} :: ${description}\n`);
+			exampleEmbed.addField(name, description, true);
 		}
 		
 	}
@@ -47,20 +55,33 @@ async function get_hash(message, args) {
 		let j = 0;
 		let entries = Object.entries(funcHash)
 		for (var [name, description] of entries) {
-			if (j === 0) {
-				data.push("------------------\n\tFunctions\n------------------");
-				j = 1;
-			}
-			data.push(`${name}: ${description}`);
+			// if (j === 0) {
+			// 	data.push("= Functions =\n");
+			// 	j = 1;
+			// }
+			data.push(`• ${name} :: ${description}\n`);
+			exampleEmbed.addField(name, description, true);
 		}
 	}
 
 	if (!data.length) {
 		data.push(`${args} is not a valid version of BotGuy`);
 		data.push("Try the command !version all")
+		return message.author.send(data, { split: true })
+			.then(() => {
+				if (message.channel.type === 'dm') return;
+				message.reply('I\'ve sent you a DM with the version details!');
+			})
+			.catch(error => {
+				console.error(`Could not send version DM to ${message.author.tag}.\n`, error);
+				message.reply('it seems like I can\'t DM you!');
+			});
 	}
 
-	return message.author.send(data, { split: true })
+	exampleEmbed.setTimestamp()
+	exampleEmbed.setFooter('Try running one of these commands with ! infront', 'https://discord.bots.gg/img/logo_transparent_coloured.png');
+
+	return message.author.send(exampleEmbed)
 		.then(() => {
 			if (message.channel.type === 'dm') return;
 			message.reply('I\'ve sent you a DM with the version details!');
@@ -85,7 +106,7 @@ async function get_versions(message) {
 			}
 		}
 	})
-	return message.author.send(data, { split: true })
+	return message.author.send(data, { code: "asciidoc" })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
 			message.reply('I\'ve sent you a DM with all versions!');
