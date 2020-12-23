@@ -46,7 +46,10 @@ async function get_hash(message, args) {
 		}
 	})
 
-
+	if (!data) {
+		data.push(`${args} is not a valid version of BotGuy`);
+		data.push("Try the command !version all")
+	}
 	return message.author.send(data, { split: true })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
@@ -89,38 +92,10 @@ module.exports = {
 	execute(message, args) {
 		versions = args.join(' ');
 
-		let data = [];
-
-		data.push(`${args} is not a valid version of BotGuy`);
-		data.push("Here are all versions for BotGuy:");
-
-		redis.smembers("BotGuy-Versions", function (errors, res) {
-			if (errors) {
-				console.error(errors);
-			} else {
-				for (var i = 0; i < res.length; i++) {
-					data.push(res[i]);
-				}
-			}
-		})
-
 		if (versions === "all") {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else {
-			if (data.includes(args)){
-		    	get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
-			}
-			else {
-				return message.author.send(data, { split: true })
-					.then(() => {
-						if (message.channel.type === 'dm') return;
-						message.reply('I\'ve sent you a DM with all versions!');
-					})
-					.catch(error => {
-						console.error(`Could not send versions DM to ${message.author.tag}.\n`, error);
-						message.reply('it seems like I can\'t DM you!');
-					});
-			}
+		    get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
 	},
 };
