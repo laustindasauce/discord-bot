@@ -128,7 +128,7 @@ module.exports = {
 			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
 		} else if (versions === "latest") {
 			redis.get('botguy-version').then((res) => {
-				return message.reply(`The latest version is v${res}`)
+				return message.reply(`the latest version is v${res}`)
 					.then(() => {
 						console.log("Replied with latest version of BotGuy.")
 					})
