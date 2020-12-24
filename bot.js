@@ -172,15 +172,16 @@ client.on('message', message => {
 // Create an event listener for new guild members
 client.on('guildMemberAdd', (member) => {
 	// Send the message to a designated channel on a server:
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	let channelID = '790611337545908306'
+	const channel = client.channels.cache.find(channel => channel.id === channelID)
 	// Do nothing if the channel wasn't found on this server
 	if (!channel) {
 		console.log("Could not find channel to send welcome message")
 		return;
 	}
 	// Send the message, mentioning the member
-	channel.send(`Welcome to the server, ${member.displayName}`);
-	
+	channel.send(`Welcome to the server, ${member.displayName}. Send **!help** in the bot-testing channel to get a list of my commands!`);
+	console.log(`Welcomed ${member.displayName}`)
 });
 
 const init = async () => {
