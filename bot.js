@@ -104,7 +104,7 @@ client.on('message', message => {
 		const func = client.functions.get(commandName)
 		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-		if (!func) return;
+		if (!func) return message.reply(`${args} is not a command!`);
 
 		if (func.testing) {
 			if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
