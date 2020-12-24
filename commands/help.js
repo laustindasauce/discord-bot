@@ -12,6 +12,7 @@ module.exports = {
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
 			data.push(functions.map(command => command.name).join(', '));
+			data.push(`\n You can send **![command name] in the dm's or a text channel to run the command!`)
 			data.push(`\nYou can send \`!help [command name]\` to get info on a specific command!`);
 
 			return message.author.send(data, { split: true })
