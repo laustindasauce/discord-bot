@@ -106,7 +106,7 @@ async function get_versions(message) {
 			}
 		}
 	})
-	return message.author.send(data, { code: "asciidoc" })
+	return message.author.send(data, { split: true })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
 			message.reply('I\'ve sent you a DM with all versions!');
