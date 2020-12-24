@@ -122,6 +122,7 @@ module.exports = {
 	description: 'Give insight into the versions of BotGuy.',
 	args: true,
 	cooldown: 8,
+	usage: '[command name] OR [all] OR [latest]',
 	execute(message, args) {
 		versions = args.join(' ');
 
