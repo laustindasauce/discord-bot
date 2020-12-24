@@ -97,15 +97,13 @@ async function get_versions(message) {
 	let data = [];
 
 	data.push("Here are all versions for BotGuy:");
-	redis.smembers("BotGuy-Versions", function (errors, res) {
-		if (errors) {
-			console.error(errors);
-		} else {
-			for (var i = 0; i < res.length; i++) {
-				data.push(res[i]);
-			}
-		}
-	})
+	arr = await redis.smembers("BotGuy-Versions");
+	
+	console.log(arr)
+
+	for (let i = 0; i < arr.length; i++) {
+		data.push(arr[i]);
+	}
 	return message.author.send(data, { split: true })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
