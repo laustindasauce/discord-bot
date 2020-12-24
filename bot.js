@@ -72,7 +72,7 @@ client.once('ready', () => {
 
 
 /**
- * When a message is sent in the server this function will be triggered
+ * Event listener for when a message is sent in the guild
  */
 client.on('message', message => {
 	/**
@@ -169,7 +169,10 @@ client.on('message', message => {
 	}
 });
 
-// Create an event listener for new guild members
+/**
+ * Event listener for when a user joins the guild
+ * Sends message to let them know how to interact with the bot
+ */
 client.on('guildMemberAdd', (member) => {
 	// Send the message to a designated channel on a server:
 	let channelID = '790611337545908306'
@@ -183,6 +186,27 @@ client.on('guildMemberAdd', (member) => {
 	channel.send(`Welcome to the server, ${member.displayName}. Send **!help** in the bot-testing channel to get a list of my commands!`);
 	console.log(`Welcomed ${member.displayName}`)
 });
+
+/**
+ * Send a funny message when a user leaves the guild
+ */
+client.on('guildMemberRemove', member => {
+    const goodbyeEmbed = new Discord.MessageEmbed()
+
+    goodbyeEmbed.setColor('#f00000')
+    goodbyeEmbed.setTitle('**' + member.user.username + '** was not the impostor there are **' + member.guild.memberCount + '** left Among Us')
+    goodbyeEmbed.setImage('https://gamewith-en.akamaized.net/article/thumbnail/rectangle/22183.png')
+
+	member.guild.channels.cache.find(i => i.name === 'member-log').send(goodbyeEmbed)
+	console.log("goodbye")
+})
+
+/**
+ * Not sure what I can do with this event yet
+ */
+// client.on("presenceUpdate", function(oldMember, newMember){
+//     console.log(`a guild member's presence changes`);
+// });
 
 const init = async () => {
 
