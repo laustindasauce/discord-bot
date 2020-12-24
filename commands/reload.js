@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'reload',
 	description: 'This is deprecated since bot is running on Kubernetes with Pipelining',
+	usage: '[command name]',
 	args: true,
 	execute(message, args) {
 		const commandName = args[0].toLowerCase();

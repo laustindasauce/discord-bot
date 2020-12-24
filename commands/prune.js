@@ -2,6 +2,7 @@ module.exports = {
 	name: 'prune',
 	description: 'Prune up to 99 messages.',
 	guildOnly: true,
+	usage: '[number 1-99]',
 	args: true,
 	execute(message, args) {
 
