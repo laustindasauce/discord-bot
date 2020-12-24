@@ -1,6 +1,16 @@
 const fetch = require('node-fetch')
 
-async function get_gif(message, args) {
+module.exports = {
+    name: 'gif',
+    aliases: ['video', 'vid'],
+    description: 'Send a specified gif. Add arguments if you\'d like!',
+    usage: '[**optional** search parameter]',
+    test() {
+		return true;
+	},
+};
+
+module.exports.execute = async (message, args) => {
     let keywords = 'happy'
     if (args.length) {
         keywords = args.join(' ')
@@ -10,14 +20,5 @@ async function get_gif(message, args) {
     let json = await response.json()
     const index = Math.floor(Math.random() * json.results.length)
     message.channel.send(json.results[index].url)
-}
-
-module.exports = {
-    name: 'gif',
-    aliases: ['video', 'vid'],
-    description: 'Send a specified gif. Add arguments if you\'d like!',
-    usage: '[**optional** search parameter]',
-	execute(message, args) {
-		get_gif(message, args).then(() => console.log("gif sent"));
-	},
+    console.log(`${keywords} gif sent!`)
 };
