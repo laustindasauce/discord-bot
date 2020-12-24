@@ -8,7 +8,7 @@ COPY commands commands
 COPY functions functions
 COPY profanity profanity
 COPY version version
-COPY test.js test.js
+COPY test test
 COPY config.js config.js
 COPY bot.js bot.js
 
