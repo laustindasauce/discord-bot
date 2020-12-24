@@ -1,5 +1,6 @@
 module.exports = {
 	name: "my-level",
+	aliases: ['mylevel'],
     description: "Tells you your permission level for the current message location.",
     permLevel: "User",
 	execute(client, redis, message, args, level) {
