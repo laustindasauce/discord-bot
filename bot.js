@@ -56,6 +56,7 @@ redis.get("check-redis").then((res) => console.log(res));
 // redis.set('botguy-env', 'live')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
+let test_env = false;
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
@@ -66,6 +67,7 @@ client.once('ready', () => {
 			version.execute(client, save_version, true);
 			console.log("**************\nTest Env Active\n**************")
 			prefix = client.config.defaultSettings.testPrefix;
+			test_env = true;
 		}
 	})
 });
@@ -102,6 +104,10 @@ client.on('message', message => {
 		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		if (!func) return;
+
+		if (func.test) {
+			if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
+		}
 
 		if (func.readOnly) return message.reply(`${func.name} is read only!`);
 
