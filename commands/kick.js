@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'kick',
 	description: 'Tag a member and kick them.',
+	usage: '[@member]',
 	guildOnly: true,
 	execute(message) {
 

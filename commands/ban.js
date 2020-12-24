@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'ban',
     description: 'Tag a member and ban them.',
+    usage: '[@member]',
     guildOnly: true,
 	execute(message) {
 
