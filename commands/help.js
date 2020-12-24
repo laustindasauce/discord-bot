@@ -46,7 +46,9 @@ module.exports = {
 
 			if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
 			if (command.description) data.push(`**Description:** ${command.description}`);
-			if (command.usage) data.push(`**Usage:** !${command.name} ${command.usage}`);
+			if (command.usage) {
+				data.push(`**Usage:** !${command.name} ${command.usage}`);
+			} else data.push(`**Usage:** !${command.name}`)
 
 			data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 		}

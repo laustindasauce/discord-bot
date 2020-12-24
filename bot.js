@@ -26,9 +26,10 @@ for (const file of functionFiles) {
 	client.functions.set(func.name, func);
 }
 
-var profanity = require('./profanity/check-profanity.js')
-var version = require('./version/version.js')
+var profanity = require('./profanity/check-profanity.js');
+var version = require('./version/version.js');
 var save_version = require('./version/save-version.js');
+var test = require('./test.js');
 // const { inherits } = require('util');
 
 /**
@@ -107,6 +108,8 @@ client.on('message', message => {
 
 		if (func.test) {
 			if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
+			test.execute(message, args);
+			return console.log("Finished testing.")
 		}
 
 		if (func.readOnly) return message.reply(`${func.name} is read only!`);
