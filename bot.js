@@ -29,8 +29,6 @@ for (const file of functionFiles) {
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
 var save_version = require('./version/save-version.js');
-var test = require('./test.js');
-// const { inherits } = require('util');
 
 /**
  * Retrieve all environment variables as constant values
@@ -106,11 +104,9 @@ client.on('message', message => {
 
 		if (!func) return message.reply(`${args} is not a command!`);
 
-		if (func.testing) {
-			if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
-			test.execute(message, args);
-			return console.log("Finished testing.")
-		}
+		// if (func.testing) {
+		// 	if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
+		// }
 
 		if (func.readOnly) return message.reply(`${func.name} is read only!`);
 
