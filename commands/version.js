@@ -117,6 +117,7 @@ async function get_versions(message) {
 
 module.exports = {
 	name: 'version',
+	aliases: ['versions', 'v'],
 	description: 'Give insight into the versions of BotGuy.',
 	args: true,
 	cooldown: 8,
