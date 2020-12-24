@@ -24,6 +24,6 @@ module.exports = {
 		}
 	},
 	test() {
-		return true;
+		return false;
 	},
 };
