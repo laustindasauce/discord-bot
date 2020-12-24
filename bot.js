@@ -106,7 +106,7 @@ client.on('message', message => {
 
 		if (!func) return;
 
-		if (func.test) {
+		if (func.testing) {
 			if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
 			test.execute(message, args);
 			return console.log("Finished testing.")
