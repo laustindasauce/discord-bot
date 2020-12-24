@@ -2,7 +2,7 @@ var Redis = require('ioredis');
 const Discord = require('discord.js');
 const exampleEmbed = new Discord.MessageEmbed()
 	.setColor('#ff2052')
-	.setAuthor('BotGuy', 'https://discord.bots.gg/img/logo_transparent_coloured.png', 'https://discord.js.org');
+	.setAuthor('BotGuy', 'https://discord.com/channels/@me/790100058682294302/791705870567604264', 'https://discord.js.org');
 
 const redisPass = process.env.REDIS_PASS;
 const redisHost = process.env.REDIS_HOST;

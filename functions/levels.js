@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const embed = new Discord.MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Levels available in this server')
-    .setAuthor('BotGuy', 'https://discord.bots.gg/img/logo_transparent_coloured.png', 'https://discord.js.org')
+    .setAuthor('BotGuy', 'https://discord.com/channels/@me/790100058682294302/791705870567604264', 'https://discord.js.org')
     .setTimestamp()
 	.setFooter('Try running \`!my-level\` to see your permission level.', 'https://discord.bots.gg/img/logo_transparent_coloured.png');
 
