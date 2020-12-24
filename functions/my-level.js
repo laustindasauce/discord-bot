@@ -5,5 +5,8 @@ module.exports = {
 	execute(client, redis, message, args, level) {
 		const friendly = client.config.permLevels.find(l => l.level === level).name;
         message.reply(`Your permission level is: ${level} - ${friendly}`);
-	}
+	},
+	test() {
+		return true;
+	},
 };

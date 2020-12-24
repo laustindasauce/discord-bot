@@ -13,4 +13,7 @@ module.exports = {
 
 		message.channel.send(avatarList);
 	},
+	test() {
+		return true;
+	},
 };

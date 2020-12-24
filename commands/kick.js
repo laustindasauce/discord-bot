@@ -50,4 +50,7 @@ module.exports = {
             message.reply("You don't have permissions to kick other users.\n<@&790612674106097754> can you check on this.")
         }
 	},
+	test() {
+		return true;
+	},
 };

@@ -4,4 +4,7 @@ module.exports = {
     description: `\`READ ONLY\`\nThis function is always running and is a profanity filter for the server.`,
     readOnly: true,
     permLevel: "User",
+    test() {
+		return true;
+	},
 };

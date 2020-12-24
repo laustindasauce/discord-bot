@@ -25,5 +25,8 @@ module.exports = {
                 console.error(`Could not send permission levels DM to ${message.author.tag}.\n`, error);
                 message.reply('it seems like I can\'t DM you!');
             });
-	}
+    },
+    test() {
+		return true;
+	},
 };

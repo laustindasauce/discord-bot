@@ -141,4 +141,7 @@ module.exports = {
 			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
 		}
 	},
+	test() {
+		return true;
+	},
 };

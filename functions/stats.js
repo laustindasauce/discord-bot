@@ -27,6 +27,8 @@ module.exports = {
 			• Discord.js :: v${version}
 			• Node       :: ${process.version}`, {code: "asciidoc"});
 		});
-		
-	}
+	},
+	test() {
+		return true;
+	},
 }

@@ -13,4 +13,7 @@ module.exports = {
 		let arguments = args.join(' ')
 		message.channel.send(`All args: ${arguments}`);
 	},
+	test() {
+		return true;
+	},
 };

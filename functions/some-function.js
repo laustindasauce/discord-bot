@@ -4,4 +4,7 @@ module.exports = {
 	execute(client, redis, message) {
 		message.channel.send('Function completed.');
 	},
+	test() {
+		return true;
+	},
 };

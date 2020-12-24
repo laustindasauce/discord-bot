@@ -51,5 +51,8 @@ module.exports = {
             // Otherwise, let the user know they don't have permission to ban
             message.reply("You don't have permissions to ban users.\n<@&790612674106097754> can you check on this.")
         }
+    },
+    test() {
+		return true;
 	},
 };
