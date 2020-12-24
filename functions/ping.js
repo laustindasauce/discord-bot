@@ -1,14 +1,27 @@
+const { MessageEmbed } = require('discord.js')
+
 module.exports = {
-	name: 'ping',
-	description: 'Simple check for if the bot is functioning',
-	cooldown: 5,
+	name: "ping",
+	aliases: ["🏓"],
+	description: "Get the Ping the bot and the sender.",
 	permLevel: "User",
+	execute: async (client, redis, message) => {
+		message.react("🏓");
+		let Pinging = new MessageEmbed()
+			.setTitle(`🏓 Pinging...`)
+
+		const msg = await message.channel.send(Pinging);
+		let pingembed = new MessageEmbed()
+			.setTitle(`🏓 Pong!`)
+			.addFields(
+				{ name: `**Ping:**`, value: `${Math.floor(msg.createdAt - message.createdAt)}ms` },
+				{ name: `${client.user.username}'s Ping:`, value: `${Math.round(client.ws.ping)}ms` },
+				{ name: `${message.author.username}'s Ping:`, value: `${Math.abs(Math.floor((msg.createdAt - message.createdAt) - client.ws.ping))}ms` },
+			)
+
+		msg.edit(pingembed)
+	},
 	test() {
 		return true;
 	},
-};
-
-module.exports.execute = async (client, redis, message) => { // eslint-disable-line no-unused-vars
-  const msg = await message.channel.send("Ping?");
-  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
 };
