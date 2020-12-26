@@ -120,8 +120,6 @@ async function get_versions(message, redis) {
 	data.push("Here are all versions for BotGuy:");
 	arr = await redis.smembers("BotGuy-Versions");
 	
-	console.log(arr)
-
 	for (let i = 0; i < arr.length; i++) {
 		data.push(arr[i]);
 	}
