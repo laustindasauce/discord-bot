@@ -136,7 +136,7 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(redis, message, args, level);
+		command.execute(message, args, redis, level);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
