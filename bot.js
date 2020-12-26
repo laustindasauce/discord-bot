@@ -49,7 +49,6 @@ redis.get("check-redis").then((res) => console.log(res));
 // redis.set('botguy-env', 'live')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
-let test_env = false;
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
