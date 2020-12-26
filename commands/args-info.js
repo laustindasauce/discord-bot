@@ -1,7 +1,10 @@
 module.exports = {
 	name: 'args-info',
 	description: 'Information about the arguments provided.',
+	usage: '[some arguments]',
 	args: true,
+	readOnly: false,
+	cooldown: 1,
 	permLevel: 0,
 	execute(message, args, _redis, _level) {
 		if (!args.length) {

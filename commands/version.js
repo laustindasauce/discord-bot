@@ -7,9 +7,11 @@ module.exports = {
 	name: 'version',
 	aliases: ['versions', 'v'],
 	description: 'Give insight into the versions of BotGuy.',
-	args: true,
-	cooldown: 8,
 	usage: '[specific version] OR [all] OR [latest]',
+	args: true,
+	readOnly: false,
+	guildOnly: false,
+	cooldown: 8,
 	permLevel: 0,
 	execute(message, args, redis, _level) {
 		versions = args.join(' ');

@@ -5,6 +5,9 @@ module.exports = {
     aliases: ['video', 'vid'],
     description: 'Send a specified gif. Add arguments if you\'d like!',
     usage: '[**optional** search parameter]',
+    args: false,
+    readOnly: false,
+    guildOnly: false,
     permLevel: 0,
     execute: async (message, args, _redis, _level) => {
         let keywords = 'happy'

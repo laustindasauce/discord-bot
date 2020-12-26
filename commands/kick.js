@@ -2,7 +2,10 @@ module.exports = {
 	name: 'kick',
 	description: 'Tag a member and kick them.',
 	usage: '[@member]',
+	args: false,
+	readOnly: false,
 	guildOnly: true,
+	cooldown: 5,
 	permLevel: 3,
 	execute(message, _args, _redis, _level) {
 		if (!message.mentions.users.size) {
