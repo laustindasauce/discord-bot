@@ -14,15 +14,5 @@ module.exports = {
                 }
             }
         }
-
-        // Set functions hash
-        functionHash = "hash-" + version + "-functions";
-        for (cmds of client.functions) {
-            for (func of cmds) {
-                if (func.name) {
-                    redis.hset(functionHash, func.name, func.description)
-                }
-            }
-        }
 	},
 };

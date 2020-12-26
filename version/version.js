@@ -1,4 +1,5 @@
 var Redis = require('ioredis')
+var save_version = require('./save-version.js')
 
 const redisPass = process.env.REDIS_PASS
 const redisHost = process.env.REDIS_HOST
@@ -14,7 +15,7 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
-async function get_version(client, save_version, test) {
+async function get_version(client, test) {
     // Get latest version from database
     await redis.get('version').then((res) => {
         if (res) {

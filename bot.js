@@ -22,7 +22,6 @@ for (const file of commandFiles) {
 
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
-var save_version = require('./version/save-version.js');
 
 /**
  * Retrieve all environment variables as constant values
@@ -54,9 +53,9 @@ client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
 	redis.get('botguy-env').then((res) => {
 		if (res !== "test") {
-			version.execute(client, save_version, false);
+			version.execute(client, false);
 		} else {
-			version.execute(client, save_version, true);
+			version.execute(client, true);
 			console.log("**************\nTest Env Active\n**************")
 			prefix = client.config.defaultSettings.testPrefix;
 			test_env = true;
