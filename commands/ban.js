@@ -3,7 +3,8 @@ module.exports = {
     description: 'Tag a member and ban them.',
     usage: '[@member]',
     guildOnly: true,
-	execute(message) {
+    permLevel: 4,
+	execute(message, _args, _redis, _level) {
 
         if (message.member.hasPermission('BAN_MEMBERS')) {
             if (!message.mentions.users.size) {

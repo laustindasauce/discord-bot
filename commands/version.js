@@ -1,20 +1,41 @@
-var Redis = require('ioredis');
 const Discord = require('discord.js');
 const exampleEmbed = new Discord.MessageEmbed()
 	.setColor('#ff2052')
 	.setAuthor('BotGuy', 'https://discord.com/channels/@me/790100058682294302/791705870567604264', 'https://discord.js.org');
 
-const redisPass = process.env.REDIS_PASS;
-const redisHost = process.env.REDIS_HOST;
+module.exports = {
+	name: 'version',
+	aliases: ['versions', 'v'],
+	description: 'Give insight into the versions of BotGuy.',
+	args: true,
+	cooldown: 8,
+	usage: '[specific version] OR [all] OR [latest]',
+	permLevel: 0,
+	execute(message, args, redis, _level) {
+		versions = args.join(' ');
 
-var redis = new Redis({
-    port: 6379,          // Redis port
-    host: redisHost,   	 // Redis host
-    password: redisPass, // Redis pass
-    db: 9,				 // Redis database
-})
+		if (versions === "all") {
+			get_versions(message, redis).then(() => console.log(`DM sent with all available versions.`));
+		} else if (versions === "latest") {
+			redis.get('botguy-version').then((res) => {
+				return message.reply(`the latest version is v${res}`)
+					.then(() => {
+						console.log("Replied with latest version of BotGuy.")
+					})
+					.catch(error => {
+						console.error(`Could not send version reply to ${message.author.tag}.\n`, error);
+					});
+				})
+		} else {
+			get_hash(message, args, redis).then(() => console.log(`DM sent with info on version.`));
+		}
+	},
+	test() {
+		return true;
+	},
+};
 
-async function get_hash(message, args) {
+async function get_hash(message, args, redis) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 	functionHash = "hash-" + args.join(' ') + "-functions";
 
@@ -93,7 +114,7 @@ async function get_hash(message, args) {
 	
 }
 
-async function get_versions(message) {
+async function get_versions(message, redis) {
 	let data = [];
 
 	data.push("Here are all versions for BotGuy:");
@@ -114,34 +135,3 @@ async function get_versions(message) {
 			message.reply('it seems like I can\'t DM you!');
 		});
 }
-
-module.exports = {
-	name: 'version',
-	aliases: ['versions', 'v'],
-	description: 'Give insight into the versions of BotGuy.',
-	args: true,
-	cooldown: 8,
-	usage: '[specific version] OR [all] OR [latest]',
-	execute(message, args) {
-		versions = args.join(' ');
-
-		if (versions === "all") {
-			get_versions(message).then(() => console.log(`DM sent with all available versions.`));
-		} else if (versions === "latest") {
-			redis.get('botguy-version').then((res) => {
-				return message.reply(`the latest version is v${res}`)
-					.then(() => {
-						console.log("Replied with latest version of BotGuy.")
-					})
-					.catch(error => {
-						console.error(`Could not send version reply to ${message.author.tag}.\n`, error);
-					});
-				})
-		} else {
-			get_hash(message, args).then(() => console.log(`DM sent with info on version.`));
-		}
-	},
-	test() {
-		return true;
-	},
-};

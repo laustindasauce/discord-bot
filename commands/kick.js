@@ -3,17 +3,16 @@ module.exports = {
 	description: 'Tag a member and kick them.',
 	usage: '[@member]',
 	guildOnly: true,
-	execute(message) {
-
+	permLevel: 3,
+	execute(message, _args, _redis, _level) {
 		if (message.member.hasPermission('KICK_MEMBERS')) {
 			if (!message.mentions.users.size) {
 				return message.reply('you need to tag a user in order to kick them!');
 			}
 
 			const user = message.mentions.users.first();
-
 			message.channel.send(`You wanted to kick: ${user.username}`);
-
+			
 			if (user) {
 				// Now we get the member from the user
 				const member = message.guild.member(user);

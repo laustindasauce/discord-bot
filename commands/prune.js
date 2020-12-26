@@ -5,8 +5,7 @@ module.exports = {
 	usage: '[number 1-99]',
 	permLevel: 3,
 	args: true,
-	execute(message, args) {
-
+	execute(message, args, _redis, _level) {
 		if (message.member.hasPermission('MANAGE_MESSAGES')) {
 
 			const amount = parseInt(args[0]) + 1;

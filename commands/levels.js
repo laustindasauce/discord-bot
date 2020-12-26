@@ -11,7 +11,7 @@ module.exports = {
     aliases: ['levels'],
     description: "Displays embedded message with all available permission levels in the server.",
     permLevel: 0,
-	execute(client, redis, message) {
+	execute(message, _args, _redis, _level) {
 		for (let i = client.config.permLevels.length-1; i >= 0; i--) {
             const thisLevel = client.config.permLevels[i];
             embed.addField( `\tLevel: ${thisLevel.level}\t{${thisLevel.name}}`, `\tDescription: ${thisLevel.description}`, false)
