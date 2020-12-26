@@ -2,7 +2,10 @@ module.exports = {
 	name: 'ban',
     description: 'Tag a member and ban them.',
     usage: '[@member]',
+    args: false,
+    readOnly: false,
     guildOnly: true,
+    cooldown: 3,
     permLevel: 4,
 	execute(message, _args, _redis, _level) {
         if (!message.mentions.users.size) {

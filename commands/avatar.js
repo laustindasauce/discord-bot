@@ -1,8 +1,11 @@
 module.exports = {
 	name: 'avatar',
+	aliases: ['icon', 'pfp'],
 	description: 'Get the avatar URL of the tagged user(s), or your own avatar.',
 	usage: '[*optional* @member]',
-	aliases: ['icon', 'pfp'],
+	args: false,
+	readOnly: false,
+	cooldown: 2,
 	permLevel: 0,
 	execute(message, _args, _redis, _level) {
 		if (!message.mentions.users.size) {
