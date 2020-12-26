@@ -3,6 +3,7 @@ module.exports = {
 	description: 'Prune up to 99 messages.',
 	guildOnly: true,
 	usage: '[number 1-99]',
+	permLevel: 3,
 	args: true,
 	execute(message, args) {
 

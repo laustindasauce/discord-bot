@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['bad-words', 'filter', 'language', 'profanity'],
     description: `\`READ ONLY\`\nThis function is always running and is a profanity filter for the server.`,
     readOnly: true,
-    permLevel: "User",
+    permLevel: 0,
     test() {
 		return true;
 	},

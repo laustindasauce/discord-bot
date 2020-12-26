@@ -4,7 +4,7 @@ module.exports = {
   name: "test",
   aliases: ['testing', 'tests'],
   description: "Run tests and present each function or the specified function as passing or failed.  \`Only available in test environment\`",
-  permLevel: "Bot Support",
+  permLevel: 8,
   usage: '[*optional* command name]',
   execute(client, redis, message, args) {
     testing.execute(message, args).then(() => {

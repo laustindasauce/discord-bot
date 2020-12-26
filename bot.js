@@ -29,6 +29,7 @@ for (const file of functionFiles) {
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
 var save_version = require('./version/save-version.js');
+const { permLevel } = require('./functions/ping.js');
 
 /**
  * Retrieve all environment variables as constant values
@@ -97,7 +98,7 @@ client.on('message', message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 
-
+	const level = client.permlevel(message);
 	if (!command) {
 		const func = client.functions.get(commandName)
 		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -121,8 +122,11 @@ client.on('message', message => {
 			}
 			return message.channel.send(reply);
 		}
-		const level = client.permlevel(message);
 		
+		if (level < func.permLevel) {
+			return message.reply(`You don't have permissions for ${func.name}`)
+		}
+
 		try {
 			func.execute(client, redis, message, args, level);
 		} catch (error) {

@@ -4,7 +4,7 @@ module.exports = {
 	name: "ping",
 	aliases: ["🏓"],
 	description: "Get the Ping the bot and the sender.",
-	permLevel: "User",
+	permLevel: 0,
 	execute: async (client, redis, message) => {
 		message.react("🏓");
 		let Pinging = new MessageEmbed()

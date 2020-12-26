@@ -5,7 +5,7 @@ require("moment-duration-format");
 module.exports = {
 	name: "stats",
 	description: "Gives some useful bot statistics",
-	permLevel: "User",
+	permLevel: 0,
 	execute(client, redis, message) {
 		const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
 		redis.get('botguy-version').then((result) => {

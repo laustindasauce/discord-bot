@@ -10,7 +10,7 @@ module.exports = {
     name: "level",
     aliases: ['levels'],
     description: "Displays embedded message with all available permission levels in the server.",
-    permLevel: "User",
+    permLevel: 0,
 	execute(client, redis, message) {
 		for (let i = client.config.permLevels.length-1; i >= 0; i--) {
             const thisLevel = client.config.permLevels[i];
