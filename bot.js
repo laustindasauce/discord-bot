@@ -111,7 +111,7 @@ client.on('message', message => {
 	}
 
 	if (level < command.permLevel) {
-		return message.reply(`You don't have permissions to run ${message.name} command.`)
+		return message.reply(`You don't have permissions to run ${command.name} command.`)
 	}
 
 	if (!cooldowns.has(command.name)) {
