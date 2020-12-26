@@ -1,7 +1,8 @@
 module.exports = {
 	name: 'beep',
 	description: 'Beep!',
-	execute(message) {
+	permLevel: 0,
+	execute(message, _args, _redis, _level) {
 		message.channel.send('Boop.');
 	},
 	test() {

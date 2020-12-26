@@ -5,26 +5,19 @@ module.exports = {
 	usage: '[number 1-99]',
 	permLevel: 3,
 	args: true,
-	execute(message, args) {
+	execute(message, args, _redis, _level) {
+		const amount = parseInt(args[0]) + 1;
 
-		if (message.member.hasPermission('MANAGE_MESSAGES')) {
-
-			const amount = parseInt(args[0]) + 1;
-
-			if (isNaN(amount)) {
-				return message.reply('that doesn\'t seem to be a valid number.');
-			} else if (amount <= 1 || amount > 100) {
-				return message.reply('you need to input a number between 1 and 99.');
-			}
-
-			message.channel.bulkDelete(amount, true).catch(err => {
-				console.error(err);
-				message.channel.send('there was an error trying to prune messages in this channel!');
-			});
-		} else {
-			// Otherwise, let the user know they don't have permission to prune messages
-            message.reply("You don't have permissions to prune messages.\n<@&790612674106097754> can you check on this.")
+		if (isNaN(amount)) {
+			return message.reply('that doesn\'t seem to be a valid number.');
+		} else if (amount <= 1 || amount > 100) {
+			return message.reply('you need to input a number between 1 and 99.');
 		}
+
+		message.channel.bulkDelete(amount, true).catch(err => {
+			console.error(err);
+			message.channel.send('there was an error trying to prune messages in this channel!');
+		});
 	},
 	test() {
 		return true;

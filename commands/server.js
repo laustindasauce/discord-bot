@@ -5,7 +5,8 @@ module.exports = {
 	aliases: ['guild', 'serverinfo', 'server-info'],
 	description: 'Display info about this server.',
 	guildOnly: true,
-	execute: async (message) => {
+	permLevel: 0,
+	execute: async (message, _args, _redis, _level) => {
 		const guild = message.guild;
 		const owner = guild.owner;
 

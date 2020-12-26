@@ -1,21 +1,10 @@
-var Redis = require('ioredis')
-
-const redisPass = process.env.REDIS_PASS
-const redisHost = process.env.REDIS_HOST
-
-var redis = new Redis({
-    port: 6379,          // Redis port
-    host: redisHost,   	 // Redis host
-    password: redisPass, // Redis pass
-    db: 9,				 // Redis database
-})
-
 module.exports = {
 	name: 'decr-prof-count',
 	description: 'Tag a member and decrease their profanity count.',
 	usage: '[@member]',
 	cooldown: 5,
-	execute(message) {
+	permLevel: 3,
+	execute(message, _args, redis, _level) {
 
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			if (!message.mentions.users.size) {

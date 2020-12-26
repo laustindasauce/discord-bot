@@ -1,7 +1,8 @@
 module.exports = {
 	name: 'user-info',
 	description: 'Display info about yourself.',
-	execute(message) {
+	permLevel: 0,
+	execute(message, _args, _redis, _level) {
 		if (!message.mentions.users.size) {
 			console.log(message.author);
 			return message.author.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);

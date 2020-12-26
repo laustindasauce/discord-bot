@@ -12,24 +12,17 @@ const client = new Discord.Client({
 client.config = config
 
 client.commands = new Discord.Collection();
-client.functions= new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const functionFiles = fs.readdirSync('./functions').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
-for (const file of functionFiles) {
-	const func = require(`./functions/${file}`);
-	client.functions.set(func.name, func);
-}
 
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
 var save_version = require('./version/save-version.js');
-const { permLevel } = require('./functions/ping.js');
 
 /**
  * Retrieve all environment variables as constant values
@@ -56,7 +49,6 @@ redis.get("check-redis").then((res) => console.log(res));
 // redis.set('botguy-env', 'live')
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
-let test_env = false;
 
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
@@ -99,42 +91,10 @@ client.on('message', message => {
 
 
 	const level = client.permlevel(message);
-	if (!command) {
-		const func = client.functions.get(commandName)
-		|| client.functions.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-		if (!func) return message.reply(`${args} is not a command!`);
-
-		// if (func.testing) {
-		// 	if (!test_env) return message.reply(`${func.name} is only callable in test environment!`);
-		// }
-
-		if (func.readOnly) return message.reply(`${func.name} is read only!`);
-
-		if (func.guildOnly && message.channel.type === 'dm') {
-			return message.reply('I can\'t execute that function inside DMs!');
-		}
-
-		if (func.args && !args.length) {
-			let reply = `You didn't provide any arguments, ${message.author}!`;
-			if (func.usage) {
-				reply += `\nThe proper usage would be: \`${prefix}${func.name} ${func.usage}\``;
-			}
-			return message.channel.send(reply);
-		}
-		
-		if (level < func.permLevel) {
-			return message.reply(`You don't have permissions for ${func.name}`)
-		}
-
-		try {
-			func.execute(client, redis, message, args, level);
-		} catch (error) {
-			console.error(error);
-			message.reply('there was an error trying to execute that function!');
-		}
-		return
-	}
+	if (!command) return message.reply(`${args} is not a command!`);
+	
+	if (command.readOnly) return message.reply(`${message.name} is read only!`);
 
 	if (command.guildOnly && message.channel.type === 'dm') {
 		return message.reply('I can\'t execute that command inside DMs!');
@@ -148,6 +108,10 @@ client.on('message', message => {
 		}
 
 		return message.channel.send(reply);
+	}
+
+	if (level < command.permLevel) {
+		return message.reply(`You don't have permissions to run ${command.name} command.`)
 	}
 
 	if (!cooldowns.has(command.name)) {
@@ -171,7 +135,7 @@ client.on('message', message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args);
+		command.execute(message, args, redis, level);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');

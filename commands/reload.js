@@ -3,7 +3,8 @@ module.exports = {
 	description: 'This is deprecated since bot is running on Kubernetes with Pipelining',
 	usage: '[command name]',
 	args: true,
-	execute(message, args) {
+	permLevel: 8,
+	execute(message, args, _redis, _level) {
 		const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName)
 			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

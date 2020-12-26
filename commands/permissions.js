@@ -2,7 +2,8 @@ module.exports = {
 	name: 'permissions',
     description: 'View your permissions or tag another user to see their permissions.',
     guildOnly: true,
-	execute(message) {
+    permLevel: 0,
+	execute(message, _args, _redis, _level) {
         const data = [];
 
         if (!message.mentions.users.size) {

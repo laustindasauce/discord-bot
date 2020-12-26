@@ -4,7 +4,7 @@ module.exports = {
 	usage: '[*optional* @member]',
 	aliases: ['icon', 'pfp'],
 	permLevel: 0,
-	execute(message) {
+	execute(message, _args, _redis, _level) {
 		if (!message.mentions.users.size) {
 			return message.channel.send(`Your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
 		}
