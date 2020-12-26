@@ -110,8 +110,8 @@ client.on('message', message => {
 		return message.channel.send(reply);
 	}
 
-	if (level < message.permLevel) {
-		return message.reply(`You don't have permissions for ${message.name}`)
+	if (level < command.permLevel) {
+		return message.reply(`You don't have permissions to run ${message.name} command.`)
 	}
 
 	if (!cooldowns.has(command.name)) {
