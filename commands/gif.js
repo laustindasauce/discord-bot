@@ -6,7 +6,7 @@ module.exports = {
     description: 'Send a specified gif. Add arguments if you\'d like!',
     usage: '[**optional** search parameter]',
     permLevel: 0,
-    execut: async (message, args, _redis, _level) => {
+    execute: async (message, args, _redis, _level) => {
         let keywords = 'happy'
         if (args.length) {
             keywords = args.join(' ')

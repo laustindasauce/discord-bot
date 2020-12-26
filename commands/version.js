@@ -37,7 +37,6 @@ module.exports = {
 
 async function get_hash(message, args, redis) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
-	functionHash = "hash-" + args.join(' ') + "-functions";
 
 	exampleEmbed.setTitle(`v${args}`)
 	exampleEmbed.setDescription(`**Modules available to BotGuy as of v${args}**`)
@@ -45,15 +44,9 @@ async function get_hash(message, args, redis) {
 	let data = [];
 
 	let hash = null;
-	let funcHash = null;
+	
 	try {
 		hash = await redis.hgetall(commandHash)
-	} catch (error) {
-		
-	}
-
-	try {
-		funcHash = await redis.hgetall(functionHash)
 	} catch (error) {
 		
 	}
@@ -71,18 +64,6 @@ async function get_hash(message, args, redis) {
 			exampleEmbed.addField(name, description, true);
 		}
 		
-	}
-	if (funcHash !== null) {
-		let j = 0;
-		let entries = Object.entries(funcHash)
-		for (var [name, description] of entries) {
-			// if (j === 0) {
-			// 	data.push("= Functions =\n");
-			// 	j = 1;
-			// }
-			data.push(`• ${name} :: ${description}\n`);
-			exampleEmbed.addField(name, description, true);
-		}
 	}
 
 	if (!data.length) {
