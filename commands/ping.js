@@ -4,6 +4,10 @@ module.exports = {
 	name: "ping",
 	aliases: ["🏓"],
 	description: "Get the Ping the bot and the sender.",
+	args: false,
+	readOnly: false,
+	guildOnly: false,
+	cooldown: 3,
 	permLevel: 0,
 	execute: async (message, _args, _redis, _level) => {
 		message.react("🏓");

@@ -10,6 +10,10 @@ module.exports = {
     name: "level",
     aliases: ['levels'],
     description: "Displays embedded message with all available permission levels in the server.",
+    args: false,
+    readOnly: false,
+    guildOnly: false,
+    cooldown: 2,
     permLevel: 0,
 	execute(message, _args, _redis, _level) {
 		for (let i = client.config.permLevels.length-1; i >= 0; i--) {

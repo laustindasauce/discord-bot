@@ -4,7 +4,12 @@ require("moment-duration-format");
 
 module.exports = {
 	name: "stats",
+	aliases: ['server-stats', 'stat'],
 	description: "Gives some useful bot statistics",
+	args: false,
+	readOnly: false,
+	guildOnly: true,
+	cooldown: 5,
 	permLevel: 0,
 	execute(message, _args, redis, _level) {
 		const duration = moment.duration(message.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");

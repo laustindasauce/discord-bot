@@ -1,7 +1,11 @@
 module.exports = {
-	name: 'permissions',
+    name: 'permissions',
+    aliases: ['permission', 'roles', 'role'],
     description: 'View your permissions or tag another user to see their permissions.',
+    args: false,
+    readOnly: false,
     guildOnly: true,
+    cooldown: 3,
     permLevel: 0,
 	execute(message, _args, _redis, _level) {
         const data = [];

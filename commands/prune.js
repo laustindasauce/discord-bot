@@ -1,10 +1,13 @@
 module.exports = {
 	name: 'prune',
+	aliases: ['delete'],
 	description: 'Prune up to 99 messages.',
-	guildOnly: true,
 	usage: '[number 1-99]',
-	permLevel: 3,
 	args: true,
+	readOnly: false,
+	guildOnly: true,
+	cooldown: 5,
+	permLevel: 3,
 	execute(message, args, _redis, _level) {
 		const amount = parseInt(args[0]) + 1;
 
