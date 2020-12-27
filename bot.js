@@ -49,6 +49,9 @@ redis.get("check-redis").then((res) => console.log(res));
 // redis.del('BotGuy-Versions')
 // redis.set('mod2', "0");
 
+/**
+ * Runs once when the client initially gets set up
+ */
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
 	redis.get('botguy-env').then((res) => {
@@ -180,6 +183,9 @@ client.on('guildMemberRemove', member => {
 //     console.log(`a guild member's presence changes`);
 // });
 
+/**
+ * This function is ran once at start to initialize the guild
+ */
 const init = async () => {
 
 	// Generate a cache of client permissions for pretty perm names in commands.

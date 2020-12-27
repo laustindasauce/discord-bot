@@ -15,6 +15,14 @@ module.exports = {
     guildOnly: false,
     cooldown: 2,
     permLevel: 0,
+    /**
+	 * This command is able to give all available levels to each server member
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, _args, _redis, _level) {
 		for (let i = client.config.permLevels.length-1; i >= 0; i--) {
             const thisLevel = client.config.permLevels[i];

@@ -1,5 +1,8 @@
 const { MessageEmbed } = require('discord.js')
-
+/**
+ * This function pulled from https://github.com/DisStreamChat/Backend
+ * Credit to them for this awesome command!
+ */
 module.exports = {
 	name: "ping",
 	aliases: ["🏓"],
@@ -9,6 +12,16 @@ module.exports = {
 	guildOnly: false,
 	cooldown: 3,
 	permLevel: 0,
+	/**
+	 * This command is a not-so-simple call and response command
+	 * This is able to display the ping of the bot, and member.
+	 * Also displays overall ping
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute: async (message, _args, _redis, _level) => {
 		message.react("🏓");
 		let Pinging = new MessageEmbed()

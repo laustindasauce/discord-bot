@@ -1,3 +1,6 @@
+/**
+ * Config setup for client.config
+ */
 const config = {
   // Bot Owner, level 10 by default. A User ID. Should never be anything else than the bot owner's ID.
   "ownerID": process.env.USER_ID,

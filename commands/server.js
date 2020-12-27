@@ -9,6 +9,15 @@ module.exports = {
 	guildOnly: true,
 	cooldown: 3,
 	permLevel: 0,
+	/**
+	 * This command is able to return some cool facts about the server the message
+	 * was sent in
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute: async (message, _args, _redis, _level) => {
 		const guild = message.guild;
 		const owner = guild.owner;

@@ -7,6 +7,14 @@ module.exports = {
     guildOnly: true,
     cooldown: 3,
     permLevel: 4,
+    /**
+	 * This command is able to return the ban the tagged user
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, _args, _redis, _level) {
         if (!message.mentions.users.size) {
             return message.reply('you need to tag a user in order to ban them!');

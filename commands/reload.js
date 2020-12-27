@@ -8,6 +8,16 @@ module.exports = {
 	guildOnly: false,
 	cooldown: 5,
 	permLevel: 8,
+	/**
+	 * This command is able to reload a command to update as you code
+	 * Only able to be used in test environment since the live environment is pipelined
+	 * into Kubernetes cluster through github
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, args, _redis, _level) {
 		const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName)
