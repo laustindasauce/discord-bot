@@ -3,6 +3,16 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.setColor('#ff2052')
 	.setAuthor('BotGuy', 'https://discord.com/channels/@me/790100058682294302/791705870567604264', 'https://discord.js.org');
 
+/**
+ * This is the version command
+ * Possible parameters of ex: '1.0.1' -- all -- latest
+ * 
+ * This command is to show the progress of the bot over time
+ * Each time the bot is restarted it will increment the version
+ * 
+ * This function has a large cooldown since it is interacting with redis and if looking
+ * for a specific version can be heavyish computation
+ */
 module.exports = {
 	name: 'version',
 	aliases: ['versions', 'v'],
@@ -13,6 +23,13 @@ module.exports = {
 	guildOnly: false,
 	cooldown: 8,
 	permLevel: 0,
+	/**
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {string} args the specific version the user wants to see
+	 * @param {Redis client} redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, args, redis, _level) {
 		versions = args.join(' ');
 
@@ -37,6 +54,13 @@ module.exports = {
 	},
 };
 
+/**
+ * This function is called when the user enters a specific version they'd like to see
+ * 
+ * @param {message Object} message the message Object that was sent to trigger this command
+ * @param {string} args the specific version the user wants to see
+ * @param {Redis client} redis Redis client (our database)
+ */
 async function get_hash(message, args, redis) {
 	commandHash = "hash-" + args.join(' ') + "-commands";
 
@@ -97,6 +121,11 @@ async function get_hash(message, args, redis) {
 	
 }
 
+/**
+ * 
+ * @param {message Object} message the message Object that was sent to trigger this command
+ * @param {Redis client} redis Redis client (our database)
+ */
 async function get_versions(message, redis) {
 	let data = [];
 
