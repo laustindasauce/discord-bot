@@ -48,7 +48,7 @@ module.exports = {
                     body += "please submit an appeal to one of the admins."
                     data.push(body)
                     
-                    return message.author.send(data, { split: true })
+                    message.author.send(data, { split: true })
                         .then(() => {
                             if (res > 2) {
                                 /**
@@ -83,7 +83,9 @@ module.exports = {
                             message.reply('It seems like I can\'t DM you!\nhttps://tenor.com/view/watch-your-profanity-funny-gif-5600117');
                         });
                 });
+                return true;
             }
         }
+        return false;
 	},
 };
