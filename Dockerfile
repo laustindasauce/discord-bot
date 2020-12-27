@@ -4,14 +4,6 @@ FROM node:12.18.3
 WORKDIR /app
 
 # Copy all folders and .js files
-# COPY package.json package.json
-# COPY package-lock.json package-lock.json
-# COPY commands commands
-# COPY profanity profanity
-# COPY version version
-# COPY test test
-# COPY config.js config.js
-# COPY bot.js bot.js
 COPY . .
 
 # Download the npm dependencies
