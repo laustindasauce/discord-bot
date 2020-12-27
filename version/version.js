@@ -53,12 +53,12 @@ async function get_version(client, test) {
                     }
                 }
                 let to_string = `${version}.${mod1}.${mod2}`
+                save_version.execute(redis, to_string, client);
                 if (test) return console.log(to_string)
                 let channelID = '790960191792873573'
                 const channel = client.channels.cache.find(channel => channel.id === channelID)
                 redis.set('botguy-version', to_string);
                 channel.send(to_string)
-                save_version.execute(redis, to_string, client);
             })
         })
     })
