@@ -12,7 +12,7 @@ WORKDIR /app
 # COPY test test
 # COPY config.js config.js
 # COPY bot.js bot.js
-COPY ./bin/main .
+COPY . .
 
 # Download the npm dependencies
 RUN npm install
