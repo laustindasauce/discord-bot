@@ -22,6 +22,7 @@ for (const file of commandFiles) {
 
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
+var messageEvent = require('./events/message.js');
 
 /**
  * Retrieve all environment variables as constant values
@@ -45,15 +46,13 @@ var prefix = client.config.defaultSettings.prefix;
 
 redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
-// redis.set('botguy-env', 'live')
-// redis.del('BotGuy-Versions')
-// redis.set('mod2', "0");
 
 /**
  * Runs once when the client initially gets set up
  */
 client.once('ready', () => {
 	console.log("Bot has logged in successfully!");
+	/** Local redis has test as the value, and kubernetes redis has live as the value */
 	redis.get('botguy-env').then((res) => {
 		if (res !== "test") {
 			version.execute(client, false);
@@ -71,77 +70,17 @@ client.once('ready', () => {
  * Event listener for when a message is sent in the guild
  */
 client.on('message', message => {
-	/**
-	 * Before doing anything else I want to check the message for any blacklisted words
-	 */
+	/**Before doing anything else I want to check the message for any blacklisted words*/
+	let profanityRes = false;
 	if (!message.author.bot) {
 		try {
-			profanity.execute(message);
+			profanityRes = profanity.execute(message);
 		} catch (error) {
 			console.error(error);
 			message.reply('Unable to check this message for profanity..');
 		}
 	}
-
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
-
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-
-	const level = client.permlevel(message);
-
-	if (!command) return message.reply(`${args} is not a command!`);
-	
-	if (command.readOnly) return message.reply(`${message.name} is read only!`);
-
-	if (command.guildOnly && message.channel.type === 'dm') {
-		return message.reply('I can\'t execute that command inside DMs!');
-	}
-
-	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
-
-		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-		}
-
-		return message.channel.send(reply);
-	}
-
-	if (level < command.permLevel) {
-		return message.reply(`You don't have permissions to run ${command.name} command.`)
-	}
-
-	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Discord.Collection());
-	}
-
-	const now = Date.now();
-	const timestamps = cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
-
-	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-		}
-	}
-
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-	try {
-		command.execute(message, args, redis, level);
-	} catch (error) {
-		console.error(error);
-		message.reply('there was an error trying to execute that command!');
-	}
+	if (!profanityRes) messageEvent.execute(message, Discord, client, redis, prefix, cooldowns);
 });
 
 /**
