@@ -1,5 +1,10 @@
 const { MessageEmbed } = require("discord.js");
-
+/**
+ * This function will test each of the commands to check if passing or not
+ * 
+ * @param {message Object} message the message Object
+ * @param {array} args arguments given as an array
+ */
 module.exports.execute = async (message, args) => {
     const { commands, functions } = message.client;
 

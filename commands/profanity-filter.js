@@ -1,3 +1,6 @@
+/**
+ * Read only function. Bulk of the function is in '../../profanity'
+ */
 module.exports = {
     name: "profanity-filter",
     aliases: ['bad-words', 'filter', 'language', 'profanity'],

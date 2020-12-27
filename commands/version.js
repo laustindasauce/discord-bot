@@ -24,9 +24,10 @@ module.exports = {
 	cooldown: 8,
 	permLevel: 0,
 	/**
+	 * Checks the argument to see which function to call
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
-	 * @param {string} args the specific version the user wants to see
+	 * @param {array} args the specific version the user wants to see
 	 * @param {Redis client} redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */

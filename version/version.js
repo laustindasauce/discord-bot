@@ -15,6 +15,11 @@ var redis = new Redis({
     db: 9,				 // Redis database
 })
 
+/**
+ * 
+ * @param {Discord client} client 
+ * @param {boolean} test true or false whether this is run in test environment or not
+ */
 async function get_version(client, test) {
     // Get latest version from database
     await redis.get('version').then((res) => {

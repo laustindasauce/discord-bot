@@ -2,11 +2,20 @@ module.exports = {
     name: 'permissions',
     aliases: ['permission', 'roles', 'role'],
     description: 'View your permissions or tag another user to see their permissions.',
+    usage: '[**optional** tagged member]',
     args: false,
     readOnly: false,
     guildOnly: true,
     cooldown: 3,
     permLevel: 0,
+    /**
+	 * This command is able to return the permissions of  the user or tagged member
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, _args, _redis, _level) {
         const data = [];
 

@@ -11,6 +11,15 @@ module.exports = {
 	guildOnly: true,
 	cooldown: 5,
 	permLevel: 0,
+	/**
+	 * This command is able to pretty print some stats for the current server and 
+	 * the bots dependencies
+	 * 
+	 * @param {message Object} message the message Object that was sent to trigger this command
+	 * @param {array} _args the specific version the user wants to see
+	 * @param {Redis client} _redis Redis client (our database)
+	 * @param {num} _level users permission level
+	 */
 	execute(message, _args, redis, _level) {
 		const duration = moment.duration(message.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
 		redis.get('botguy-version').then((result) => {
