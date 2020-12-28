@@ -14,11 +14,11 @@ module.exports = {
 	 * for foul language
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
-	 * @param {array} _args the rest of the message after the command
+	 * @param {array} args the rest of the message after the command
 	 * @param {Redis client} redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */
-	execute(message, _args, redis, _level) {
+	execute(message, args, redis, _level) {
 		if (!message.mentions.users.size) {
 			return message.reply('You need to tag a user in order to decrease their profanity count!');
 		}
