@@ -3,7 +3,7 @@ const getUserFromMention = require('../utils/getUserFromMention.js')
 module.exports = {
 	name: 'kick',
 	description: 'Tag a member and kick them.',
-	usage: '[@member]',
+	usage: '[@member] reason the user needs kicked',
 	args: false,
 	readOnly: false,
 	guildOnly: true,
@@ -13,7 +13,7 @@ module.exports = {
 	 * This command is able to kick the tagged user
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
-	 * @param {array} args the specific version the user wants to see
+	 * @param {array} args the rest of the message after the command
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */

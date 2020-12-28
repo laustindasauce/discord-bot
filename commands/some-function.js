@@ -11,7 +11,7 @@ module.exports = {
 	 * This command does nothing at this point
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
-	 * @param {array} _args the specific version the user wants to see
+	 * @param {array} _args the rest of the message after the command
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */
