@@ -1,3 +1,5 @@
+const getUserFromMention = require('../utils/getUserFromMention.js')
+
 module.exports = {
 	name: 'kick',
 	description: 'Tag a member and kick them.',
@@ -11,21 +13,23 @@ module.exports = {
 	 * This command is able to kick the tagged user
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
-	 * @param {array} _args the specific version the user wants to see
+	 * @param {array} args the specific version the user wants to see
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */
-	execute(message, _args, _redis, _level) {
+	execute(message, args, _redis, _level) {
 		if (!message.mentions.users.size) {
 			return message.reply('you need to tag a user in order to kick them!');
 		}
 
-		const user = message.mentions.users.first();
+		const user = getUserFromMention.execute(args[0], message.client);
 		message.channel.send(`You wanted to kick: ${user.username}`);
 		
 		if (user) {
 			// Now we get the member from the user
 			const member = message.guild.member(user);
+			// Get the reason for the ban from the command
+            const reason = args.slice(1).join(' ');
 			// If the member is in the guild
 			if (member) {
 				/**
@@ -34,27 +38,27 @@ module.exports = {
 				 * There are big differences between a user and a member
 				 */
 				member
-				.kick('Optional reason that will display in the audit logs')
+				.kick(reason)
 				.then(() => {
 					// We let the message author know we were able to kick the person
-					message.reply(`Successfully kicked ${user.tag}`);
+					message.reply(`Successfully kicked ${member.displayName}`);
 				})
 				.catch(err => {
 					// An error happened
 					// This is generally due to the bot not being able to kick the member,
 					// either due to missing permissions or role hierarchy
-					message.reply('I was unable to kick the member');
-					// Log the error
-					console.error(err);
+					message.reply(`I was unable to kick ${member.displayName}`);
+                    // Log the error
+                    console.error(err);
 				});
 			} else {
 				// The mentioned user isn't in this guild
-				message.reply("That user isn't in this guild!");
+                message.reply(`${member.displayName} isn't in this guild!`);
 			}
-		// Otherwise, if no user was mentioned
 		} else {
-		message.reply("You didn't mention the user to kick!");
-		}
+            // Otherwise, if no user was mentioned
+            return message.reply('Please use a proper mention if you want to ban someone.');
+        }
 	},
 	test() {
 		return true;

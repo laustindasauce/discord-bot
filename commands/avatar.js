@@ -1,3 +1,5 @@
+const getUserFromMention = require('../utils/getUserFromMention.js')
+
 module.exports = {
 	name: 'avatar',
 	aliases: ['icon', 'pfp'],
@@ -16,15 +18,14 @@ module.exports = {
 	 * @param {num} _level users permission level
 	 */
 	execute(message, _args, _redis, _level) {
-		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
+		if (args[0]) {
+			const user = getUserFromMention.execute(args[0], message.client);
+			if (!user) {
+				return message.reply('Please use a proper mention if you want to see someone elses avatar.');
+			}
+			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
 		}
-
-		const avatarList = message.mentions.users.map(user => {
-			return `${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`;
-		});
-
-		message.channel.send(avatarList);
+		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
 	},
 	test() {
 		return true;
