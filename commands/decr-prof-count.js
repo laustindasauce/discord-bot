@@ -6,7 +6,7 @@ module.exports = {
 	usage: '[@member]',
 	args: false,
 	readOnly: false,
-	guildOnly: false,
+	guildOnly: true,
 	cooldown: 5,
 	permLevel: 3,
 	/**
