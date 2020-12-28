@@ -15,7 +15,7 @@ module.exports = {
         goodbyeEmbed.setImage('https://gamewith-en.akamaized.net/article/thumbnail/rectangle/22183.png')
 
         member.guild.channels.cache.find(i => i.name === 'member-log').send(goodbyeEmbed)
-        console.log("goodbye")
+        console.log(`Said goodbye to ${member.displayName}`)
 	},
 	test() {
 		return true;
