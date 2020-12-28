@@ -1,3 +1,5 @@
+const getUserFromMention = require('../utils/functions/getUserFromMention.js')
+
 module.exports = {
 	name: 'decr-prof-count',
 	description: 'Tag a member and decrease their profanity count.',
@@ -21,7 +23,7 @@ module.exports = {
 			return message.reply('You need to tag a user in order to decrease their profanity count!');
 		}
 
-		const user = message.mentions.users.first();
+		const user = getUserFromMention.execute(args[0], message.client);
 
 		if (user) {
 			const member = message.guild.member(user);
@@ -33,31 +35,32 @@ module.exports = {
 						// Decrement the profanity count
 						redis.decr(title).then(() => {
 							res--;
-							message.reply(`Decrement was a success:\n${member.user.username} now has profanity count of ${res}`)
+							message.reply(`Decrement was a success:\n${member.displayName} now has profanity count of ${res}`)
 						}).catch(err => {
 							// An error happened
-							message.reply(`I was unable to edit ${member.user.username}'s profanity count`);
+							message.reply(`I was unable to edit ${member.displayName}'s profanity count`);
 							// Log the error
 							console.error(err);
 						})
 					} else {
 						// member doesn't have any profanity incidents
-						message.reply(`${member.user.username} doesn't have any profanity incidents.`)
+						message.reply(`${member.displayName} doesn't have any profanity incidents.`)
 					}
 				}).catch(err => {
 					// An error happened
-					message.reply(`I was unable to edit ${member.user.username}'s profanity count`);
+					message.reply(`I was unable to edit ${member.displayName}'s profanity count`);
 					// Log the error
 					console.error(err);
 				});
 			} else {
 				// The mentioned user isn't in this guild
-				message.reply(`${member.user.username} isn't in this guild!`);
+				return message.reply(`${member.displayName} isn't in this guild!`);
 			}
 		// Otherwise, if no user was mentioned
 		} else {
-			message.reply("You didn't mention the user to edit!");
-		}
+            // Otherwise, if no user was mentioned
+            return message.reply('Please use a proper mention if you want to edit someone\'s profanity count.');
+        }
 	},
 	test() {
 		return true;
