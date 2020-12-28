@@ -23,6 +23,8 @@ for (const file of commandFiles) {
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
 var messageEvent = require('./events/message.js');
+var welcomeEvent = require('./events/welcome.js');
+var goodbyeEvent = require('./events/goodbye.js');
 
 /**
  * Retrieve all environment variables as constant values
@@ -88,31 +90,14 @@ client.on('message', message => {
  * Sends message to let them know how to interact with the bot
  */
 client.on('guildMemberAdd', (member) => {
-	// Send the message to a designated channel on a server:
-	let channelID = '790611337545908306'
-	const channel = client.channels.cache.find(channel => channel.id === channelID)
-	// Do nothing if the channel wasn't found on this server
-	if (!channel) {
-		console.log("Could not find channel to send welcome message")
-		return;
-	}
-	// Send the message, mentioning the member
-	channel.send(`Welcome to the server, ${member.displayName}. Send **!help** in the bot-testing channel to get a list of my commands!`);
-	console.log(`Welcomed ${member.displayName}`)
+	welcomeEvent.execute(member);
 });
 
 /**
  * Send a funny message when a user leaves the guild
  */
 client.on('guildMemberRemove', member => {
-    const goodbyeEmbed = new Discord.MessageEmbed()
-
-    goodbyeEmbed.setColor('#f00000')
-    goodbyeEmbed.setTitle('**' + member.user.username + '** was not the impostor there are **' + member.guild.memberCount + '** left Among Us')
-    goodbyeEmbed.setImage('https://gamewith-en.akamaized.net/article/thumbnail/rectangle/22183.png')
-
-	member.guild.channels.cache.find(i => i.name === 'member-log').send(goodbyeEmbed)
-	console.log("goodbye")
+    goodbyeEvent.execute(member, Discord)
 })
 
 /**
