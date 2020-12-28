@@ -1,4 +1,4 @@
-const getUserFromMention = require('../utils/getUserFromMention.js')
+const getUserFromMention = require('../utils/functions/getUserFromMention.js')
 
 module.exports = {
 	name: 'ban',
@@ -56,7 +56,7 @@ module.exports = {
                 });
             } else {
                 // The mentioned user isn't in this guild
-                message.reply(`${member.displayName} isn't in this guild!`);
+                return message.reply(`${member.displayName} isn't in this guild!`);
             }
         } else {
             // Otherwise, if no user was mentioned

@@ -1,4 +1,4 @@
-const getUserFromMention = require('../utils/getUserFromMention.js')
+const getUserFromMention = require('../utils/functions/getUserFromMention.js')
 
 module.exports = {
 	name: 'avatar',
