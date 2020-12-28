@@ -19,12 +19,12 @@ module.exports = {
 	 */
 	execute(message, args, _redis, _level) {
 		const data = [];
-		const { commands, functions } = message.client;
+		const { commands } = message.client;
 
 		if (!args.length) {
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
-			data.push(functions.map(command => command.name).join(', '));
+
 			// data.push(`\n You can send **![command name] in the dm's or a text channel to run the command!`)
 			data.push(`\nSend \`!help [command name]\` to get info on a specific command and how to use it!`);
 
@@ -41,30 +41,19 @@ module.exports = {
 
 		const name = args[0].toLowerCase();
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
-		const func = functions.get(name) || functions.find(c => c.aliases && c.aliases.includes(name));
 
-		if (!command) {
-			if (!func) return message.reply('that\'s not a valid command!');
+		if (!command) return message.reply('that\'s not a valid command! Try `!help\` to visualize all commands.');
+			
+		data.push(`**Name:** ${command.name}`);
 
-			data.push(`**Name:** ${func.name}`);
+		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
+		if (command.description) data.push(`**Description:** ${command.description}`);
+		if (command.usage) {
+			data.push(`**Usage:** !${command.name} ${command.usage}`);
+		} else data.push(`**Usage:** !${command.name}`)
 
-			if (func.aliases) data.push(`**Aliases:** ${func.aliases.join(', ')}`);
-			if (func.description) data.push(`**Description:** ${func.description}`);
-			if (func.usage) data.push(`**Usage:** !${func.name} ${func.usage}`);
-
-			data.push(`**Cooldown:** ${func.cooldown || 3} second(s)`);
-
-		} else {
-			data.push(`**Name:** ${command.name}`);
-
-			if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-			if (command.description) data.push(`**Description:** ${command.description}`);
-			if (command.usage) {
-				data.push(`**Usage:** !${command.name} ${command.usage}`);
-			} else data.push(`**Usage:** !${command.name}`)
-
-			data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-		}
+		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
+		
 
 		message.channel.send(data, { split: true });
 	},
