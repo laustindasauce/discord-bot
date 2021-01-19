@@ -1,11 +1,17 @@
 stages:
-- name: Build & Publish
-  steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: discord-bots-botguy:${CICD_EXECUTION_SEQUENCE}
-- name: Deploy
-  steps:
-  - applyYamlConfig:
-      path: ./discord-bot-dc.yaml
+  - name: Build & Publish
+    when:
+      branch: master
+      event: [push, pull request]
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: discord-bots-botguy:${CICD_EXECUTION_SEQUENCE}
+  - name: Deploy
+    when:
+      branch: master
+      event: [push, pull request]
+    steps:
+      - applyYamlConfig:
+          path: ./discord-bot-dc.yaml
