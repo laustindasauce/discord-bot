@@ -67,7 +67,7 @@ async function get_version(client, test) {
 module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
-	execute(client, save_version, test) {
-        get_version(client, save_version, test).then(() => console.log("Successfully updated version."));
+	execute(client, test) {
+        get_version(client, test).then(() => console.log("Successfully updated version."));
 	},
 };
