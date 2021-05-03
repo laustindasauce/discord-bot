@@ -24,32 +24,32 @@ spec:
           valueFrom:
             secretKeyRef:
               key: botguy-token
-              name: bot-secrets
+              name: discord-secrets
         - name: PUBLIC
           valueFrom:
             secretKeyRef:
               key: botguy-public
-              name: bot-secrets
+              name: discord-secrets
         - name: BOT_ID
           valueFrom:
             secretKeyRef:
               key: botguy-id
-              name: bot-secrets
+              name: discord-secrets
         - name: SECRET
           valueFrom:
             secretKeyRef:
               key: botguy-secret
-              name: bot-secrets
+              name: discord-secrets
         - name: TENOR_KEY
           valueFrom:
             secretKeyRef:
               key: botguy-tenor-key
-              name: bot-secrets
+              name: discord-secrets
         - name: USER_ID
           valueFrom:
             secretKeyRef:
               key: abspen1-id
-              name: bot-secrets
+              name: discord-secrets
         - name: REDIS_PASS
           valueFrom:
             secretKeyRef:
