@@ -46,8 +46,10 @@ var redis = new Redis({
 const cooldowns = new Discord.Collection();
 var prefix = client.config.defaultSettings.prefix;
 
-redis.set('check-redis', 'Redis is running!');
+
+// redis.set('check-redis', 'Redis is running!');
 redis.get("check-redis").then((res) => console.log(res));
+
 
 /**
  * Runs once when the client initially gets set up
