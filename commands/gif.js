@@ -22,6 +22,8 @@ module.exports = {
         if (args.length) {
             keywords = args.join(' ')
         }
+
+        // Keep in mind that ContentFilter is off!!
         let url = `https://api.tenor.com/v1/search?q=${keywords}&key=${process.env.TENOR_KEY}&ContentFilter=off`
         let response = await fetch(url)
         let json = await response.json()
