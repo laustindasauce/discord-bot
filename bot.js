@@ -20,6 +20,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+
 var profanity = require('./profanity/check-profanity.js');
 var version = require('./version/version.js');
 var messageEvent = require('./events/message.js');
