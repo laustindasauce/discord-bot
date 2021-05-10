@@ -1,4 +1,4 @@
-import axios from "axios";
+var axios = require('axios');
 
 module.exports = {
 	name: 'stock-price',
@@ -32,12 +32,12 @@ module.exports = {
         .then(function (response) {
             console.log(response.data);
             if (response.data == 500) {
-                return message.channel.send("There was an internal auth error.")
+                message.channel.send("There was an internal auth error.")
             } else if (response.data == 404) {
-                return message.channel.send(`Unable to get live price of ${postData.Stock}`);
+                message.channel.send(`Unable to get live price of ${postData.Stock}`);
             } else {
                 let currPrice = num.format(response.data, 2);
-                return message.channel.send(`${postData.stock}: ${currPrice}`)
+                message.channel.send(`${postData.stock}: ${currPrice}`)
             }
         })
         .catch(function (error) {
