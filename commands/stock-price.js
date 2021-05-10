@@ -8,7 +8,7 @@ module.exports = {
 	args: true,
 	readOnly: false,
 	guildOnly: false,
-	cooldown: 10,
+	cooldown: 30,
 	permLevel: 0,
 	/**
 	 * This command is able to give some basic user-information of the member tagged 
@@ -19,7 +19,7 @@ module.exports = {
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} level users permission level
 	 */
-	execute: async (message, args, _redis, level) => {
+	execute: async (message, args, _redis, _level) => {
 		const stock = args[0].toUpperCase();
         postData = new Object();
         postData.Stock = stock;
