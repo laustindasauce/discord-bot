@@ -36,13 +36,13 @@ module.exports = {
             } else if (response.data == 404) {
                 message.reply(`Unable to get live price of ${postData.Stock}`);
             } else {
-                let currPrice = num.format(response.data, 2);
-                message.reply(`${postData.stock}: ${currPrice}`)
+                let currPrice = response.data.toFixed(2)
+                message.reply(`${stock} is currently trading at $${currPrice}`)
             }
         })
         .catch(function (error) {
             message.reply('There was a server error!')
-            // console.log(error);
+            console.log(error);
         });
 	}
 };
