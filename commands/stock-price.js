@@ -20,7 +20,7 @@ module.exports = {
 	 * @param {num} level users permission level
 	 */
 	execute: async (message, args, _redis, level) => {
-		const stock = args[0].toLowerCase();
+		const stock = args[0].toUpperCase();
         postData = new Object();
         postData.Stock = stock;
         jsonData = JSON.stringify(postData);
@@ -32,16 +32,17 @@ module.exports = {
         .then(function (response) {
             console.log(response.data);
             if (response.data == 500) {
-                message.channel.send("There was an internal auth error.")
+                message.reply("There was an internal auth error.")
             } else if (response.data == 404) {
-                message.channel.send(`Unable to get live price of ${postData.Stock}`);
+                message.reply(`Unable to get live price of ${postData.Stock}`);
             } else {
                 let currPrice = num.format(response.data, 2);
-                message.channel.send(`${postData.stock}: ${currPrice}`)
+                message.reply(`${postData.stock}: ${currPrice}`)
             }
         })
         .catch(function (error) {
-            console.log(error);
+            message.reply('There was a server error!')
+            // console.log(error);
         });
 	}
 };
