@@ -33,6 +33,9 @@ module.exports = {
             console.log(err)
         })
         .finally(() => {
+			if ( Object.keys(companyInfo).length === 0) {
+				return message.reply(`**${stock}** info is not available.`)
+			}
             const embed = new MessageEmbed()
 			.setAuthor(companyInfo.name, companyInfo.logo)
 			.setTitle(`${stock}`)
