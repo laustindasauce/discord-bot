@@ -14,6 +14,17 @@ module.exports = {
 	/**
 	 * This command uses Finnhub to get the company profile of specified ticker
 	 * 
+	 * Example Quote response
+	 * 
+	 	{
+			"c": 261.74, // Close
+			"h": 263.31, // High
+			"l": 260.68, // Low
+			"o": 261.07, // Open
+			"pc": 259.45, // Previous Close
+			"t": 1582641000 // Not sure what this is
+		}
+	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
 	 * @param {array} args the rest of the message after the command
 	 * @param {Redis client} _redis Redis client (our database)
@@ -22,6 +33,7 @@ module.exports = {
 	execute: async (message, args, _redis, _level) => {
 		const stock = args[0].toUpperCase();
         let companyInfo = null;
+		let companyQuote = null;
         fetch(
             `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
         )
@@ -36,18 +48,36 @@ module.exports = {
 			if ( Object.keys(companyInfo).length === 0) {
 				return message.reply(`**${stock}** info is not available.`)
 			}
-            const embed = new MessageEmbed()
-			.setColor('#0099ff')
-			.setAuthor(companyInfo.name, companyInfo.logo)
-			.setTitle(`${stock}`)
-            .setURL(companyInfo.weburl)
-            .addField("Industry", companyInfo.finnhubIndustry, true)
-			.addField("IPO Date", companyInfo.ipo, true)
-			.addField("Market Cap", `${companyInfo.marketCapitalization}M`, true)
-			.addField("Shares Outstanding", companyInfo.shareOutstanding, true)
-			.setTimestamp(Date.now());
+			fetch(
+				`https://finnhub.io/api/v1/quote?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
+			)
+			.then((quote) => quote.json())
+			.then((quote) => {
+				companyQuote = quote;
+			})
+			.finally(() => {
+				const embed = new MessageEmbed()
+				.setColor('#0099ff')
+				.setAuthor(companyInfo.name, companyInfo.logo)
+				.setTitle(`${stock}`)
+				.setURL(companyInfo.weburl)
+				.addFields(
+					{ name: 'Open', value: companyQuote.o, inline: true },
+					{ name: 'Current', value: companyQuote.c, inline: true },
+					{ name: 'High', value: companyQuote.h, inline: true },
+					{ name: 'Low', value: companyQuote.l, inline: true },
+					{ name: 'Previous Close', value: companyQuote.pc, inline: true },
+					{ name: '\u200B', value: '\u200B' }, // this is a spacer for the embed
+				)
+				.addField("Industry", companyInfo.finnhubIndustry, true)
+				.addField("IPO Date", companyInfo.ipo, true)
+				.addField("Market Cap", `${companyInfo.marketCapitalization}M`, true)
+				.addField("Shares Outstanding", companyInfo.shareOutstanding, true)
+				.addField('\u200B', '\u200B')
+				.setTimestamp(Date.now());
 
-		    message.channel.send(embed);
+				message.channel.send(embed);
+			})
         });
 	}
 };
