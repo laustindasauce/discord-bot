@@ -45,7 +45,6 @@ module.exports = {
 			.addField("IPO Date", companyInfo.ipo, true)
 			.addField("Market Cap", `${companyInfo.marketCapitalization}M`, true)
 			.addField("Shares Outstanding", companyInfo.shareOutstanding, true)
-			// .setFooter(`[Web URL]() | `)
 			.setTimestamp(Date.now());
 
 		    message.channel.send(embed);
