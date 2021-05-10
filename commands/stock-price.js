@@ -11,13 +11,13 @@ module.exports = {
 	cooldown: 30,
 	permLevel: 0,
 	/**
-	 * This command is able to give some basic user-information of the member tagged 
-	 * or the member who sent the message if no one is tagged
+	 * This command uses personal back-end to get the current price of the given ticker
+     * The price is pulled from Alpaca API on the back-end
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
 	 * @param {array} args the rest of the message after the command
 	 * @param {Redis client} _redis Redis client (our database)
-	 * @param {num} level users permission level
+	 * @param {num} _level users permission level
 	 */
 	execute: async (message, args, _redis, _level) => {
 		const stock = args[0].toUpperCase();
