@@ -37,6 +37,7 @@ module.exports = {
 				return message.reply(`**${stock}** info is not available.`)
 			}
             const embed = new MessageEmbed()
+			.setColor('#0099ff')
 			.setAuthor(companyInfo.name, companyInfo.logo)
 			.setTitle(`${stock}`)
             .setURL(companyInfo.weburl)
