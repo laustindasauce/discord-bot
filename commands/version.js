@@ -138,11 +138,9 @@ async function get_versions(message, redis) {
 	// }
 	data.push('Versions go from 1.0.9 => 1.1.0 and 1.9.9 => 2.0.0')
 
-	const version = await redis.get('version') || 1;
-	const mod1 = await redis.get('mod1') || 0;
-	const mod2 = await redis.get('mod2') || 0;
+	const version = await redis.get('botguy-version');
 
-	const to_string = `**1.0.1 => ${version}.${mod1}.${mod2}**`;
+	const to_string = `**1.0.1 => ${version}**`;
 
 	data.push(to_string);
 
