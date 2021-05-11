@@ -21,7 +21,7 @@ module.exports = {
 
         if (!command) return message.reply(`${args} is not a command!`);
         
-        if (command.readOnly) return message.reply(`${message.name} is read only!`);
+        if (command.readOnly) return message.reply(`Sorry, the command ${command.name} is read only!`);
 
         if (command.guildOnly && message.channel.type === 'dm') {
             return message.reply('I can\'t execute that command inside DMs!');
