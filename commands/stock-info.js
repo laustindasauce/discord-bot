@@ -3,13 +3,13 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
 	name: 'stock-info',
-	aliases: ['company', 'info'],
+	aliases: ['company', 'info', 'stock'],
 	description: 'Get info of a company searched by ticker.',
 	usage: 'TSLA',
 	args: true,
 	readOnly: false,
 	guildOnly: false,
-	cooldown: 10,
+	cooldown: 20,
 	permLevel: 0,
 	/**
 	 * This command uses Finnhub to get the company profile of specified ticker
