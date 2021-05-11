@@ -1,6 +1,6 @@
 const Redis = require('ioredis')
 const save_version = require('./save-version.js')
-const version_check = require('./version-check.js')
+const check_version = require('./check-version.js')
 
 
 const redisPass = process.env.REDIS_PASS
@@ -70,7 +70,7 @@ module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
 	execute: async (client, test) => {
-        const updates = await version_check.execute(redis, client);
+        const updates = await check_version.execute(redis, client);
         if (updates) {
             get_version(client, test).then(() => console.log("Successfully updated version."));
         }

@@ -1,14 +1,12 @@
-/**
- * This function pulled from https://github.com/DisStreamChat/Backend
- * Credit to them for this awesome command!
- */
- module.exports = {
+module.exports = {
 	name: "version-check",
 	description: "Check to see if there are any added commands",
 	/**
-	 * This command is a not-so-simple call and response command
-	 * This is able to display the ping of the bot, and member.
-	 * Also displays overall ping
+	 * This is a helper function that will check to see if there are any added / removed
+     * commands from the current version of the bot to now
+     * 
+     * If there are differences in the commands then return true which will update the version
+     * If not return false which will keep the version from updating
 	 * 
 	 * @param {Redis client} redis Redis client (our database)
 	 * @param {Discord client} client

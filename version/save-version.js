@@ -2,7 +2,7 @@ module.exports = {
 	name: 'save-version',
     description: 'Save the version to Redis database.',
     /**
-     * This function will save the versions
+     * This function will save the version with the currently available commands
      * 
      * @param {Redis client} redis the Redis client (database)
      * @param {string} version the latest version
