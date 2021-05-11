@@ -4,7 +4,7 @@ module.exports = {
 	description: 'This is deprecated since bot is running on Kubernetes with Pipelining',
 	usage: '[command name]',
 	args: true,
-	readOnly: false,
+	readOnly: true,
 	guildOnly: false,
 	cooldown: 5,
 	permLevel: 8,
