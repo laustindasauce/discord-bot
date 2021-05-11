@@ -18,7 +18,7 @@ module.exports = {
         //     return;
         // }
         // Send the message, mentioning the member
-        member.send(`Welcome to the server, ${member.displayName}. Send **!help** in the bot-testing channel or right here to see the commands you can send for me to do!`);
+        member.send(`Welcome to the Bot Testing server, ${member.displayName}. Send **!help** in the bot-testing channel or right here to see the commands you can send for me to do!`);
         console.log(`Welcomed ${member.displayName}`)
 	},
 	test() {
