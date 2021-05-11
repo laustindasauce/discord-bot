@@ -1,5 +1,7 @@
-var Redis = require('ioredis')
-var save_version = require('./save-version.js')
+const Redis = require('ioredis')
+const save_version = require('./save-version.js')
+const version_check = require('./version-check.js')
+
 
 const redisPass = process.env.REDIS_PASS
 const redisHost = process.env.REDIS_HOST
@@ -8,7 +10,7 @@ let version = 1;
 let mod1 = 0;
 let mod2 = 0;
 
-var redis = new Redis({
+const redis = new Redis({
     port: 6379,          // Redis port
     host: redisHost,   	 // Redis host
     password: redisPass, // Redis pass
@@ -54,10 +56,10 @@ async function get_version(client, test) {
                 }
                 let to_string = `${version}.${mod1}.${mod2}`
                 save_version.execute(redis, to_string, client);
+                redis.set('botguy-version', to_string);
                 if (test) return console.log(to_string)
                 let channelID = '790960191792873573'
                 const channel = client.channels.cache.find(channel => channel.id === channelID)
-                redis.set('botguy-version', to_string);
                 channel.send(to_string)
             })
         })
@@ -67,7 +69,17 @@ async function get_version(client, test) {
 module.exports = {
 	name: 'version',
 	description: 'Update application version with each GitHub push.',
-	execute(client, test) {
-        get_version(client, test).then(() => console.log("Successfully updated version."));
+	execute: async (client, test) => {
+        const updates = await version_check.execute(redis, client);
+        if (updates) {
+            get_version(client, test).then(() => console.log("Successfully updated version."));
+        }
+        else {
+            const version = await redis.get('botguy-version');
+
+            save_version.execute(redis, version, client);
+            console.log("Successfully saved current version.");
+            console.log(version);
+        }
 	},
 };
