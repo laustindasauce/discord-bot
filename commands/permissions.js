@@ -68,7 +68,7 @@ module.exports = {
                 }
             } else {
                 // Otherwise, if no user was mentioned
-                message.reply("You didn't mention the user to ban!");
+                // This should never get hit since the first if case would
             }
         }
     },
