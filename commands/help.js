@@ -1,3 +1,5 @@
+const version = require('./version.js')
+
 module.exports = {
 	name: 'help',
 	description: 'List all of my commands or info about a specific command.',
@@ -17,26 +19,29 @@ module.exports = {
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */
-	execute(message, args, _redis, _level) {
+	execute: async (message, args, redis, level) => {
 		const data = [];
 		const { commands } = message.client;
 
 		if (!args.length) {
-			data.push('Here\'s a list of all my commands:');
-			data.push(commands.map(command => command.name).join(', '));
+			// data.push('Here\'s a list of all my commands:');
+			// data.push(commands.map(command => command.name).join(', '));
 
-			// data.push(`\n You can send **![command name] in the dm's or a text channel to run the command!`)
-			data.push(`\nSend \`!help [command name]\` to get info on a specific command and how to use it!`);
+			// // data.push(`\n You can send **![command name] in the dm's or a text channel to run the command!`)
+			// data.push(`\nSend \`!help [command name]\` to get info on a specific command and how to use it!`);
 
-			return message.author.send(data, { split: true })
-				.then(() => {
-					if (message.channel.type === 'dm') return;
-					message.reply('I\'ve sent you a DM with all my commands!');
-				})
-				.catch(error => {
-					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.reply('it seems like I can\'t DM you!');
-				});
+			// return message.author.send(data, { split: true })
+			// 	.then(() => {
+			// 		if (message.channel.type === 'dm') return;
+			// 		message.reply('I\'ve sent you a DM with all my commands!');
+			// 	})
+			// 	.catch(error => {
+			// 		console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+			// 		message.reply('it seems like I can\'t DM you!');
+			// 	});
+			const curr_version = await redis.get('botguy-version');
+			args.push(curr_version)
+			return version.execute(message, args, redis, level)
 		}
 
 		const name = args[0].toLowerCase();

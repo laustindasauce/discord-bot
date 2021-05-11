@@ -18,10 +18,10 @@ module.exports = {
 	aliases: ['versions', 'v'],
 	description: 'Give insight into the versions of BotGuy.',
 	usage: '[specific version] OR [all] OR [latest]',
-	args: true,
+	args: false,
 	readOnly: false,
 	guildOnly: false,
-	cooldown: 8,
+	cooldown: 20,
 	permLevel: 0,
 	/**
 	 * Checks the argument to see which function to call
