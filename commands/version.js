@@ -133,10 +133,20 @@ async function get_versions(message, redis) {
 	data.push("Here are all versions for BotGuy:");
 	arr = await redis.smembers("BotGuy-Versions");
 	
-	for (let i = 0; i < arr.length; i++) {
-		data.push(arr[i]);
-	}
-	return message.author.send(data, { split: true })
+	// for (let i = 0; i < arr.length; i++) {
+	// 	data.push(arr[i]);
+	// }
+	data.push('Versions go from 1.0.9 => 1.1.0 and 1.9.9 => 2.0.0')
+
+	const version = await redis.get('version') || 1;
+	const mod1 = await redis.get('mod1') || 0;
+	const mod2 = await redis.get('mod2') || 0;
+
+	const to_string = `**1.0.1 => ${version}.${mod1}.${mod2}**`;
+
+	data.push(to_string);
+
+	return message.author.send(data, {split: true})
 		.then(() => {
 			if (message.channel.type === 'dm') return;
 			message.reply('I\'ve sent you a DM with all versions!');
