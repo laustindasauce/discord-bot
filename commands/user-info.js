@@ -7,7 +7,7 @@ const formatFromNow = time => formatDistanceToNow(time, { addSuffix: true });
 module.exports = {
 	name: 'user-info',
 	aliases: ['info'],
-	description: 'Display info about yourself.',
+	description: 'Display info about yourself or other server members.',
 	usage: '@member be sure to tag the member directly after the command if you tag someone.',
 	args: false,
 	readOnly: false,
