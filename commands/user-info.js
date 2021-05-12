@@ -11,6 +11,7 @@ module.exports = {
 	usage: '@member be sure to tag the member directly after the command if you tag someone.',
 	args: false,
 	readOnly: false,
+	channel: 'bot-testing',
 	guildOnly: false,
 	cooldown: 5,
 	permLevel: 0,

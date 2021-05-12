@@ -6,6 +6,7 @@ module.exports = {
   description: "Run tests and present each function or the specified function as passing or failed.",
   args: false,
   readOnly: false,
+  channel: 'bot-testing',
   guildOnly: false,
   cooldown: 5,
   permLevel: 8,

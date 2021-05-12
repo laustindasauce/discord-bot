@@ -9,6 +9,7 @@ module.exports = {
 	usage: '[some arguments]',
 	args: true,
 	readOnly: false,
+	channel: 'bot-testing',
 	cooldown: 1,
 	permLevel: 0,
 	/**

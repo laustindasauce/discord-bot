@@ -12,6 +12,7 @@ module.exports = {
     description: "Displays embedded message with all available permission levels in the server.",
     args: false,
     readOnly: false,
+    channel: 'bot-testing',
     guildOnly: false,
     cooldown: 2,
     permLevel: 0,

@@ -4,6 +4,7 @@ module.exports = {
 	description: "Tells you your permission level for the current message location.",
 	args: false,
 	readOnly: false,
+	channel: 'bot-testing',
 	guildOnly: false,
 	cooldown: 3,
 	permLevel: 0,

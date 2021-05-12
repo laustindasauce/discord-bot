@@ -9,6 +9,7 @@ module.exports = {
 	description: "Get the Ping the bot and the sender.",
 	args: false,
 	readOnly: false,
+	channel: 'bot-testing',
 	guildOnly: false,
 	cooldown: 3,
 	permLevel: 0,

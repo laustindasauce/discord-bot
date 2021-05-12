@@ -8,6 +8,7 @@ module.exports = {
 	args: false,
 	readOnly: false,
 	guildOnly: false,
+	channel: 'bot-testing',
 	cooldown: 5,
 	permLevel: 0,
 	/**

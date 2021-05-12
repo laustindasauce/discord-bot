@@ -20,6 +20,7 @@ module.exports = {
 	usage: '[specific version] OR [all] OR [latest]',
 	args: false,
 	readOnly: false,
+	channel: 'bot-testing',
 	guildOnly: false,
 	cooldown: 20,
 	permLevel: 0,
