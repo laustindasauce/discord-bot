@@ -8,7 +8,7 @@ module.exports = {
 	usage: 'TSLA',
 	args: true,
 	readOnly: false,
-	channel: 'stock-market',
+	channels: ['stock-market'],
 	guildOnly: false,
 	cooldown: 20,
 	permLevel: 0,

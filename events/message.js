@@ -28,9 +28,9 @@ module.exports = {
             return message.reply(`I can't execute \`${command.name}\` inside DMs!`);
         }
 
-        // if (command.channel && command.channel !== message.channel.name) {
-        //     return message.reply(`I can only execute \`${command.name}\` in the channel \`${command.channel}\`!`)
-        // }
+        if (command.channels && !command.channels.includes(message.channel.name)) {
+            return message.reply(`I can only execute \`${command.name}\` in the channel \`${command.channel}\`!`)
+        }
 
         if (command.args && !args.length) {
             let reply = `you didn't provide any arguments!`;

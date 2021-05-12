@@ -5,7 +5,7 @@ module.exports = {
     usage: '[**optional** tagged member]',
     args: false,
     readOnly: false,
-    channel: 'bot-testing',
+    channels: ['bot-testing'],
     guildOnly: true,
     cooldown: 3,
     permLevel: 0,

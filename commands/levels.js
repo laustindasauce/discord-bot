@@ -12,7 +12,7 @@ module.exports = {
     description: "Displays embedded message with all available permission levels in the server.",
     args: false,
     readOnly: false,
-    channel: 'bot-testing',
+    channels: ['bot-testing'],
     guildOnly: false,
     cooldown: 2,
     permLevel: 0,
@@ -25,8 +25,8 @@ module.exports = {
 	 * @param {num} _level users permission level
 	 */
 	execute(message, _args, _redis, _level) {
-		for (let i = client.config.permLevels.length-1; i >= 0; i--) {
-            const thisLevel = client.config.permLevels[i];
+		for (let i = message.client.config.permLevels.length-1; i >= 0; i--) {
+            const thisLevel = message.client.config.permLevels[i];
             embed.addField( `\tLevel: ${thisLevel.level}\t{${thisLevel.name}}`, `\tDescription: ${thisLevel.description}`, false)
         }
         return message.author.send(embed)

@@ -8,7 +8,7 @@ module.exports = {
 	description: "Gives some useful bot statistics",
 	args: false,
 	readOnly: false,
-	channel: 'bot-testing',
+	channels: ['bot-testing'],
 	guildOnly: true,
 	cooldown: 5,
 	permLevel: 0,

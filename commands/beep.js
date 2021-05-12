@@ -4,7 +4,7 @@ module.exports = {
 	description: 'Beep!',
 	args: false,
 	readOnly: false,
-	channel: 'bot-testing',
+	channels: ['bot-testing'],
 	guildOnly: false,
 	permLevel: 0,
 	/**

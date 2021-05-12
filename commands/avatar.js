@@ -7,7 +7,7 @@ module.exports = {
 	usage: '[*optional* @member]',
 	args: false,
 	readOnly: false,
-	channel: 'bot-testing',
+	channels: ['bot-testing'],
 	cooldown: 2,
 	permLevel: 0,
 	/**
