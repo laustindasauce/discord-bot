@@ -7,10 +7,11 @@ module.exports = {
         'or reply in same channel a unique reminder and a specific' +
         ' time from now. I recommend using email/dm if reminder is a ' +
         'long time from now in case the channel is removed.',
-        usage: '[number 1-99]',
+	usage: '[number 1-99]',
 	args: true,
-	readOnly: false,
+	readOnly: true,
 	guildOnly: false,
+	cooldown: 30,
 	permLevel: 0,
 	/**
 	 * This command is a simple call and response
