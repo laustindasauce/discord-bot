@@ -76,7 +76,15 @@ module.exports = {
 				.addField('\u200B', '\u200B')
 				.setTimestamp(Date.now());
 
-				message.channel.send(embed);
+				// message.channel.send(embed);
+				return message.author.send(embed)
+				.then(() => {
+					if (message.channel.type !== 'dm') message.reply('I\'ve sent you a DM with all my commands!');
+				})
+				.catch(error => {
+					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+					message.reply('it seems like I can\'t DM you!');
+				});
 			})
         });
 	}
