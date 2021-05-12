@@ -1,3 +1,5 @@
+const { Message } = require("discord.js");
+
 module.exports = {
 	name: 'message',
 	description: 'message event handler.',
@@ -23,17 +25,21 @@ module.exports = {
         if (command.readOnly) return message.reply(`Sorry, the command \`${command.name}\` is read only!`);
 
         if (command.guildOnly && message.channel.type === 'dm') {
-            return message.reply(`I can\'t execute \`${command.name}\` inside DMs!`);
+            return message.reply(`I can't execute \`${command.name}\` inside DMs!`);
         }
 
+        // if (command.channel && command.channel !== message.channel.name) {
+        //     return message.reply(`I can only execute \`${command.name}\` in the channel \`${command.channel}\`!`)
+        // }
+
         if (command.args && !args.length) {
-            let reply = `You didn't provide any arguments, ${message.author}!`;
+            let reply = `you didn't provide any arguments!`;
 
             if (command.usage) {
                 reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
             }
 
-            return message.channel.send(reply);
+            return message.reply(reply);
         }
 
         if (level < command.permLevel) return message.reply(`you don't have permissions to run \`${command.name}\` command.`)
