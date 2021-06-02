@@ -14,49 +14,51 @@ spec:
         app: botguy
     spec:
       imagePullSecrets:
-      - name: pipeline-docker-registry
+        - name: pipeline-docker-registry
       containers:
-      - name: botguy
-        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
-        imagePullPolicy: Always
-        env:
-        - name: TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: botguy-token
-              name: discord-secrets
-        - name: PUBLIC
-          valueFrom:
-            secretKeyRef:
-              key: botguy-public
-              name: discord-secrets
-        - name: BOT_ID
-          valueFrom:
-            secretKeyRef:
-              key: botguy-id
-              name: discord-secrets
-        - name: SECRET
-          valueFrom:
-            secretKeyRef:
-              key: botguy-secret
-              name: discord-secrets
-        - name: TENOR_KEY
-          valueFrom:
-            secretKeyRef:
-              key: botguy-tenor-key
-              name: discord-secrets
-        - name: USER_ID
-          valueFrom:
-            secretKeyRef:
-              key: abspen1-id
-              name: discord-secrets
-        - name: REDIS_PASS
-          valueFrom:
-            secretKeyRef:
-              key: REDIS_PASS
-              name: redis-pass
-        - name: REDIS_HOST
-          valueFrom:
-            secretKeyRef:
-              key: REDIS_HOST
-              name: redis-pass
+        - name: botguy
+          image: ${CICD_IMAGE}:v1.0
+          imagePullPolicy: Always
+          env:
+            - name: CICD_GIT_COMMIT
+              value: ${CICD_GIT_COMMIT}
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-token
+                  name: discord-secrets
+            - name: PUBLIC
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-public
+                  name: discord-secrets
+            - name: BOT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-id
+                  name: discord-secrets
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-secret
+                  name: discord-secrets
+            - name: TENOR_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-tenor-key
+                  name: discord-secrets
+            - name: USER_ID
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1-id
+                  name: discord-secrets
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_PASS
+                  name: redis-pass
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_HOST
+                  name: redis-pass
