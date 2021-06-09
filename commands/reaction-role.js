@@ -74,22 +74,22 @@ module.exports = {
     );
     // Emojis
 
-    const actuaryRoleEmoji = "🏓";
-    const auditServicesRoleEmoji = "🏓";
-    const CAORoleEmoji = "🏓";
-    const CFORoleEmoji = "🏓";
-    const CLORoleEmoji = "🏓";
-    const claimsRoleEmoji = "🏓";
-    const dataAnalyticsRoleEmoji = "🏓";
-    const enterpriseRiskRoleEmoji = "🏓";
-    const experienceManagementRoleEmoji = "🏓";
-    const federalSavingsBankRoleEmoji = "🏓";
-    const humanResourcesRoleEmoji = "🏓";
-    const informationSecurityRoleEmoji = "🏓";
-    const informationTechnologyRoleEmoji = "🏓";
-    const lifeCompanyRoleEmoji = "🏓";
-    const regulatoryRelationsRoleEmoji = "🏓";
-    const stateManagementRoleEmoji = "🏓";
+    const actuaryRoleEmoji = ":a:";
+    const auditServicesRoleEmoji = ":a:";
+    const CAORoleEmoji = ":a:";
+    const CFORoleEmoji = ":a:";
+    const CLORoleEmoji = ":a:";
+    const claimsRoleEmoji = ":a:";
+    const dataAnalyticsRoleEmoji = ":a:";
+    const enterpriseRiskRoleEmoji = ":a:";
+    const experienceManagementRoleEmoji = ":a:";
+    const federalSavingsBankRoleEmoji = ":a:";
+    const humanResourcesRoleEmoji = ":a:";
+    const informationSecurityRoleEmoji = ":a:";
+    const informationTechnologyRoleEmoji = ":a:";
+    const lifeCompanyRoleEmoji = ":a:";
+    const regulatoryRelationsRoleEmoji = ":a:";
+    const stateManagementRoleEmoji = ":a:";
 
     roleEmbed.setColor("#e42643");
     roleEmbed.setTitle("**Role Menu: Internship Area**");
