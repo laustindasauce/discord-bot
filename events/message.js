@@ -38,8 +38,9 @@ module.exports = {
       command.channels &&
       !command.channels.includes(message.channel.name && command.guildOnly)
     ) {
+      console.log(`guildOnly: ${command.guildOnly}`);
       return message.reply(
-        `I can only execute \`${command.name}\` in the channel \`${command.channel}\`!`
+        `I can only execute \`${command.name}\` in the channel \`${command.channels}\`!`
       );
     }
 
