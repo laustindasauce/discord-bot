@@ -24,7 +24,7 @@ module.exports = {
   usage: "[specific version] OR [all] OR [latest]",
   args: false,
   readOnly: false,
-  channels: ["bot-testing"],
+  channels: ["bot-commands"],
   guildOnly: false,
   cooldown: 20,
   permLevel: 0,

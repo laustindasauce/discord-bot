@@ -57,7 +57,7 @@ async function get_version(client, test) {
         save_version.execute(redis, to_string, client);
         redis.set("botguy-version", to_string);
         if (test) return console.log(to_string);
-        let channelID = "790960191792873573";
+        let channelID = "852251818758635551";
         const channel = client.channels.cache.find(
           (channel) => channel.id === channelID
         );
