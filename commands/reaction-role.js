@@ -23,52 +23,52 @@ module.exports = {
     const channel = "852211870378098751";
 
     // Roles
-    const actuaryRole = message.guild.roles.chache.find(
+    const actuaryRole = message.guild.roles.cache.find(
       (role) => role.name === "Actuary"
     );
-    const auditServicesRole = message.guild.roles.chache.find(
+    const auditServicesRole = message.guild.roles.cache.find(
       (role) => role.name === "Audit Services"
     );
-    const CAORole = message.guild.roles.chache.find(
+    const CAORole = message.guild.roles.cache.find(
       (role) => role.name === "CAO, Business Advisors"
     );
-    const CFORole = message.guild.roles.chache.find(
+    const CFORole = message.guild.roles.cache.find(
       (role) => role.name === "Chief Financial Office"
     );
-    const CLORole = message.guild.roles.chache.find(
+    const CLORole = message.guild.roles.cache.find(
       (role) => role.name === "Chief Legal Office"
     );
-    const claimsRole = message.guild.roles.chache.find(
+    const claimsRole = message.guild.roles.cache.find(
       (role) => role.name === "Claims"
     );
-    const dataAnalyticsRole = message.guild.roles.chache.find(
+    const dataAnalyticsRole = message.guild.roles.cache.find(
       (role) => role.name === "Data & Analytics"
     );
-    const enterpriseRiskRole = message.guild.roles.chache.find(
+    const enterpriseRiskRole = message.guild.roles.cache.find(
       (role) => role.name === "Enterprise Risk & Compliance"
     );
-    const experienceManagementRole = message.guild.roles.chache.find(
+    const experienceManagementRole = message.guild.roles.cache.find(
       (role) => role.name === "Experience Management"
     );
-    const federalSavingsBankRole = message.guild.roles.chache.find(
+    const federalSavingsBankRole = message.guild.roles.cache.find(
       (role) => role.name === "Federal Savings Bank"
     );
-    const humanResourcesRole = message.guild.roles.chache.find(
+    const humanResourcesRole = message.guild.roles.cache.find(
       (role) => role.name === "Human Resources"
     );
-    const informationSecurityRole = message.guild.roles.chache.find(
+    const informationSecurityRole = message.guild.roles.cache.find(
       (role) => role.name === "Information Security"
     );
-    const informationTechnologyRole = message.guild.roles.chache.find(
+    const informationTechnologyRole = message.guild.roles.cache.find(
       (role) => role.name === "Information Technology"
     );
-    const lifeCompanyRole = message.guild.roles.chache.find(
+    const lifeCompanyRole = message.guild.roles.cache.find(
       (role) => role.name === "Life Company"
     );
-    const regulatoryRelationsRole = message.guild.roles.chache.find(
+    const regulatoryRelationsRole = message.guild.roles.cache.find(
       (role) => role.name === "Regulatory Relations"
     );
-    const stateManagementRole = message.guild.roles.chache.find(
+    const stateManagementRole = message.guild.roles.cache.find(
       (role) => role.name === "State Management"
     );
     // Emojis
