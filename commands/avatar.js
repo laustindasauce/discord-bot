@@ -7,7 +7,8 @@ module.exports = {
   usage: "[*optional* @member]",
   args: false,
   readOnly: false,
-  channels: [],
+  channels: ["bot-commands"],
+  guildOnly: false,
   cooldown: 2,
   permLevel: 0,
   /**
