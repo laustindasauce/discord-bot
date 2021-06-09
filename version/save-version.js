@@ -10,7 +10,7 @@ module.exports = {
    */
   execute(redis, version, client) {
     // Add version to list of all versions
-    redis.sadd("abspen1-Versions", version);
+    redis.sadd("BotGuy-Versions", version);
 
     // Set commands hash
     commandHash = "hash-" + version + "-commands";
