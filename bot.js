@@ -22,6 +22,7 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
+var version = require("./version/version.js");
 var messageEvent = require("./events/message.js");
 // var welcomeEvent = require("./events/welcome.js");
 // var goodbyeEvent = require("./events/goodbye.js");
@@ -55,16 +56,16 @@ redis.get("check-redis").then((res) => console.log(res));
 client.once("ready", () => {
   console.log("Bot has logged in successfully!");
   /** Local redis has test as the value, and kubernetes redis has live as the value */
-  // redis.get('botguy-env').then((res) => {
-  // 	if (res !== "test") {
-  // 		version.execute(client, false);
-  // 	} else {
-  // 		version.execute(client, true);
-  // 		console.log("**************\nTest Env Active\n**************")
-  // 		prefix = client.config.defaultSettings.testPrefix;
-  // 		test_env = true;
-  // 	}
-  // })
+  redis.get("botguy-env").then((res) => {
+    if (res !== "test") {
+      version.execute(client, false);
+    } else {
+      version.execute(client, true);
+      console.log("**************\nTest Env Active\n**************");
+      prefix = client.config.defaultSettings.testPrefix;
+      test_env = true;
+    }
+  });
 });
 
 /**

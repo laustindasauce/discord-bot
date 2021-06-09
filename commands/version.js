@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const exampleEmbed = new Discord.MessageEmbed()
   .setColor("#ff2052")
   .setAuthor(
-    "BotGuy",
+    "abspen1",
     "https://discord.com/channels/@me/790100058682294302/791705870567604264",
     "https://discord.js.org"
   );
@@ -20,11 +20,11 @@ const exampleEmbed = new Discord.MessageEmbed()
 module.exports = {
   name: "version",
   aliases: ["versions", "v"],
-  description: "Give insight into the versions of BotGuy.",
+  description: "Give insight into the versions of abspen1Alt.",
   usage: "[specific version] OR [all] OR [latest]",
   args: false,
   readOnly: false,
-  channels: ["bot-testing"],
+  channels: ["bot-commands"],
   guildOnly: false,
   cooldown: 20,
   permLevel: 0,
@@ -44,11 +44,11 @@ module.exports = {
         console.log(`DM sent with all available versions.`)
       );
     } else if (versions === "latest") {
-      redis.get("botguy-version").then((res) => {
+      redis.get("abspen1-version").then((res) => {
         return message
           .reply(`the latest version is v${res}`)
           .then(() => {
-            console.log("Replied with latest version of BotGuy.");
+            console.log("Replied with latest version of abspen1Alt.");
           })
           .catch((error) => {
             console.error(
@@ -79,7 +79,9 @@ async function get_hash(message, args, redis) {
   commandHash = "hash-" + args.join(" ") + "-commands";
 
   exampleEmbed.setTitle(`v${args}`);
-  exampleEmbed.setDescription(`**Modules available to BotGuy as of v${args}**`);
+  exampleEmbed.setDescription(
+    `**Modules available to abspen1Alt as of v${args}**`
+  );
 
   let data = [];
 
@@ -104,7 +106,7 @@ async function get_hash(message, args, redis) {
   }
 
   if (!data.length) {
-    data.push(`${args} is not a valid version of BotGuy`);
+    data.push(`${args} is not a valid version of abspen1Alt`);
     data.push("Try the command !version all");
     return message.author
       .send(data, { split: true })
@@ -150,15 +152,15 @@ async function get_hash(message, args, redis) {
 async function get_versions(message, redis) {
   let data = [];
 
-  data.push("Here are all versions for BotGuy:");
-  arr = await redis.smembers("BotGuy-Versions");
+  data.push("Here are all versions for abspen1Alt:");
+  arr = await redis.smembers("abspen1-Versions");
 
   // for (let i = 0; i < arr.length; i++) {
   // 	data.push(arr[i]);
   // }
   data.push("Versions go from 1.0.9 => 1.1.0 and 1.9.9 => 2.0.0");
 
-  const version = await redis.get("botguy-version");
+  const version = await redis.get("abspen1-version");
 
   const to_string = `**1.0.1 => ${version}**`;
 
