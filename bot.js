@@ -49,10 +49,6 @@ var prefix = client.config.defaultSettings.prefix;
 
 redis.set("check-redis", "Redis is running!");
 redis.get("check-redis").then((res) => console.log(res));
-redis.set("abspen1-version", "1.0.0");
-redis.set("version", 1);
-redis.set("mod1", 0);
-redis.set("mod2", 0);
 
 /**
  * Runs once when the client initially gets set up

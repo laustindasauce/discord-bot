@@ -162,7 +162,7 @@ async function get_versions(message, redis) {
 
   const version = await redis.get("abspen1-version");
 
-  const to_string = `**1.0.1 => ${version}**`;
+  const to_string = `**1.0.0 => ${version}**`;
 
   data.push(to_string);
 
