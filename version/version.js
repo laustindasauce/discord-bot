@@ -13,7 +13,7 @@ const redis = new Redis({
   port: 6379, // Redis port
   host: redisHost, // Redis host
   password: redisPass, // Redis pass
-  db: 9, // Redis database
+  db: 10, // Redis database
 });
 
 /**
