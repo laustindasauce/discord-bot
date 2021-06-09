@@ -12,7 +12,7 @@ module.exports = {
    * @param {Discord client} client
    */
   execute: async (redis, client) => {
-    const version = await redis.get("abspen1-version");
+    const version = await redis.get("botguy-version");
 
     commandHash = "hash-" + version + "-commands";
 
