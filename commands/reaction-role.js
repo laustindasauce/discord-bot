@@ -24,199 +24,139 @@ module.exports = {
     const channel = "852211870378098751";
 
     // Roles
-    const actuaryRole = message.guild.roles.cache.find(
-      (role) => role.name === "Actuary"
+    const videoGamesRole = message.guild.roles.cache.find(
+      (role) => role.name === "Video Games"
     );
-    const auditServicesRole = message.guild.roles.cache.find(
-      (role) => role.name === "Audit Services"
+    const boardGamesRole = message.guild.roles.cache.find(
+      (role) => role.name === "Board Games"
     );
-    const CAORole = message.guild.roles.cache.find(
-      (role) => role.name === "CAO, Business Advisors"
+    const TVSeriesRole = message.guild.roles.cache.find(
+      (role) => role.name === "TV Series"
     );
-    const CFORole = message.guild.roles.cache.find(
-      (role) => role.name === "Chief Financial Office"
+    const moviesRole = message.guild.roles.cache.find(
+      (role) => role.name === "Movies"
     );
-    const CLORole = message.guild.roles.cache.find(
-      (role) => role.name === "Chief Legal Office"
+    const sportsRole = message.guild.roles.cache.find(
+      (role) => role.name === "Sports"
     );
-    const claimsRole = message.guild.roles.cache.find(
-      (role) => role.name === "Claims"
+    const phoenixRole = message.guild.roles.cache.find(
+      (role) => role.name === "Phoenix"
     );
-    const dataAnalyticsRole = message.guild.roles.cache.find(
-      (role) => role.name === "Data & Analytics"
+    const planoRole = message.guild.roles.cache.find(
+      (role) => role.name === "Plano"
     );
-    const enterpriseRiskRole = message.guild.roles.cache.find(
-      (role) => role.name === "Enterprise Risk & Compliance"
+    const sanAntonioRole = message.guild.roles.cache.find(
+      (role) => role.name === "San Antonio"
     );
-    const experienceManagementRole = message.guild.roles.cache.find(
-      (role) => role.name === "Experience Management"
+    const tampaRole = message.guild.roles.cache.find(
+      (role) => role.name === "Tampa"
     );
-    const federalSavingsBankRole = message.guild.roles.cache.find(
-      (role) => role.name === "Federal Savings Bank"
+    const coloradoSpringsRole = message.guild.roles.cache.find(
+      (role) => role.name === "Colorado Springs"
     );
-    const humanResourcesRole = message.guild.roles.cache.find(
-      (role) => role.name === "Human Resources"
-    );
-    const informationSecurityRole = message.guild.roles.cache.find(
-      (role) => role.name === "Information Security"
-    );
-    const informationTechnologyRole = message.guild.roles.cache.find(
-      (role) => role.name === "Information Technology"
-    );
-    const lifeCompanyRole = message.guild.roles.cache.find(
-      (role) => role.name === "Life Company"
-    );
-    const regulatoryRelationsRole = message.guild.roles.cache.find(
-      (role) => role.name === "Regulatory Relations"
-    );
-    const stateManagementRole = message.guild.roles.cache.find(
-      (role) => role.name === "State Management"
-    );
+
     // Emojis
 
-    const actuaryRoleEmoji = "🏓";
-    const auditServicesRoleEmoji = "🏓";
-    const CAORoleEmoji = "🏓";
-    const CFORoleEmoji = "🏓";
-    const CLORoleEmoji = "🏓";
-    const claimsRoleEmoji = "🏓";
-    const dataAnalyticsRoleEmoji = "🏓";
-    const enterpriseRiskRoleEmoji = "🏓";
-    const experienceManagementRoleEmoji = "🏓";
-    const federalSavingsBankRoleEmoji = "🏓";
-    const humanResourcesRoleEmoji = "🏓";
-    const informationSecurityRoleEmoji = "🏓";
-    const informationTechnologyRoleEmoji = "🏓";
-    const lifeCompanyRoleEmoji = "🏓";
-    const regulatoryRelationsRoleEmoji = "🏓";
-    const stateManagementRoleEmoji = "🏓";
+    const videoGamesRoleEmoji = "🎮";
+    const boardGamesRoleEmoji = "🎲";
+    const TVSeriesRoleEmoji = "📺";
+    const moviesRoleEmoji = "🎥";
+    const sportsRoleEmoji = "🏀";
+    const phoenixRoleEmoji = "🌵";
+    const planoRoleEmoji = "✈️";
+    const sanAntonioRoleEmoji = "😄";
+    const tampaRoleEmoji = "🏖️";
+    const coloradoSpringsRoleEmoji = "🏔️";
 
     roleEmbed.setColor("#e42643");
     roleEmbed.setTitle("**Role Menu: Internship Area**");
     roleEmbed.setDescription("React to give yourself a role!");
     roleEmbed.addFields(
-      { name: actuaryRoleEmoji, value: "Actuary", inline: true },
-      { name: auditServicesRoleEmoji, value: "Audit Services" },
-      { name: CAORoleEmoji, value: "CAO, Business Advisors", inline: true },
-      { name: CFORoleEmoji, value: "Chief Financial Office" },
-      { name: CLORoleEmoji, value: "Chief Legal Office" },
-      { name: claimsRoleEmoji, value: "Claims" },
-      { name: dataAnalyticsRoleEmoji, value: "Data & Analytics" },
-      { name: enterpriseRiskRoleEmoji, value: "Enterprise Risk & Compliance" },
-      { name: experienceManagementRoleEmoji, value: "Experience Management" },
-      { name: federalSavingsBankRoleEmoji, value: "Federal Savings Bank" },
-      { name: humanResourcesRoleEmoji, value: "Human Resources" },
-      { name: informationSecurityRoleEmoji, value: "Information Security" },
-      { name: informationTechnologyRoleEmoji, value: "Information Technology" },
-      { name: lifeCompanyRoleEmoji, value: "Life Company" },
-      { name: regulatoryRelationsRoleEmoji, value: "Regulatory Relations" },
-      { name: stateManagementRoleEmoji, value: "State Management" }
+      { name: videoGamesRoleEmoji, value: "Video Games", inline: true },
+      { name: boardGamesRoleEmoji, value: "Board Games", inline: true },
+      { name: TVSeriesRoleEmoji, value: "TV Series", inline: true },
+      { name: moviesRoleEmoji, value: "Movies", inline: true },
+      { name: sportsRoleEmoji, value: "Sports", inline: true },
+      { name: phoenixRoleEmoji, value: "Phoenix", inline: true },
+      { name: planoRoleEmoji, value: "Plano", inline: true },
+      { name: sanAntonioRoleEmoji, value: "San Antonio", inline: true },
+      { name: tampaRoleEmoji, value: "Tampa", inline: true },
+      {
+        name: coloradoSpringsRoleEmoji,
+        value: "Colorado Springs",
+        inline: true,
+      }
     );
 
     let messageEmbed = await message.channel.send(roleEmbed);
-    messageEmbed.react(actuaryRoleEmoji);
-    messageEmbed.react(auditServicesRoleEmoji);
-    messageEmbed.react(CAORoleEmoji);
-    messageEmbed.react(CFORoleEmoji);
-    messageEmbed.react(CLORoleEmoji);
-    messageEmbed.react(claimsRoleEmoji);
-    messageEmbed.react(dataAnalyticsRoleEmoji);
-    messageEmbed.react(enterpriseRiskRoleEmoji);
-    messageEmbed.react(experienceManagementRoleEmoji);
-    messageEmbed.react(federalSavingsBankRoleEmoji);
-    messageEmbed.react(humanResourcesRoleEmoji);
-    messageEmbed.react(informationSecurityRoleEmoji);
-    messageEmbed.react(informationTechnologyRoleEmoji);
-    messageEmbed.react(lifeCompanyRoleEmoji);
-    messageEmbed.react(regulatoryRelationsRoleEmoji);
-    messageEmbed.react(stateManagementRoleEmoji);
+    messageEmbed.react(videoGamesRoleEmoji);
+    messageEmbed.react(boardGamesRoleEmoji);
+    messageEmbed.react(TVSeriesRoleEmoji);
+    messageEmbed.react(moviesRoleEmoji);
+    messageEmbed.react(sportsRoleEmoji);
+    messageEmbed.react(phoenixRoleEmoji);
+    messageEmbed.react(planoRoleEmoji);
+    messageEmbed.react(sanAntonioRoleEmoji);
+    messageEmbed.react(tampaRoleEmoji);
+    messageEmbed.react(coloradoSpringsRoleEmoji);
 
     message.client.on("messageReactionAdd", async (reaction, user) => {
+      console.log("Reaction added");
       if (reaction.message.partial) await reaction.message.fetch();
       if (reaction.partial) await reaction.fetch();
       if (user.bot) return;
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.name === actuaryRoleEmoji) {
+        if (reaction.emoji.name === videoGamesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(actuaryRole);
+            .roles.add(videoGamesRole);
         }
-        if (reaction.emoji.name === auditServicesRoleEmoji) {
+        if (reaction.emoji.name === boardGamesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(auditServicesRole);
+            .roles.add(boardGamesRole);
         }
-        if (reaction.emoji.name === CAORoleEmoji) {
+        if (reaction.emoji.name === TVSeriesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(CAORole);
+            .roles.add(TVSeriesRole);
         }
-        if (reaction.emoji.name === CFORoleEmoji) {
+        if (reaction.emoji.name === moviesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(CFORole);
+            .roles.add(moviesRole);
         }
-        if (reaction.emoji.name === CLORoleEmoji) {
+        if (reaction.emoji.name === sportsRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(CLORole);
+            .roles.add(sportsRole);
         }
-        if (reaction.emoji.name === claimsRoleEmoji) {
+        if (reaction.emoji.name === phoenixRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(claimsRole);
+            .roles.add(phoenixRole);
         }
-        if (reaction.emoji.name === dataAnalyticsRoleEmoji) {
+        if (reaction.emoji.name === planoRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(dataAnalyticsRole);
+            .roles.add(planoRole);
         }
-        if (reaction.emoji.name === enterpriseRiskRoleEmoji) {
+        if (reaction.emoji.name === sanAntonioRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(enterpriseRiskRole);
+            .roles.add(sanAntonioRole);
         }
-        if (reaction.emoji.name === experienceManagementRoleEmoji) {
+        if (reaction.emoji.name === tampaRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(experienceManagementRole);
+            .roles.add(tampaRole);
         }
-        if (reaction.emoji.name === federalSavingsBankRoleEmoji) {
+        if (reaction.emoji.name === coloradoSpringsRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(federalSavingsBankRole);
-        }
-        if (reaction.emoji.name === humanResourcesRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(humanResourcesRole);
-        }
-        if (reaction.emoji.name === informationSecurityRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(informationSecurityRole);
-        }
-        if (reaction.emoji.name === informationTechnologyRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(informationTechnologyRole);
-        }
-        if (reaction.emoji.name === lifeCompanyRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(lifeCompanyRole);
-        }
-        if (reaction.emoji.name === regulatoryRelationsRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(regulatoryRelationsRole);
-        }
-        if (reaction.emoji.name === stateManagementRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(stateManagementRole);
+            .roles.add(coloradoSpringsRole);
         }
       }
     });
@@ -228,85 +168,55 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.name === actuaryRoleEmoji) {
+        if (reaction.emoji.name === videoGamesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(actuaryRole);
+            .roles.remove(videoGamesRole);
         }
-        if (reaction.emoji.name === auditServicesRoleEmoji) {
+        if (reaction.emoji.name === boardGamesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(auditServicesRole);
+            .roles.remove(boardGamesRole);
         }
-        if (reaction.emoji.name === CAORoleEmoji) {
+        if (reaction.emoji.name === TVSeriesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(CAORole);
+            .roles.remove(TVSeriesRole);
         }
-        if (reaction.emoji.name === CFORoleEmoji) {
+        if (reaction.emoji.name === moviesRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(CFORole);
+            .roles.remove(moviesRole);
         }
-        if (reaction.emoji.name === CLORoleEmoji) {
+        if (reaction.emoji.name === sportsRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(CLORole);
+            .roles.remove(sportsRole);
         }
-        if (reaction.emoji.name === claimsRoleEmoji) {
+        if (reaction.emoji.name === phoenixRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(claimsRole);
+            .roles.remove(phoenixRole);
         }
-        if (reaction.emoji.name === dataAnalyticsRoleEmoji) {
+        if (reaction.emoji.name === planoRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(dataAnalyticsRole);
+            .roles.remove(planoRole);
         }
-        if (reaction.emoji.name === enterpriseRiskRoleEmoji) {
+        if (reaction.emoji.name === sanAntonioRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(enterpriseRiskRole);
+            .roles.remove(sanAntonioRole);
         }
-        if (reaction.emoji.name === experienceManagementRoleEmoji) {
+        if (reaction.emoji.name === tampaRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(experienceManagementRole);
+            .roles.remove(tampaRole);
         }
-        if (reaction.emoji.name === federalSavingsBankRoleEmoji) {
+        if (reaction.emoji.name === coloradoSpringsRoleEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(federalSavingsBankRole);
-        }
-        if (reaction.emoji.name === humanResourcesRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(humanResourcesRole);
-        }
-        if (reaction.emoji.name === informationSecurityRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(informationSecurityRole);
-        }
-        if (reaction.emoji.name === informationTechnologyRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(informationTechnologyRole);
-        }
-        if (reaction.emoji.name === lifeCompanyRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(lifeCompanyRole);
-        }
-        if (reaction.emoji.name === regulatoryRelationsRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(regulatoryRelationsRole);
-        }
-        if (reaction.emoji.name === stateManagementRoleEmoji) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(stateManagementRole);
+            .roles.remove(coloradoSpringsRole);
         }
       }
     });
