@@ -83,8 +83,6 @@ module.exports = {
         console.log("Successfully updated version.")
       );
     } else {
-      const version = await redis.get("botguy-version");
-
       save_version.execute(redis, version, client);
       console.log("Successfully saved current version.");
       console.log(version);
