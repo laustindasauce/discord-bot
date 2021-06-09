@@ -20,11 +20,11 @@ const exampleEmbed = new Discord.MessageEmbed()
 module.exports = {
   name: "version",
   aliases: ["versions", "v"],
-  description: "Give insight into the versions of abspen1Alt.",
+  description: "Give insight into the versions of abspen1 BOT.",
   usage: "[specific version] OR [all] OR [latest]",
   args: false,
   readOnly: false,
-  channels: ["bot-commands"],
+  channels: ["bot-testing"],
   guildOnly: false,
   cooldown: 20,
   permLevel: 0,
@@ -44,7 +44,7 @@ module.exports = {
         console.log(`DM sent with all available versions.`)
       );
     } else if (versions === "latest") {
-      redis.get("abspen1-version").then((res) => {
+      redis.get("botguy-version").then((res) => {
         return message
           .reply(`the latest version is v${res}`)
           .then(() => {
@@ -80,7 +80,7 @@ async function get_hash(message, args, redis) {
 
   exampleEmbed.setTitle(`v${args}`);
   exampleEmbed.setDescription(
-    `**Modules available to abspen1Alt as of v${args}**`
+    `**Modules available to abspen1 as of v${args}**`
   );
 
   let data = [];
@@ -106,7 +106,7 @@ async function get_hash(message, args, redis) {
   }
 
   if (!data.length) {
-    data.push(`${args} is not a valid version of abspen1Alt`);
+    data.push(`${args} is not a valid version of abspen1`);
     data.push("Try the command !version all");
     return message.author
       .send(data, { split: true })
@@ -152,17 +152,17 @@ async function get_hash(message, args, redis) {
 async function get_versions(message, redis) {
   let data = [];
 
-  data.push("Here are all versions for abspen1Alt:");
-  arr = await redis.smembers("abspen1-Versions");
+  data.push("Here are all versions for abspen1:");
+  arr = await redis.smembers("BotGuy-Versions");
 
   // for (let i = 0; i < arr.length; i++) {
   // 	data.push(arr[i]);
   // }
   data.push("Versions go from 1.0.9 => 1.1.0 and 1.9.9 => 2.0.0");
 
-  const version = await redis.get("abspen1-version");
+  const version = await redis.get("botguy-version");
 
-  const to_string = `**1.0.0 => ${version}**`;
+  const to_string = `**1.0.1 => ${version}**`;
 
   data.push(to_string);
 
