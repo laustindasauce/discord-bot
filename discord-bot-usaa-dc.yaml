@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: abspen1Alt
+  name: abspen1
   namespace: bots
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: abspen1Alt
+      app: abspen1
   template:
     metadata:
       labels:
-        app: abspen1Alt
+        app: abspen1
     spec:
       imagePullSecrets:
         - name: pipeline-docker-registry
       containers:
-        - name: abspen1Alt
+        - name: abspen1
           image: ${CICD_IMAGE}:v1.0
           imagePullPolicy: Always
           env:
