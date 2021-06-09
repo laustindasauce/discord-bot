@@ -71,7 +71,13 @@ module.exports = {
   name: "version",
   description: "Update application version with each GitHub push.",
   execute: async (client, test) => {
-    const updates = await check_version.execute(redis, client);
+    const version = await redis.get("botguy-version");
+    let updates;
+    if (!version) {
+      updates = true;
+    } else {
+      updates = await check_version.execute(redis, client);
+    }
     if (updates) {
       get_version(client, test).then(() =>
         console.log("Successfully updated version.")
