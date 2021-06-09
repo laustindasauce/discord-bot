@@ -1,4 +1,5 @@
-const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
+const roleEmbed = new Discord.MessageEmbed();
 /**
  * This function will allow users to react to get a role
  */
@@ -90,11 +91,9 @@ module.exports = {
     const regulatoryRelationsRoleEmoji = "🏓";
     const stateManagementRoleEmoji = "🏓";
 
-    let embed =
-      new MessageEmbed()
-        .setColor("#e42643")
-        .setTitle("**Role Menu: Internship Area**")
-        .setDescription("React to give yourself a role!") +
+    roleEmbed.setColor("#e42643");
+    roleEmbed.setTitle("**Role Menu: Internship Area**");
+    roleEmbed.setDescription("React to give yourself a role!") +
       `${actuaryRoleEmoji} for Actuary` +
       `${auditServicesRoleEmoji} for Audit Services` +
       `${CAORoleEmoji} for CAO, Business Advisors` +
@@ -112,7 +111,7 @@ module.exports = {
       `${regulatoryRelationsRoleEmoji} for Regulatory Relations` +
       `${stateManagementRoleEmoji} for State Management`;
 
-    let messageEmbed = await message.channel.send(embed);
+    let messageEmbed = await message.channel.send(roleEmbed);
     messageEmbed.react(actuaryRoleEmoji);
     messageEmbed.react(auditServicesRoleEmoji);
     messageEmbed.react(CAORoleEmoji);
