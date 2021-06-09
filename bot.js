@@ -7,6 +7,7 @@ const client = new Discord.Client({
   ws: {
     intents: config.intents,
   },
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 
 client.config = config;
