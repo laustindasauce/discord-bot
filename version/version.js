@@ -26,14 +26,10 @@ async function get_version(client, test) {
   await redis.get("version").then((res) => {
     if (res) {
       version = res;
-    } else {
-      version = 1;
     }
     redis.get("mod1").then((res2) => {
       if (res2) {
         mod1 = res2;
-      } else {
-        mod1 = 0;
       }
       redis.get("mod2").then((res3) => {
         if (res3) {
@@ -59,9 +55,9 @@ async function get_version(client, test) {
         }
         let to_string = `${version}.${mod1}.${mod2}`;
         save_version.execute(redis, to_string, client);
-        redis.set("abspen1-version", to_string);
+        redis.set("botguy-version", to_string);
         if (test) return console.log(to_string);
-        let channelID = "852251818758635551";
+        let channelID = "790960191792873573";
         const channel = client.channels.cache.find(
           (channel) => channel.id === channelID
         );
@@ -81,7 +77,7 @@ module.exports = {
         console.log("Successfully updated version.")
       );
     } else {
-      const version = await redis.get("abspen1-version");
+      const version = await redis.get("botguy-version");
 
       save_version.execute(redis, version, client);
       console.log("Successfully saved current version.");
