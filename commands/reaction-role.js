@@ -93,23 +93,25 @@ module.exports = {
 
     roleEmbed.setColor("#e42643");
     roleEmbed.setTitle("**Role Menu: Internship Area**");
-    roleEmbed.setDescription("React to give yourself a role!") +
-      `${actuaryRoleEmoji} for Actuary` +
-      `${auditServicesRoleEmoji} for Audit Services` +
-      `${CAORoleEmoji} for CAO, Business Advisors` +
-      `${CFORoleEmoji} for Chief Financial Office` +
-      `${CLORoleEmoji} for Chief Legal Office` +
-      `${claimsRoleEmoji} for Claims` +
-      `${dataAnalyticsRoleEmoji} for Data & Analytics` +
-      `${enterpriseRiskRoleEmoji} for Enterprise Risk & Compliance` +
-      `${experienceManagementRoleEmoji} for Experience Management` +
-      `${federalSavingsBankRoleEmoji} for Federal Savings Bank` +
-      `${humanResourcesRoleEmoji} for Human Resources` +
-      `${informationSecurityRoleEmoji} for Information Security` +
-      `${informationTechnologyRoleEmoji} for Information Technology` +
-      `${lifeCompanyRoleEmoji} for Life Company` +
-      `${regulatoryRelationsRoleEmoji} for Regulatory Relations` +
-      `${stateManagementRoleEmoji} for State Management`;
+    roleEmbed.setDescription("React to give yourself a role!");
+    roleEmbed.addFields(
+      { actuaryRoleEmoji, value: "Actuary", inline: true },
+      { auditServicesRoleEmoji, value: "Audit Services" },
+      { CAORoleEmoji, value: "CAO, Business Advisors", inline: true },
+      { CFORoleEmoji, value: "Chief Financial Office" },
+      { CLORoleEmoji, value: "Chief Legal Office" },
+      { claimsRoleEmoji, value: "Claims" },
+      { dataAnalyticsRoleEmoji, value: "Data & Analytics" },
+      { enterpriseRiskRoleEmoji, value: "Enterprise Risk & Compliance" },
+      { experienceManagementRoleEmoji, value: "Experience Management" },
+      { federalSavingsBankRoleEmoji, value: "Federal Savings Bank" },
+      { humanResourcesRoleEmoji, value: "Human Resources" },
+      { informationSecurityRoleEmoji, value: "Information Security" },
+      { informationTechnologyRoleEmoji, value: "Information Technology" },
+      { lifeCompanyRoleEmoji, value: "Life Company" },
+      { regulatoryRelationsRoleEmoji, value: "Regulatory Relations" },
+      { stateManagementRoleEmoji, value: "State Management" }
+    );
 
     let messageEmbed = await message.channel.send(roleEmbed);
     messageEmbed.react(actuaryRoleEmoji);
