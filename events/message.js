@@ -85,7 +85,12 @@ module.exports = {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     try {
-      command.execute(message, args, redis, level);
+      if (command.name === "reaction-role") {
+        console.log("Executing reaction role");
+        command.execute(message, client);
+      } else {
+        command.execute(message, args, redis, level);
+      }
     } catch (error) {
       console.error(error);
       message.reply(

@@ -16,11 +16,9 @@ module.exports = {
   /**
    *
    * @param {message Object} message the message Object that was sent to trigger this command
-   * @param {array} _args the rest of the message after the command
-   * @param {Redis client} _redis Redis client (our database)
-   * @param {num} _level users permission level
+   * @param {client} object Discord client object
    */
-  execute: async (message, _args, _redis, _level) => {
+  execute: async (message, client) => {
     const channel = "852211870378098751";
 
     // Roles
@@ -100,12 +98,14 @@ module.exports = {
     messageEmbed.react(tampaRoleEmoji);
     messageEmbed.react(coloradoSpringsRoleEmoji);
 
-    message.client.on("messageReactionAdd", async (reaction, user) => {
+    client.on("messageReactionAdd", async (reaction, user) => {
       console.log("Reaction added");
       if (reaction.message.partial) await reaction.message.fetch();
       if (reaction.partial) await reaction.fetch();
       if (user.bot) return;
       if (!reaction.message.guild) return;
+
+      console.log("WE got here!");
 
       if (reaction.message.channel.id == channel) {
         if (reaction.emoji.name === videoGamesRoleEmoji) {
@@ -161,7 +161,7 @@ module.exports = {
       }
     });
 
-    message.client.on("messageReactionRemove", async (reaction, user) => {
+    client.on("messageReactionRemove", async (reaction, user) => {
       if (reaction.message.partial) await reaction.message.fetch();
       if (reaction.partial) await reaction.fetch();
       if (user.bot) return;
