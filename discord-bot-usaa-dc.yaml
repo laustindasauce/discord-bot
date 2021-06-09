@@ -17,7 +17,7 @@ spec:
         - name: pipeline-docker-registry
       containers:
         - name: abspen1
-          image: ${CICD_IMAGE}:v1.0
+          image: ${CICD_IMAGE}:v1.1
           imagePullPolicy: Always
           env:
             - name: CICD_GIT_COMMIT
