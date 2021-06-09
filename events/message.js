@@ -36,7 +36,8 @@ module.exports = {
 
     if (
       command.channels &&
-      !command.channels.includes(message.channel.name && command.guildOnly)
+      !command.channels.includes(message.channel.name) &&
+      command.guildOnly
     ) {
       console.log(`guildOnly: ${command.guildOnly}`);
       return message.reply(
