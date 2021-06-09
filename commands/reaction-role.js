@@ -74,43 +74,43 @@ module.exports = {
     );
     // Emojis
 
-    const actuaryRoleEmoji = ":a:";
-    const auditServicesRoleEmoji = ":a:";
-    const CAORoleEmoji = ":a:";
-    const CFORoleEmoji = ":a:";
-    const CLORoleEmoji = ":a:";
-    const claimsRoleEmoji = ":a:";
-    const dataAnalyticsRoleEmoji = ":a:";
-    const enterpriseRiskRoleEmoji = ":a:";
-    const experienceManagementRoleEmoji = ":a:";
-    const federalSavingsBankRoleEmoji = ":a:";
-    const humanResourcesRoleEmoji = ":a:";
-    const informationSecurityRoleEmoji = ":a:";
-    const informationTechnologyRoleEmoji = ":a:";
-    const lifeCompanyRoleEmoji = ":a:";
-    const regulatoryRelationsRoleEmoji = ":a:";
-    const stateManagementRoleEmoji = ":a:";
+    const actuaryRoleEmoji = "🏓";
+    const auditServicesRoleEmoji = "🏓";
+    const CAORoleEmoji = "🏓";
+    const CFORoleEmoji = "🏓";
+    const CLORoleEmoji = "🏓";
+    const claimsRoleEmoji = "🏓";
+    const dataAnalyticsRoleEmoji = "🏓";
+    const enterpriseRiskRoleEmoji = "🏓";
+    const experienceManagementRoleEmoji = "🏓";
+    const federalSavingsBankRoleEmoji = "🏓";
+    const humanResourcesRoleEmoji = "🏓";
+    const informationSecurityRoleEmoji = "🏓";
+    const informationTechnologyRoleEmoji = "🏓";
+    const lifeCompanyRoleEmoji = "🏓";
+    const regulatoryRelationsRoleEmoji = "🏓";
+    const stateManagementRoleEmoji = "🏓";
 
     roleEmbed.setColor("#e42643");
     roleEmbed.setTitle("**Role Menu: Internship Area**");
     roleEmbed.setDescription("React to give yourself a role!");
     roleEmbed.addFields(
-      { actuaryRoleEmoji, value: "Actuary", inline: true },
-      { auditServicesRoleEmoji, value: "Audit Services" },
-      { CAORoleEmoji, value: "CAO, Business Advisors", inline: true },
-      { CFORoleEmoji, value: "Chief Financial Office" },
-      { CLORoleEmoji, value: "Chief Legal Office" },
-      { claimsRoleEmoji, value: "Claims" },
-      { dataAnalyticsRoleEmoji, value: "Data & Analytics" },
-      { enterpriseRiskRoleEmoji, value: "Enterprise Risk & Compliance" },
-      { experienceManagementRoleEmoji, value: "Experience Management" },
-      { federalSavingsBankRoleEmoji, value: "Federal Savings Bank" },
-      { humanResourcesRoleEmoji, value: "Human Resources" },
-      { informationSecurityRoleEmoji, value: "Information Security" },
-      { informationTechnologyRoleEmoji, value: "Information Technology" },
-      { lifeCompanyRoleEmoji, value: "Life Company" },
-      { regulatoryRelationsRoleEmoji, value: "Regulatory Relations" },
-      { stateManagementRoleEmoji, value: "State Management" }
+      { name: actuaryRoleEmoji, value: "Actuary", inline: true },
+      { name: auditServicesRoleEmoji, value: "Audit Services" },
+      { name: CAORoleEmoji, value: "CAO, Business Advisors", inline: true },
+      { name: CFORoleEmoji, value: "Chief Financial Office" },
+      { name: CLORoleEmoji, value: "Chief Legal Office" },
+      { name: claimsRoleEmoji, value: "Claims" },
+      { name: dataAnalyticsRoleEmoji, value: "Data & Analytics" },
+      { name: enterpriseRiskRoleEmoji, value: "Enterprise Risk & Compliance" },
+      { name: experienceManagementRoleEmoji, value: "Experience Management" },
+      { name: federalSavingsBankRoleEmoji, value: "Federal Savings Bank" },
+      { name: humanResourcesRoleEmoji, value: "Human Resources" },
+      { name: informationSecurityRoleEmoji, value: "Information Security" },
+      { name: informationTechnologyRoleEmoji, value: "Information Technology" },
+      { name: lifeCompanyRoleEmoji, value: "Life Company" },
+      { name: regulatoryRelationsRoleEmoji, value: "Regulatory Relations" },
+      { name: stateManagementRoleEmoji, value: "State Management" }
     );
 
     let messageEmbed = await message.channel.send(roleEmbed);
