@@ -50,11 +50,11 @@ var prefix = client.config.defaultSettings.prefix;
 redis.set("check-redis", "Redis is running!");
 redis.get("check-redis").then((res) => console.log(res));
 
-// redis.set("botguy-version", "1.0.0");
-// redis.del("mod1");
-// redis.del("mod2");
-// redis.del("version");
-// redis.del("BotGuy-Versions");
+redis.set("botguy-version", "1.0.0");
+redis.del("mod1");
+redis.del("mod2");
+redis.del("version");
+redis.del("BotGuy-Versions");
 /**
  * Runs once when the client initially gets set up
  */
