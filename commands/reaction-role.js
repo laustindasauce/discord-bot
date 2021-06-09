@@ -129,7 +129,7 @@ module.exports = {
     messageEmbed.react(regulatoryRelationsRoleEmoji);
     messageEmbed.react(stateManagementRoleEmoji);
 
-    client.on("messageReactionAdd", async (reaction, user) => {
+    message.client.on("messageReactionAdd", async (reaction, user) => {
       if (reaction.message.partial) await reaction.message.fetch();
       if (reaction.partial) await reaction.fetch();
       if (user.bot) return;
@@ -219,7 +219,7 @@ module.exports = {
       }
     });
 
-    client.on("messageReactionRemove", async (reaction, user) => {
+    message.client.on("messageReactionRemove", async (reaction, user) => {
       if (reaction.message.partial) await reaction.message.fetch();
       if (reaction.partial) await reaction.fetch();
       if (user.bot) return;
