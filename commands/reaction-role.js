@@ -8,7 +8,7 @@ module.exports = {
   description: "Send message that allows users to react to get a role.",
   args: false,
   readOnly: false,
-  channels: ["welcome-and-rules"],
+  channels: ["roles"],
   guildOnly: true,
   cooldown: 3,
   permLevel: 10,
@@ -20,7 +20,7 @@ module.exports = {
    * @param {num} _level users permission level
    */
   execute: async (message, _args, _redis, _level) => {
-    const channel = "852211870378098750";
+    const channel = "852211870378098751";
 
     // Roles
     const actuaryRole = message.guild.roles.chache.find(

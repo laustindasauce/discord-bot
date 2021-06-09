@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abspen1Alt
+  namespace: bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: abspen1Alt
+  template:
+    metadata:
+      labels:
+        app: abspen1Alt
+    spec:
+      imagePullSecrets:
+        - name: pipeline-docker-registry
+      containers:
+        - name: abspen1Alt
+          image: ${CICD_IMAGE}:v1.0
+          imagePullPolicy: Always
+          env:
+            - name: CICD_GIT_COMMIT
+              value: ${CICD_GIT_COMMIT}
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1Alt-token
+                  name: discord-secrets
+            - name: PUBLIC
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1Alt-public
+                  name: discord-secrets
+            - name: BOT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1Alt-id
+                  name: discord-secrets
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1Alt-secret
+                  name: discord-secrets
+            - name: TENOR_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: botguy-tenor-key
+                  name: discord-secrets
+            - name: USER_ID
+              valueFrom:
+                secretKeyRef:
+                  key: abspen1-id
+                  name: discord-secrets
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_PASS
+                  name: redis-pass
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: REDIS_HOST
+                  name: redis-pass

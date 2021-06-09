@@ -4,7 +4,7 @@ stages:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
           buildContext: .
-          tag: discord-bots-botguy:v1.0
+          tag: discord-bots-abspen1Alt:v1.0
     when:
       branch: {}
       event:
@@ -14,7 +14,7 @@ stages:
   - name: Deploy
     steps:
       - applyYamlConfig:
-          path: ./discord-bot-dc.yaml
+          path: ./discord-bot-usaa-dc.yaml
     when:
       branch: {}
       event:
@@ -23,5 +23,5 @@ stages:
           - pull request
 branch:
   include:
-    - master
+    - usaa
 notification: {}

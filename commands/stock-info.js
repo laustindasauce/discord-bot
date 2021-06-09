@@ -2,17 +2,17 @@ const fetch = require("node-fetch");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-	name: 'stock-info',
-	aliases: ['company', 'info', 'stock'],
-	description: 'Get info of a company searched by ticker.',
-	usage: 'TSLA',
-	args: true,
-	readOnly: false,
-	channels: ['stock-market'],
-	guildOnly: false,
-	cooldown: 20,
-	permLevel: 0,
-	/**
+  name: "stock-info",
+  aliases: ["company", "stock"],
+  description: "Get info of a company searched by ticker.",
+  usage: "TSLA",
+  args: true,
+  readOnly: false,
+  channels: ["bot-commands"],
+  guildOnly: false,
+  cooldown: 20,
+  permLevel: 0,
+  /**
 	 * This command uses Finnhub to get the company profile of specified ticker
 	 * 
 	 * Example Quote response
@@ -31,62 +31,79 @@ module.exports = {
 	 * @param {Redis client} _redis Redis client (our database)
 	 * @param {num} _level users permission level
 	 */
-	execute: async (message, args, _redis, _level) => {
-		const stock = args[0].toUpperCase();
-        let companyInfo = null;
-		let companyQuote = null;
+  execute: async (message, args, _redis, _level) => {
+    const stock = args[0].toUpperCase();
+    let companyInfo = null;
+    let companyQuote = null;
+    fetch(
+      `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        companyInfo = res;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        if (Object.keys(companyInfo).length === 0) {
+          return message.reply(`**${stock}** info is not available.`);
+        }
         fetch(
-            `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
+          `https://finnhub.io/api/v1/quote?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
         )
-        .then((res) => res.json())
-        .then((res) => {
-            companyInfo = res;
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-        .finally(() => {
-			if ( Object.keys(companyInfo).length === 0) {
-				return message.reply(`**${stock}** info is not available.`)
-			}
-			fetch(
-				`https://finnhub.io/api/v1/quote?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
-			)
-			.then((quote) => quote.json())
-			.then((quote) => {
-				companyQuote = quote;
-			})
-			.finally(() => {
-				const embed = new MessageEmbed()
-				.setColor('#0099ff')
-				.setAuthor(companyInfo.name, companyInfo.logo)
-				.setTitle(`${stock}`)
-				.setURL(companyInfo.weburl)
-				.addFields(
-					{ name: 'Open', value: companyQuote.o, inline: true },
-					{ name: 'Current', value: companyQuote.c, inline: true },
-					{ name: 'High', value: companyQuote.h, inline: true },
-					{ name: 'Low', value: companyQuote.l, inline: true },
-					{ name: 'Previous Close', value: companyQuote.pc, inline: true },
-					{ name: '\u200B', value: '\u200B' }, // this is a spacer for the embed
-				)
-				.addField("Industry", companyInfo.finnhubIndustry, true)
-				.addField("IPO Date", companyInfo.ipo, true)
-				.addField("Market Cap", `${companyInfo.marketCapitalization}M`, true)
-				.addField("Shares Outstanding", companyInfo.shareOutstanding, true)
-				.addField('\u200B', '\u200B')
-				.setTimestamp(Date.now());
+          .then((quote) => quote.json())
+          .then((quote) => {
+            companyQuote = quote;
+          })
+          .finally(() => {
+            const embed = new MessageEmbed()
+              .setColor("#0099ff")
+              .setAuthor(companyInfo.name, companyInfo.logo)
+              .setTitle(`${stock}`)
+              .setURL(companyInfo.weburl)
+              .addFields(
+                { name: "Open", value: companyQuote.o, inline: true },
+                { name: "Current", value: companyQuote.c, inline: true },
+                { name: "High", value: companyQuote.h, inline: true },
+                { name: "Low", value: companyQuote.l, inline: true },
+                {
+                  name: "Previous Close",
+                  value: companyQuote.pc,
+                  inline: true,
+                },
+                { name: "\u200B", value: "\u200B" } // this is a spacer for the embed
+              )
+              .addField("Industry", companyInfo.finnhubIndustry, true)
+              .addField("IPO Date", companyInfo.ipo, true)
+              .addField(
+                "Market Cap",
+                `${companyInfo.marketCapitalization}M`,
+                true
+              )
+              .addField(
+                "Shares Outstanding",
+                companyInfo.shareOutstanding,
+                true
+              )
+              .addField("\u200B", "\u200B")
+              .setTimestamp(Date.now());
 
-				// message.channel.send(embed);
-				return message.author.send(embed)
-				.then(() => {
-					if (message.channel.type !== 'dm') message.reply('I\'ve sent you a DM with all my commands!');
-				})
-				.catch(error => {
-					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.reply('it seems like I can\'t DM you!');
-				});
-			})
-        });
-	}
+            // message.channel.send(embed);
+            return message.author
+              .send(embed)
+              .then(() => {
+                if (message.channel.type !== "dm")
+                  message.reply("I've sent you a DM with all my commands!");
+              })
+              .catch((error) => {
+                console.error(
+                  `Could not send help DM to ${message.author.tag}.\n`,
+                  error
+                );
+                message.reply("it seems like I can't DM you!");
+              });
+          });
+      });
+  },
 };
