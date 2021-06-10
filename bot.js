@@ -88,6 +88,163 @@ client.on("message", (message) => {
 // client.on("guildMemberAdd", (member) => {
 //   welcomeEvent.execute(member);
 // });
+// Roles
+const videoGamesRole = message.guild.roles.cache.find(
+  (role) => role.name === "Video Games"
+);
+const boardGamesRole = message.guild.roles.cache.find(
+  (role) => role.name === "Board Games"
+);
+const TVSeriesRole = message.guild.roles.cache.find(
+  (role) => role.name === "TV Series"
+);
+const moviesRole = message.guild.roles.cache.find(
+  (role) => role.name === "Movies"
+);
+const sportsRole = message.guild.roles.cache.find(
+  (role) => role.name === "Sports"
+);
+const phoenixRole = message.guild.roles.cache.find(
+  (role) => role.name === "Phoenix"
+);
+const planoRole = message.guild.roles.cache.find(
+  (role) => role.name === "Plano"
+);
+const sanAntonioRole = message.guild.roles.cache.find(
+  (role) => role.name === "San Antonio"
+);
+const tampaRole = message.guild.roles.cache.find(
+  (role) => role.name === "Tampa"
+);
+const coloradoSpringsRole = message.guild.roles.cache.find(
+  (role) => role.name === "Colorado Springs"
+);
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  console.log("Reaction added");
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) {
+    console.log("by bot");
+    return;
+  }
+  if (!reaction.message.guild) return;
+
+  console.log("WE got here!");
+
+  if (reaction.message.channel.id == "852211870378098751") {
+    if (reaction.emoji.name === videoGamesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(videoGamesRole);
+    }
+    if (reaction.emoji.name === boardGamesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(boardGamesRole);
+    }
+    if (reaction.emoji.name === TVSeriesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(TVSeriesRole);
+    }
+    if (reaction.emoji.name === moviesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(moviesRole);
+    }
+    if (reaction.emoji.name === sportsRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(sportsRole);
+    }
+    if (reaction.emoji.name === phoenixRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(phoenixRole);
+    }
+    if (reaction.emoji.name === planoRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(planoRole);
+    }
+    if (reaction.emoji.name === sanAntonioRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(sanAntonioRole);
+    }
+    if (reaction.emoji.name === tampaRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(tampaRole);
+    }
+    if (reaction.emoji.name === coloradoSpringsRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(coloradoSpringsRole);
+    }
+  }
+});
+
+client.on("messageReactionRemove", async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+  if (!reaction.message.guild) return;
+
+  if (reaction.message.channel.id == "852211870378098751") {
+    if (reaction.emoji.name === videoGamesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(videoGamesRole);
+    }
+    if (reaction.emoji.name === boardGamesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(boardGamesRole);
+    }
+    if (reaction.emoji.name === TVSeriesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(TVSeriesRole);
+    }
+    if (reaction.emoji.name === moviesRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(moviesRole);
+    }
+    if (reaction.emoji.name === sportsRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(sportsRole);
+    }
+    if (reaction.emoji.name === phoenixRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(phoenixRole);
+    }
+    if (reaction.emoji.name === planoRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(planoRole);
+    }
+    if (reaction.emoji.name === sanAntonioRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(sanAntonioRole);
+    }
+    if (reaction.emoji.name === tampaRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(tampaRole);
+    }
+    if (reaction.emoji.name === coloradoSpringsRoleEmoji) {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.remove(coloradoSpringsRole);
+    }
+  }
+});
 
 /**
  * Send a funny message when a user leaves the guild
