@@ -88,6 +88,19 @@ client.on("message", (message) => {
 // client.on("guildMemberAdd", (member) => {
 //   welcomeEvent.execute(member);
 // });
+
+// Emojis
+const videoGamesRoleEmoji = "🎮";
+const boardGamesRoleEmoji = "🎲";
+const TVSeriesRoleEmoji = "📺";
+const moviesRoleEmoji = "🎥";
+const sportsRoleEmoji = "🏀";
+const phoenixRoleEmoji = "🌵";
+const planoRoleEmoji = "✈️";
+const sanAntonioRoleEmoji = "😄";
+const tampaRoleEmoji = "🏖️";
+const coloradoSpringsRoleEmoji = "🏔️";
+
 // Roles
 const videoGamesRole = message.guild.roles.cache.find(
   (role) => role.name === "Video Games"
