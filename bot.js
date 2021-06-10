@@ -88,7 +88,18 @@ client.on("message", (message) => {
 // client.on("guildMemberAdd", (member) => {
 //   welcomeEvent.execute(member);
 // });
+client.on("messageReactionAdd", async (reaction, user) => {
+  console.log("Reaction added");
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) {
+    console.log("By bot");
+    return;
+  }
+  if (!reaction.message.guild) return;
 
+  console.log("WE got here!");
+});
 /**
  * Send a funny message when a user leaves the guild
  */
