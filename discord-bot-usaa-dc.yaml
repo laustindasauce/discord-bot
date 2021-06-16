@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: CICD_EXECUTION_SEQUENCE
-              value: ${CICD_EXECUTION_SEQUENCE}
+              value: "${CICD_EXECUTION_SEQUENCE}"
             - name: TOKEN
               valueFrom:
                 secretKeyRef:
