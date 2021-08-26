@@ -17,7 +17,7 @@ Here is a brief list of the functionality of the bot. Check the commands folder 
 * Send updates (Of what i'm not sure)
 * Show user statistics when prompted
 * Ban users
-* ETC..
+* ETC...
 
 ## To Do
 List of ideas to do next for this project
