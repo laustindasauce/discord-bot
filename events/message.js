@@ -29,7 +29,7 @@ module.exports = {
         }
 
         if (command.channels && !command.channels.includes(message.channel.name)) {
-            return message.reply(`I can only execute \`${command.name}\` in the channel \`${command.channel}\`!`)
+            return message.reply(`I can only execute \`${command.name}\` in the channel \`${command.channels}\`!`)
         }
 
         if (command.args && !args.length) {
