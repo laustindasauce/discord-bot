@@ -23,7 +23,7 @@ module.exports = {
 			"l": 260.68, // Low
 			"o": 261.07, // Open
 			"pc": 259.45, // Previous Close
-			"t": 1582641000 // Not sure what this is
+			"t": 1582641000 // Not sure what this is (Might be the time)
 		}
 	 * 
 	 * @param {message Object} message the message Object that was sent to trigger this command
@@ -35,8 +35,9 @@ module.exports = {
 		const stock = args[0].toUpperCase();
         let companyInfo = null;
 		let companyQuote = null;
+		const token = process.env.FINNHUB_TOKEN
         fetch(
-            `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
+            `https://finnhub.io/api/v1/stock/profile2?symbol=${stock}&token=${token}`
         )
         .then((res) => res.json())
         .then((res) => {
@@ -50,7 +51,7 @@ module.exports = {
 				return message.reply(`**${stock}** info is not available.`)
 			}
 			fetch(
-				`https://finnhub.io/api/v1/quote?symbol=${stock}&token=c24i3o2ad3i89m1l92bg`
+				`https://finnhub.io/api/v1/quote?symbol=${stock}&token=${token}`
 			)
 			.then((quote) => quote.json())
 			.then((quote) => {

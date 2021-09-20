@@ -62,3 +62,8 @@ spec:
                 secretKeyRef:
                   key: REDIS_HOST
                   name: redis-pass
+            - name: FINNHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: finnhub-token
+                  name: discord-secrets
