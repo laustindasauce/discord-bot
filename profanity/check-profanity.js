@@ -26,7 +26,8 @@ module.exports = {
 
     // array of the words sent
     const message_content = message.content.toLowerCase().split(" ");
-    console.log(message_content);
+
+    // Add any profane words to the array and output that so the user knows what was marked as profane
     let profane_words = [];
     for (var word in message_content) {
       if (badwordsArray.includes(word)) {
