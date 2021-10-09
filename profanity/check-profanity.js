@@ -33,6 +33,8 @@ module.exports = {
       }
     }
 
+    console.log("Profane words found: ", profane_words);
+
     if (profane_words.length > 0) {
       let data = [];
       message.delete();
