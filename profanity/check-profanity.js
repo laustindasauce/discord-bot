@@ -26,6 +26,7 @@ module.exports = {
 
     // array of the words sent
     message_content = message.content.toLowerCase().split(" ");
+    console.log(message_content);
     profane_words = [];
     for (var word in message_content) {
       if (badwordsArray.includes(word)) {
