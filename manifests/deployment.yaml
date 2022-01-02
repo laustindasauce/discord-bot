@@ -1,27 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: botguy
+  name: discord-bot
   namespace: bots
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: botguy
+      app: discord-bot
   template:
     metadata:
       labels:
-        app: botguy
+        app: discord-bot
     spec:
       imagePullSecrets:
-        - name: pipeline-docker-registry
+        - name: guldentech-harbor-registry
       containers:
-        - name: botguy
-          image: ${CICD_IMAGE}:v1.0
+        - name: discord-bot
+          image: harbor.guldentech.com/austin-spencer/discord-bot:TAG
           imagePullPolicy: Always
           env:
-            - name: CICD_GIT_COMMIT
-              value: ${CICD_GIT_COMMIT}
             - name: TOKEN
               valueFrom:
                 secretKeyRef:
