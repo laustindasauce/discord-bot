@@ -54,12 +54,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: REDIS_PASS
-                  name: redis-pass
+                  name: redis
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
                   key: REDIS_HOST
-                  name: redis-pass
+                  name: redis
             - name: FINNHUB_TOKEN
               valueFrom:
                 secretKeyRef:
