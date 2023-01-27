@@ -17,9 +17,11 @@ spec:
         - name: guldentech-harbor-registry
       containers:
         - name: discord-bot
-          image: harbor.guldentech.com/austin-spencer/discord-bot:TAG
+          image: harbor2.guldentech.com/austin-spencer/discord-bot:TAG
           imagePullPolicy: Always
           env:
+            - name: version
+              value: THE_VERSION
             - name: TOKEN
               valueFrom:
                 secretKeyRef:
